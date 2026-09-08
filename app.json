@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "oslo-offsite-2026",
+    "name": "Oslo Offsite",
     "slug": "oslo-offsite-2026",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,7 +8,9 @@
     "scheme": "oslooffsite2026",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/expo.icon",
+      "bundleIdentifier": "com.chrfalch.oslooffsite2026",
+      "supportsTablet": false
     },
     "android": {
       "adaptiveIcon": {
@@ -17,7 +19,8 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": true,
+      "package": "com.chrfalch.oslooffsite2026"
     },
     "web": {
       "output": "static",
@@ -28,9 +31,10 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 76
+          "backgroundColor": "#F7F8FA",
+          "dark": {
+            "backgroundColor": "#0C0D0E"
+          }
         }
       ]
     ],

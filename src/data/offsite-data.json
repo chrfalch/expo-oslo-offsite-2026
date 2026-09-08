@@ -1,0 +1,1681 @@
+{
+  "schemaVersion": "1.2",
+  "generatedAt": "2026-09-08",
+  "source": {
+    "name": "Oslo Offsite — September 2026 (Notion)",
+    "url": "https://app.notion.com/p/383e5b57352481b18dc0ef30c9da41e8",
+    "pageLastEditedAt": "2026-09-08T18:35:12Z",
+    "note": "All content derived from the public Notion invitation doc. Fields left null are not stated in the doc. Coordinates added from Kartverket's official Norwegian address register (ws.geonorge.no); walk times are computed from those coordinates, not measured routes."
+  },
+  "event": {
+    "name": "Oslo Offsite — September 2026",
+    "city": "Oslo",
+    "country": "Norway",
+    "startDate": "2026-09-13",
+    "endDate": "2026-09-19",
+    "organizer": "Christian Falch",
+    "focus": "The offsite falls right around the beta release of our SDK, so this time the work will be focused on the SDK.",
+    "workingDays": {
+      "startDate": "2026-09-14",
+      "endDate": "2026-09-18",
+      "hours": "roughly 09:00–17:00 or later",
+      "note": "Expect to be focused and working on building something we can ship by Friday."
+    },
+    "currency": "NOK",
+    "timezone": "Europe/Oslo"
+  },
+  "referencePoints": {
+    "rebel": {
+      "label": "Rebel (workspace)",
+      "address": "Universitetsgata 2",
+      "city": "Oslo",
+      "coordinates": {
+        "lat": 59.917498,
+        "lng": 10.740059,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Universitetsgata 2"
+      }
+    },
+    "torshov": {
+      "label": "Torshov (accommodation area)",
+      "address": "Vogts gate 45",
+      "city": "Oslo",
+      "coordinates": {
+        "lat": 59.933992,
+        "lng": 10.764322,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Vogts gate 45A"
+      },
+      "note": "Approximate centre of the Torshov area; the flats have no confirmed address yet."
+    }
+  },
+  "schedule": [
+    {
+      "id": "sauna",
+      "title": "Fjord sauna, team only",
+      "type": "social",
+      "date": "2026-09-15",
+      "startTime": "18:45",
+      "endTime": "20:45",
+      "location": "Sukkerbiten",
+      "address": "Nylandsveien 28",
+      "booked": true,
+      "notes": "Warm/cold experience. Bring bathing clothes and towels.",
+      "coordinates": {
+        "lat": 59.905115,
+        "lng": 10.752999,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Nylandsveien 28"
+      }
+    },
+    {
+      "id": "official-dinner",
+      "title": "Official team dinner",
+      "type": "social",
+      "date": "2026-09-17",
+      "startTime": "18:00",
+      "endTime": null,
+      "location": "Hell's Kitchen",
+      "address": "Møllergata 23-25",
+      "booked": null,
+      "notes": "Thursday, chosen so everyone can attend. Serves pizza.",
+      "coordinates": {
+        "lat": 59.915635,
+        "lng": 10.74856,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Mollergata 23"
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "jungel-pizza",
+      "name": "Jungel Pizza",
+      "category": "restaurant",
+      "cuisine": "Pizza",
+      "description": "Thin-crust pizza",
+      "address": "Vogts gate 54",
+      "area": "Torshov",
+      "walkMinutesFrom": {
+        "torshov": 3,
+        "rebel": 42
+      },
+      "vinkScore": 5,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.935368,
+        "lng": 10.764828,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Vogts gate 54"
+      },
+      "distanceMetersFrom": {
+        "torshov": 156,
+        "rebel": 2419
+      }
+    },
+    {
+      "id": "tyren-torshov",
+      "name": "Tyren Torshov",
+      "category": "restaurant",
+      "cuisine": "Bistro",
+      "description": "Neighbourhood bistro and bar",
+      "address": "Vogts gate 60 A",
+      "area": "Torshov",
+      "walkMinutesFrom": {
+        "torshov": 4,
+        "rebel": 43
+      },
+      "vinkScore": 4,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.935846,
+        "lng": 10.765333,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Vogts gate 60A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 214,
+        "rebel": 2479
+      }
+    },
+    {
+      "id": "bff-torshov",
+      "name": "BFF Torshov",
+      "category": "restaurant",
+      "cuisine": "Burgers",
+      "description": "Burger diner",
+      "address": "Vogts gate 31",
+      "area": "Torshov",
+      "walkMinutesFrom": {
+        "torshov": 3,
+        "rebel": 36
+      },
+      "vinkScore": 4,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.932499,
+        "lng": 10.763079,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Vogts gate 31A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 180,
+        "rebel": 2104
+      }
+    },
+    {
+      "id": "duken",
+      "name": "Duken",
+      "category": "restaurant",
+      "cuisine": "Pizza",
+      "description": "Pizza and bar",
+      "address": "Seilduksgata 23",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 17,
+        "rebel": 25
+      },
+      "vinkScore": 5,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.92539,
+        "lng": 10.760788,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Seilduksgata 23A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 977,
+        "rebel": 1451
+      }
+    },
+    {
+      "id": "200",
+      "name": "200",
+      "category": "restaurant",
+      "cuisine": "Gastrobar",
+      "description": "Gastrobar",
+      "address": "Sofienberggata 15",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 23,
+        "rebel": 22
+      },
+      "vinkScore": 4,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.922237,
+        "lng": 10.76135,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Sofienberggata 15"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1318,
+        "rebel": 1298
+      }
+    },
+    {
+      "id": "apostrophe",
+      "name": "Apostrophe",
+      "category": "restaurant",
+      "cuisine": "Bistro",
+      "description": "Bistro, known for the fries",
+      "address": "Kirkegårdsgata 7 A",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 24,
+        "rebel": 24
+      },
+      "vinkScore": 4,
+      "signatureDish": "French fries — crisp and perfectly salted",
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.921352,
+        "lng": 10.763883,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Kirkegårdsgata 7A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1406,
+        "rebel": 1395
+      }
+    },
+    {
+      "id": "trancher",
+      "name": "Trancher",
+      "category": "restaurant",
+      "cuisine": "Steak",
+      "description": "Informal steak restaurant",
+      "address": "Thorvald Meyers gate 78",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 29,
+        "rebel": 19
+      },
+      "vinkScore": 4,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.918946,
+        "lng": 10.759745,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Thorvald Meyers gate 78A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1692,
+        "rebel": 1109
+      }
+    },
+    {
+      "id": "render",
+      "name": "Render",
+      "category": "restaurant",
+      "cuisine": "Burgers",
+      "description": "Burger restaurant",
+      "address": "Toftes gate 19 B",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 9,
+        "rebel": 31
+      },
+      "vinkScore": 5,
+      "signatureDish": "Oslohoma burger — lots of grilled onion and cheese",
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.929613,
+        "lng": 10.760858,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Toftes gate 19B"
+      },
+      "distanceMetersFrom": {
+        "torshov": 524,
+        "rebel": 1777
+      }
+    },
+    {
+      "id": "pao",
+      "name": "Pao",
+      "category": "restaurant",
+      "cuisine": "Thai",
+      "description": "Thai",
+      "address": "Markveien 46 A",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 25,
+        "rebel": 19
+      },
+      "vinkScore": 5,
+      "signatureDish": "Nuggets — tempura-fried chicken thighs with Thai chili, coriander and caramel fish sauce",
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.921455,
+        "lng": 10.75752,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Markveien 46A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1445,
+        "rebel": 1068
+      }
+    },
+    {
+      "id": "skaal",
+      "name": "Skaal",
+      "category": "restaurant",
+      "cuisine": "Grill",
+      "description": "Yakitori grill",
+      "address": "Olaf Ryes plass 12",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 21,
+        "rebel": 21
+      },
+      "vinkScore": 5,
+      "signatureDish": "Grilled skewer — Norwegian chuck with miso and prune glaze, mushroom ragù",
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.923488,
+        "lng": 10.758629,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Olaf Ryes plass 12"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1210,
+        "rebel": 1231
+      }
+    },
+    {
+      "id": "fourrage",
+      "name": "Fourrage",
+      "category": "restaurant",
+      "cuisine": "French",
+      "description": "French bistro",
+      "address": "Storgata 97",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 33,
+        "rebel": 15
+      },
+      "vinkScore": 5,
+      "signatureDish": "Steak tartare — coarsely ground flank steak, Caesar dressing, grated Comté",
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.917585,
+        "lng": 10.755419,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Storgata 97"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1891,
+        "rebel": 856
+      }
+    },
+    {
+      "id": "bar-lupo",
+      "name": "Bar Lupo",
+      "category": "restaurant",
+      "cuisine": "Italian",
+      "description": "Italian",
+      "address": "Olaf Ryes plass 3",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 24,
+        "rebel": 19
+      },
+      "vinkScore": null,
+      "signatureDish": "Linguine with crab — lots of crab meat and a pangrattato",
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.9222,
+        "lng": 10.757488,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Olaf Ryes plass 3A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1365,
+        "rebel": 1103
+      }
+    },
+    {
+      "id": "kork",
+      "name": "Kork",
+      "category": "restaurant",
+      "cuisine": "Pizza",
+      "description": "Pizza",
+      "address": "Markveien 42 A",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 24,
+        "rebel": 19
+      },
+      "vinkScore": 4,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.921877,
+        "lng": 10.757506,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Markveien 42A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1400,
+        "rebel": 1087
+      }
+    },
+    {
+      "id": "175c-k-fried",
+      "name": "175°C K-fried",
+      "category": "restaurant",
+      "cuisine": "Korean",
+      "description": "Korean fried chicken",
+      "address": "Vulkan 7",
+      "area": "Vulkan",
+      "walkMinutesFrom": {
+        "torshov": 25,
+        "rebel": 15
+      },
+      "vinkScore": 5,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.922571,
+        "lng": 10.751958,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Vulkan 7"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1445,
+        "rebel": 871
+      }
+    },
+    {
+      "id": "dumpling-as",
+      "name": "Dumpling AS",
+      "category": "restaurant",
+      "cuisine": "Asian",
+      "description": "Dumplings",
+      "address": "Hesselbergs gate 1 C",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 13,
+        "rebel": 27
+      },
+      "vinkScore": 4,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.927582,
+        "lng": 10.759419,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Hesselbergs gate 1C"
+      },
+      "distanceMetersFrom": {
+        "torshov": 763,
+        "rebel": 1556
+      }
+    },
+    {
+      "id": "hos-peder",
+      "name": "Hos Peder",
+      "category": "restaurant",
+      "cuisine": "Small plates",
+      "description": "Small plates, cheap",
+      "address": "Thorvald Meyers gate 40 B",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 20,
+        "rebel": 22
+      },
+      "vinkScore": 5,
+      "signatureDish": null,
+      "priceNote": "Cheap",
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.923701,
+        "lng": 10.759464,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Thorvald Meyers gate 40B"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1176,
+        "rebel": 1283
+      }
+    },
+    {
+      "id": "grotto",
+      "name": "Grotto",
+      "category": "restaurant",
+      "cuisine": "French",
+      "description": "French bistro, good pistachio gelato",
+      "address": "Hallings gate 5",
+      "area": "St. Hanshaugen",
+      "walkMinutesFrom": {
+        "torshov": 32,
+        "rebel": 10
+      },
+      "vinkScore": 5,
+      "signatureDish": "Pistachio ice cream — creamy, nutty, with sweet Italian meringue",
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.922558,
+        "lng": 10.739827,
+        "precision": "street",
+        "source": "geonorge",
+        "matchedAddress": "Hallings gate 3C (nearest registered address)"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1865,
+        "rebel": 563
+      }
+    },
+    {
+      "id": "parkteatret",
+      "name": "Parkteatret",
+      "category": "restaurant",
+      "cuisine": "Bar food",
+      "description": "Bar, food and live music",
+      "address": "Olaf Ryes plass 11",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 21,
+        "rebel": 21
+      },
+      "vinkScore": 4,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.923492,
+        "lng": 10.758325,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Olaf Ryes plass 11"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1214,
+        "rebel": 1217
+      }
+    },
+    {
+      "id": "jamals-falafel",
+      "name": "Jamal's Falafel",
+      "category": "restaurant",
+      "cuisine": "Falafel",
+      "description": "Falafel, vegan. Slightly outside the walking zone.",
+      "address": "Heimdalsgata 2 C",
+      "area": "Grünerløkka / Tøyen",
+      "walkMinutesFrom": {
+        "torshov": 30,
+        "rebel": 21
+      },
+      "vinkScore": 5,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.918492,
+        "lng": 10.762104,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Heimdalsgata 2C"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1728,
+        "rebel": 1234
+      }
+    },
+    {
+      "id": "rebel-hangout",
+      "name": "Rebel Hangout",
+      "category": "lunch",
+      "cuisine": "Buffet",
+      "description": "Weekday buffet, pay in the cafeteria",
+      "address": "Universitetsgata 2",
+      "area": "Sentrum",
+      "walkMinutesFrom": {
+        "torshov": 40,
+        "rebel": 0
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": "Weekdays",
+      "url": null,
+      "coordinates": {
+        "lat": 59.917498,
+        "lng": 10.740059,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Universitetsgata 2"
+      },
+      "distanceMetersFrom": {
+        "torshov": 2279,
+        "rebel": 0
+      }
+    },
+    {
+      "id": "stykke-pizza",
+      "name": "Stykke Pizza",
+      "category": "lunch",
+      "cuisine": "Pizza",
+      "description": "In the Rebel building",
+      "address": "Universitetsgata 2",
+      "area": "Sentrum",
+      "walkMinutesFrom": {
+        "torshov": 40,
+        "rebel": 0
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": "70 NOK a slice",
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.917498,
+        "lng": 10.740059,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Universitetsgata 2"
+      },
+      "distanceMetersFrom": {
+        "torshov": 2279,
+        "rebel": 0
+      }
+    },
+    {
+      "id": "kaffistova",
+      "name": "Kaffistova",
+      "category": "lunch",
+      "cuisine": "Norwegian classics",
+      "description": "Traditional Norwegian dishes",
+      "address": "Kristian IVs gate 2",
+      "area": "Sentrum",
+      "walkMinutesFrom": {
+        "torshov": 44,
+        "rebel": 5
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.914735,
+        "lng": 10.740364,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Kristian IVs gate 2"
+      },
+      "distanceMetersFrom": {
+        "torshov": 2523,
+        "rebel": 308
+      }
+    },
+    {
+      "id": "lorry",
+      "name": "Lorry",
+      "category": "lunch",
+      "cuisine": "Traditional pub food",
+      "description": "Traditional pub food",
+      "address": "Parkveien 12",
+      "area": "Sentrum",
+      "walkMinutesFrom": {
+        "torshov": 43,
+        "rebel": 13
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": "125–332 NOK",
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.920818,
+        "lng": 10.728916,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Parkveien 12"
+      },
+      "distanceMetersFrom": {
+        "torshov": 2457,
+        "rebel": 722
+      }
+    },
+    {
+      "id": "fiskeriet",
+      "name": "Fiskeriet",
+      "category": "lunch",
+      "cuisine": "Fish",
+      "description": "Fish restaurant",
+      "address": "Youngstorget 2B",
+      "area": "Sentrum",
+      "walkMinutesFrom": {
+        "torshov": 40,
+        "rebel": 11
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": "259–298 NOK",
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.914553,
+        "lng": 10.749678,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Youngstorget 2"
+      },
+      "distanceMetersFrom": {
+        "torshov": 2310,
+        "rebel": 628
+      }
+    },
+    {
+      "id": "fuglen",
+      "name": "Fuglen",
+      "category": "coffee",
+      "cuisine": null,
+      "description": "In Rebel's building, down on the cellar floor. Coffee by day, cocktail bar in the evening, in a preserved 1960s interior. Opened as Kaffefuglen in 1963, renamed Fuglen in 2008.",
+      "address": "Universitetsgata 2 (cellar floor)",
+      "area": "Sentrum",
+      "walkMinutesFrom": {
+        "torshov": 40,
+        "rebel": 0
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": "From 07:30",
+      "url": null,
+      "coordinates": {
+        "lat": 59.917498,
+        "lng": 10.740059,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Universitetsgata 2"
+      },
+      "distanceMetersFrom": {
+        "torshov": 2279,
+        "rebel": 0
+      }
+    },
+    {
+      "id": "supreme-roastworks",
+      "name": "Supreme Roastworks",
+      "category": "coffee",
+      "cuisine": null,
+      "description": "Odd-Steinar Tøllefsen is World Brewers Cup Champion 2015.",
+      "address": "Thorvald Meyers gate 18",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 12,
+        "rebel": 28
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.928203,
+        "lng": 10.759273,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Thorvald Meyers gate 18A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 702,
+        "rebel": 1601
+      }
+    },
+    {
+      "id": "java-espressobar",
+      "name": "Java Espressobar & Kaffeforretning",
+      "category": "coffee",
+      "cuisine": null,
+      "description": "Opened 1997. Closest of the coffee bars to Rebel.",
+      "address": "Ullevålsveien 47",
+      "area": "St. Hanshaugen",
+      "walkMinutesFrom": {
+        "torshov": 30,
+        "rebel": 13
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.924476,
+        "lng": 10.739645,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Ullevalsveien 47A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1735,
+        "rebel": 776
+      }
+    },
+    {
+      "id": "mocca-kaffebar",
+      "name": "Mocca Kaffebar",
+      "category": "coffee",
+      "cuisine": null,
+      "description": "Opened 2000. Same company as Java, which also started the KAFFA roastery in 2005.",
+      "address": "Niels Juels gate 70 B",
+      "area": "Briskeby",
+      "walkMinutesFrom": {
+        "torshov": 52,
+        "rebel": 21
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.919444,
+        "lng": 10.718594,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Niels Juels gate 70B"
+      },
+      "distanceMetersFrom": {
+        "torshov": 3018,
+        "rebel": 1216
+      }
+    },
+    {
+      "id": "tim-wendelboe",
+      "name": "Tim Wendelboe",
+      "category": "coffee",
+      "cuisine": null,
+      "description": "Espresso bar at Grüners gate 1, roastery at Tøyengata 29c. Norwegian Barista Champion 2001, 2002 and 2004; World Barista Champion 2004; World Cup Tasters Champion 2005.",
+      "address": "Grüners gate 1",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 22,
+        "rebel": 19
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.923318,
+        "lng": 10.755819,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Gruners gate 1A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1278,
+        "rebel": 1091
+      }
+    },
+    {
+      "id": "papegoye",
+      "name": "Papegøye",
+      "category": "coffee",
+      "cuisine": null,
+      "description": "Best hours of the group, useful when working late. In 2022, three of the five baristas on the Norwegian national coffee team were part of the Papegøye family.",
+      "address": "Urtegata 48, 0187 Oslo",
+      "area": "Grønland",
+      "walkMinutesFrom": {
+        "torshov": 39,
+        "rebel": 26
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": "Mon–Tue 07:00–19:00, Wed–Fri 07:00–23:00, Sat 08:00–23:00, Sun 08:00–18:00",
+      "url": null,
+      "coordinates": {
+        "lat": 59.913723,
+        "lng": 10.766143,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Urtegata 48A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 2256,
+        "rebel": 1513
+      }
+    },
+    {
+      "id": "munch",
+      "name": "MUNCH",
+      "category": "activity",
+      "cuisine": null,
+      "description": "Art museum. Free on Wednesdays 18:00–21:00, drop-in tickets at the door.",
+      "address": "Edvard Munchs plass 1",
+      "area": "Bjørvika",
+      "walkMinutesFrom": {
+        "torshov": 54,
+        "rebel": 26
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": "Free Wed 18:00–21:00, otherwise 200 NOK evening slot, 100 NOK under 25",
+      "hours": "Open until 21:00 Wed–Sat",
+      "url": "https://www.munch.no/en/",
+      "coordinates": {
+        "lat": 59.906106,
+        "lng": 10.75535,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Edvard Munchs plass 1"
+      },
+      "distanceMetersFrom": {
+        "torshov": 3141,
+        "rebel": 1527
+      }
+    },
+    {
+      "id": "fabrikken-oslo",
+      "name": "Fabrikken Oslo",
+      "category": "activity",
+      "cuisine": null,
+      "description": "Shuffleboard, darts, pool, karaoke, arcade. Bookings: booking@fabrikkenoslo.no",
+      "address": "Markveien 35",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 24,
+        "rebel": 19
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": "Whole shuffleboard court 750 NOK/hour, pool 220 NOK/hour, board games free",
+      "hours": "Wed 17:00–01:00, Thu–Sat 16:00–01:00, closed Sun and Mon",
+      "url": "https://www.fabrikkenoslo.no/",
+      "coordinates": {
+        "lat": 59.922222,
+        "lng": 10.757185,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Markveien 35A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1368,
+        "rebel": 1089
+      }
+    },
+    {
+      "id": "oslo-camping",
+      "name": "Oslo Camping",
+      "category": "activity",
+      "cuisine": null,
+      "description": "Indoor minigolf, drop-in. Easiest thing to do after a late day.",
+      "address": "Møllergata 12",
+      "area": "Sentrum",
+      "walkMinutesFrom": {
+        "torshov": 41,
+        "rebel": 9
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": "155 NOK",
+      "hours": "Open until midnight Wed–Thu",
+      "url": "https://campingen.no/en/oslo",
+      "coordinates": {
+        "lat": 59.914584,
+        "lng": 10.747373,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Mollergata 12"
+      },
+      "distanceMetersFrom": {
+        "torshov": 2356,
+        "rebel": 521
+      }
+    },
+    {
+      "id": "grunerlokka-brygghus",
+      "name": "Grünerløkka Brygghus",
+      "category": "bar",
+      "cuisine": null,
+      "description": "Own brewery, 21 taps. Walk home to Torshov afterwards.",
+      "address": "Thorvald Meyers gate 30B",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 18,
+        "rebel": 24
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": "Mon–Thu 16:00–00:00, kitchen until 21:00",
+      "url": "https://brygghus.no/puben-2/",
+      "coordinates": {
+        "lat": 59.925019,
+        "lng": 10.759519,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Thorvald Meyers gate 30B"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1033,
+        "rebel": 1370
+      }
+    },
+    {
+      "id": "crow-bar",
+      "name": "Crow Bar & Bryggeri",
+      "category": "bar",
+      "cuisine": null,
+      "description": "Big tap list. Reservations need 6+ people and cannot be same-day.",
+      "address": "Torggata 32",
+      "area": "Sentrum",
+      "walkMinutesFrom": {
+        "torshov": 34,
+        "rebel": 13
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": "Opens 15:00",
+      "url": "https://www.crowbryggeri.com/",
+      "coordinates": {
+        "lat": 59.917189,
+        "lng": 10.753413,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Torggata 32"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1965,
+        "rebel": 745
+      }
+    },
+    {
+      "id": "ekebergparken",
+      "name": "Ekebergparken",
+      "category": "activity",
+      "cuisine": null,
+      "description": "Sculpture park in the forest above the city. Tram 13 or 19. Kongsveien is closed for roadworks May–November 2026, so allow an extra 15 minutes and check ruter.no. Sunset around 19:45.",
+      "address": "Kongsveien 23",
+      "area": "Ekeberg",
+      "walkMinutesFrom": {
+        "torshov": 68,
+        "rebel": 41
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": "Free",
+      "hours": "Open 24 hours",
+      "url": "https://www.ekebergparken.com/en/visitor-information",
+      "coordinates": {
+        "lat": 59.898541,
+        "lng": 10.75967,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Kongsveien 23"
+      },
+      "distanceMetersFrom": {
+        "torshov": 3950,
+        "rebel": 2375
+      }
+    },
+    {
+      "id": "national-museum",
+      "name": "The National Museum",
+      "category": "activity",
+      "cuisine": null,
+      "description": "Hours taken from VisitOSLO; the museum's own site would not load, so worth a check.",
+      "address": "Brynjulf Bulls plass 3",
+      "area": "Sentrum",
+      "walkMinutesFrom": {
+        "torshov": 55,
+        "rebel": 16
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": "Open until 20:00 Tuesday and Wednesday",
+      "url": "https://www.nasjonalmuseet.no/en/",
+      "coordinates": {
+        "lat": 59.911494,
+        "lng": 10.729109,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Brynjulf Bulls plass 3"
+      },
+      "distanceMetersFrom": {
+        "torshov": 3179,
+        "rebel": 905
+      }
+    },
+    {
+      "id": "good-knight",
+      "name": "Good Knight chess pub",
+      "category": "activity",
+      "cuisine": null,
+      "description": "The only chess pub in Oslo.",
+      "address": "Badstugata 1",
+      "area": null,
+      "walkMinutesFrom": {
+        "torshov": 37,
+        "rebel": 11
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": "https://goodknight.no",
+      "coordinates": {
+        "lat": 59.916039,
+        "lng": 10.751331,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Badstugata 1"
+      },
+      "distanceMetersFrom": {
+        "torshov": 2123,
+        "rebel": 649
+      }
+    },
+    {
+      "id": "haralds-vaffel",
+      "name": "Haralds Vaffel",
+      "category": "snack",
+      "cuisine": "Waffles",
+      "description": "Heart-shaped Norwegian waffles, soft not crisp.",
+      "address": "Olaf Ryes plass 3",
+      "area": "Grünerløkka",
+      "walkMinutesFrom": {
+        "torshov": 24,
+        "rebel": 19
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.9222,
+        "lng": 10.757488,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Olaf Ryes plass 3A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 1365,
+        "rebel": 1103
+      }
+    },
+    {
+      "id": "apent-bakeri-torshov",
+      "name": "Åpent Bakeri",
+      "category": "snack",
+      "cuisine": "Bakery",
+      "description": "Cinnamon buns and other Norwegian buns.",
+      "address": "Åsengata 42",
+      "area": "Torshov",
+      "walkMinutesFrom": {
+        "torshov": 14,
+        "rebel": 53
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": "07:30–16:00 weekdays",
+      "url": null,
+      "coordinates": {
+        "lat": 59.939373,
+        "lng": 10.773576,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Asengata 42A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 790,
+        "rebel": 3067
+      }
+    },
+    {
+      "id": "godt-brod",
+      "name": "Godt Brød",
+      "category": "snack",
+      "cuisine": "Bakery",
+      "description": "Vegan skillingsbolle.",
+      "address": "Thereses gate 52",
+      "area": "Bislett",
+      "walkMinutesFrom": {
+        "torshov": 35,
+        "rebel": 18
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": "Vegan skillingsbolle 56 NOK",
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.925921,
+        "lng": 10.731272,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Thereses gate 52A"
+      },
+      "distanceMetersFrom": {
+        "torshov": 2048,
+        "rebel": 1057
+      }
+    },
+    {
+      "id": "syverkiosken",
+      "name": "Syverkiosken",
+      "category": "snack",
+      "cuisine": "Hot dogs",
+      "description": "Pølse med lompe — sausage in a potato flatbread. One of the last old wooden kiosks.",
+      "address": "Maridalsveien 45B",
+      "area": "Sagene",
+      "walkMinutesFrom": {
+        "torshov": 16,
+        "rebel": 24
+      },
+      "vinkScore": null,
+      "signatureDish": "Pølse med lompe",
+      "priceNote": null,
+      "hours": null,
+      "url": null,
+      "coordinates": {
+        "lat": 59.928375,
+        "lng": 10.752428,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Maridalsveien 45B"
+      },
+      "distanceMetersFrom": {
+        "torshov": 911,
+        "rebel": 1392
+      }
+    },
+    {
+      "id": "kiwi-vogts-gate",
+      "name": "Kiwi Vogts gate",
+      "category": "supermarket",
+      "cuisine": null,
+      "description": "Nearest supermarket to the Torshov flats.",
+      "address": "Vogts gate 66",
+      "area": "Torshov",
+      "walkMinutesFrom": {
+        "torshov": 5,
+        "rebel": 45
+      },
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": "07:00–23:00 Mon–Sat",
+      "url": null,
+      "coordinates": {
+        "lat": 59.936701,
+        "lng": 10.765925,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Vogts gate 66"
+      },
+      "distanceMetersFrom": {
+        "torshov": 314,
+        "rebel": 2576
+      }
+    }
+  ],
+  "foodToTry": {
+    "fromSupermarket": [
+      {
+        "name": "Brunost",
+        "description": "Whey cheese boiled until the milk sugar caramelises. Sweet, fudge-like. The item first-time visitors most often dislike. Try it thin, on a waffle.",
+        "priceNok": "about 40 for 500 g"
+      },
+      {
+        "name": "Leverpostei",
+        "description": "Baked liver pâté. The default sandwich topping.",
+        "priceNok": "27–33"
+      },
+      {
+        "name": "Kaviar",
+        "description": "Smoked cod roe from a tube. Strongly acquired taste.",
+        "priceNok": "about 37"
+      },
+      {
+        "name": "Makrell i tomat",
+        "description": "Tinned mackerel in tomato sauce, on bread.",
+        "priceNok": null
+      },
+      {
+        "name": "Kvikk Lunsj",
+        "description": "Chocolate-covered wafer bar.",
+        "priceNok": "18.50"
+      },
+      {
+        "name": "Freia Melkesjokolade",
+        "description": "Milk chocolate.",
+        "priceNok": "about 50 for 200 g"
+      },
+      {
+        "name": "Solo",
+        "description": "Orange soda, recipe brought from Spain in 1934. Outsold Coca-Cola here in the 1960s.",
+        "priceNok": "31.50"
+      },
+      {
+        "name": "Matpakke",
+        "description": "The habit, not a product: bread with the toppings above, wrapped in paper with sheets between the slices. What Norwegians actually eat at work.",
+        "priceNok": null
+      }
+    ],
+    "outAndAbout": [
+      {
+        "name": "Vaffel",
+        "description": "Heart-shaped, soft not crisp, with sour cream and jam or brunost.",
+        "placeIds": [
+          "haralds-vaffel"
+        ]
+      },
+      {
+        "name": "Kanelbolle / skillingsbolle / skolebrød",
+        "description": "Norwegian sweet buns.",
+        "placeIds": [
+          "apent-bakeri-torshov",
+          "godt-brod"
+        ]
+      },
+      {
+        "name": "Pølse med lompe",
+        "description": "Sausage in a potato flatbread.",
+        "placeIds": [
+          "syverkiosken"
+        ]
+      },
+      {
+        "name": "Fårikål",
+        "description": "The national dish. September is the season, but Fårikålens festdag is 24 September, five days after we leave. Restaurant Schrøder or Kaffistova — phone ahead, not confirmed to be on the menu that week.",
+        "placeIds": [
+          "kaffistova"
+        ]
+      }
+    ]
+  },
+  "expoCustomerApps": [
+    {
+      "name": "Vy",
+      "emoji": "🚂",
+      "description": "Norway's state-owned national railway. Use it for train travel, not the airport express.",
+      "appStoreUrl": "https://apps.apple.com/no/app/id439655098",
+      "siteUrl": null
+    },
+    {
+      "name": "Cutters",
+      "emoji": "💇",
+      "description": "Hair salon chain.",
+      "appStoreUrl": "https://apps.apple.com/no/app/id1466739130",
+      "siteUrl": null
+    },
+    {
+      "name": "Digg",
+      "emoji": "🍕",
+      "description": "Pizza delivery.",
+      "appStoreUrl": "https://apps.apple.com/no/app/id1522202208",
+      "siteUrl": "http://Digg.no"
+    },
+    {
+      "name": "Take Take Take",
+      "emoji": "♟️",
+      "description": "Chess app by Play Magnus.",
+      "appStoreUrl": "https://apps.apple.com/no/app/id6754937311",
+      "siteUrl": null
+    },
+    {
+      "name": "Dr.Dropin",
+      "emoji": "😷",
+      "description": "Healthcare.",
+      "appStoreUrl": "https://apps.apple.com/no/app/id1467608455",
+      "siteUrl": null
+    }
+  ],
+  "accommodation": {
+    "area": "Torshov",
+    "note": "All three Torshov Airbnbs are booked and verified. Christian booked them. Private bedrooms for everyone, shared bathrooms.",
+    "status": "booked",
+    "verified": true,
+    "verifiedOn": "2026-09-08",
+    "options": [
+      {
+        "name": "Bright and nice apartment in Torshov",
+        "url": "https://www.airbnb.com/rooms/1164546549560682899",
+        "address": null,
+        "coordinates": null,
+        "status": "booked",
+        "verified": true
+      },
+      {
+        "name": "Top apartment in Torshov",
+        "url": "https://www.airbnb.com/rooms/41404820",
+        "address": null,
+        "coordinates": null,
+        "status": "booked",
+        "verified": true
+      },
+      {
+        "name": "Large loft apartment in Torshov",
+        "url": "https://www.airbnb.com/rooms/1401228997904837114",
+        "address": null,
+        "coordinates": null,
+        "status": "booked",
+        "verified": true
+      }
+    ]
+  },
+  "workspace": {
+    "name": "Rebel",
+    "address": "Universitetsgata 2",
+    "area": "Sentrum",
+    "url": "https://www.rebel.no/en",
+    "notes": "Co-working space in the centre of Oslo. Everyone gets access cards and free wifi. It has a restaurant for lunch.",
+    "coordinates": {
+      "lat": 59.917498,
+      "lng": 10.740059,
+      "precision": "address",
+      "source": "geonorge",
+      "matchedAddress": "Universitetsgata 2"
+    }
+  },
+  "packing": [
+    {
+      "item": "Raincoat",
+      "notes": [
+        "It can rain a fair bit at this time of year",
+        "Ideally with a hood so you don't need an umbrella"
+      ]
+    },
+    {
+      "item": "Sweater(s) for layering",
+      "notes": [
+        "Bring one or two, so you can do t-shirt to sweater to raincoat"
+      ]
+    },
+    {
+      "item": "Warm hat (\"lue\")",
+      "notes": [
+        "Nice for chilly evenings outdoors"
+      ]
+    },
+    {
+      "item": "Warm socks and normal socks",
+      "notes": []
+    },
+    {
+      "item": "Shoes without holes in them",
+      "notes": [
+        "Wet feet are annoying",
+        "Two pairs could be good"
+      ]
+    },
+    {
+      "item": "Bathing clothes and towels",
+      "notes": [
+        "For the fjord sauna on 15 September"
+      ]
+    }
+  ],
+  "packingNote": "Mid-September in Oslo is cool and often wet, so layers and rain protection are the priority. You can pick most things up locally. An umbrella is optional.",
+  "faq": [
+    {
+      "question": "Do I need cash?",
+      "answer": "No. Norway is almost entirely cashless — card and Apple/Google Pay work everywhere, and locals mostly use Vipps. Many places won't even accept cash, so there's no need to bring any."
+    }
+  ],
+  "travel": [
+    {
+      "name": "Christian Falch",
+      "role": "organizer",
+      "arrival": null,
+      "departure": null
+    },
+    {
+      "name": "Tomasz Sapeta",
+      "role": "attendee",
+      "arrival": {
+        "date": "2026-09-10",
+        "time": "14:30",
+        "flight": "DY 1041",
+        "note": null
+      },
+      "departure": null
+    },
+    {
+      "name": "Gabriel",
+      "role": "attendee",
+      "arrival": {
+        "date": "2026-09-12",
+        "time": "16:20",
+        "flight": "KL 1203",
+        "note": null
+      },
+      "departure": {
+        "date": "2026-09-18",
+        "time": "21:30",
+        "flight": null,
+        "note": null
+      }
+    },
+    {
+      "name": "Hirbod",
+      "role": "attendee",
+      "arrival": {
+        "date": "2026-09-14",
+        "time": "00:05",
+        "flight": "LH 866",
+        "note": "Local Oslo landing time. LH 866 is Lufthansa Frankfurt to Oslo, departing 13 Sept at 22:00. The Notion doc lists this under 13 Sept because that is the departure date. Lufthansa's current published schedule for this route is 22:10 to 00:15, so confirm the exact minutes against Hirbod's ticket.",
+        "departsFrom": "Frankfurt (FRA)",
+        "departureDate": "2026-09-13",
+        "departureTime": "22:00"
+      },
+      "departure": {
+        "date": "2026-09-19",
+        "time": "09:55",
+        "flight": "LH 859",
+        "departsFrom": "Oslo (OSL)",
+        "note": "LH 859 is Lufthansa Oslo to Frankfurt."
+      }
+    },
+    {
+      "name": "Jakub Grzywacz",
+      "role": "attendee",
+      "arrival": {
+        "date": "2026-09-10",
+        "time": "23:35",
+        "flight": "DY 1043",
+        "note": null
+      },
+      "departure": {
+        "date": "2026-09-19",
+        "time": "10:45",
+        "flight": "LO 482",
+        "note": null
+      }
+    },
+    {
+      "name": "Wojciech Dróżdż",
+      "role": "attendee",
+      "arrival": {
+        "date": "2026-09-10",
+        "time": "23:35",
+        "flight": "DY 1043",
+        "note": null
+      },
+      "departure": {
+        "date": "2026-09-19",
+        "time": "10:45",
+        "flight": "LO 482",
+        "note": null
+      }
+    },
+    {
+      "name": "Wiktor Smaga",
+      "role": "attendee",
+      "arrival": {
+        "date": "2026-09-10",
+        "time": "23:35",
+        "flight": "DY 1043",
+        "note": null
+      },
+      "departure": {
+        "date": "2026-09-19",
+        "time": "10:45",
+        "flight": "LO 482",
+        "note": null
+      }
+    },
+    {
+      "name": "Jakub Tkacz",
+      "role": "attendee",
+      "arrival": {
+        "date": "2026-09-11",
+        "time": "14:00",
+        "flight": "DY 1041",
+        "note": null
+      },
+      "departure": {
+        "date": "2026-09-18",
+        "time": "19:40",
+        "flight": "DY 1042",
+        "note": null
+      }
+    }
+  ],
+  "logistics": {
+    "flights": "Find a flight that works for you, then send it to Christian. Booked with Brex points, or your limit is raised so you can book it yourself.",
+    "travelDoc": "Add your travel info to the Travel logistics doc.",
+    "registration": "Closed."
+  },
+  "geo": {
+    "coordinateSystem": "WGS84 decimal degrees",
+    "geocodingSource": "Kartverket address register, ws.geonorge.no/adresser/v1",
+    "geocodedOn": "2026-09-08",
+    "precisionValues": [
+      "address",
+      "street"
+    ],
+    "walkEstimate": "Straight-line distance multiplied by 1.3 for street detour, at 4.5 km/h."
+  }
+}

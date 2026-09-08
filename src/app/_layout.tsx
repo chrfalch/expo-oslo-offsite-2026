@@ -1,17 +1,35 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { useEffect } from 'react';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
 import AppTabs from '@/components/app-tabs';
+import { useOffsiteTheme } from '@/theme';
 
-SplashScreen.preventAutoHideAsync();
+export default function RootLayout() {
+  const { colors, scheme } = useOffsiteTheme();
+  const baseTheme = scheme === 'dark' ? DarkTheme : DefaultTheme;
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  useEffect(() => {
+    if (__DEV__ && process.env.EXPO_OS !== 'web') {
+      // Keep the preview's floating developer button from covering the Expo mark.
+      void import('expo-dev-client').then(({ setToolsButtonVisible }) => setToolsButtonVisible(false));
+    }
+  }, []);
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
+    <ThemeProvider
+      value={{
+        ...baseTheme,
+        colors: {
+          ...baseTheme.colors,
+          primary: colors.accent,
+          background: colors.background,
+          card: colors.background,
+          text: colors.text,
+          border: colors.border,
+        },
+      }}>
+      <StatusBar style="auto" />
       <AppTabs />
     </ThemeProvider>
   );
