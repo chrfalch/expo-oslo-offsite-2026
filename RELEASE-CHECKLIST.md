@@ -2,6 +2,17 @@
 
 Prepare and validate everything before uploading. Use EAS Build, EAS-managed signing credentials, EAS Update, EAS Observe, and EAS Submit. Audience confirmed: only offsite attendees. Destinations: a private TestFlight beta and Google Play internal testing. Ask setup questions one at a time.
 
+## Embedded Android Maps — 2026-09-09
+
+- [x] Enable Maps SDK for Android in `chrfalch-oslo-offsite-2026`, with the user's approval of the activation terms.
+- [x] Link the new “My Billing Account” under `christian.falch@mezzin.no`; the user completed billing setup.
+- [x] Create “Oslo Offsite Android Maps”, restricted to Maps SDK for Android, `com.chrfalch.oslooffsite2026`, and the local debug/EAS upload certificates listed in `docs/RELEASING.md`.
+- [x] Save `GOOGLE_MAPS_API_KEY` in ignored `.env.local` and the EAS development, preview, and production environments with sensitive visibility.
+- [x] Isolate Maps-enabled Android updates with runtime `1.0.0-android-maps-v1`; preserve the iOS runtime.
+- [x] Rebuild and install the Android development app, then verify rendered street tiles and the Fuglen destination pin on the emulator. All 56 tests, TypeScript, lint, and native configuration checks pass.
+- [ ] Build and verify a fresh Android release before distribution. Earlier beta binaries lack the native Maps key.
+- [ ] Add the Play app-signing SHA-1 to this key once Play App Signing is available, then verify Maps in a Play-installed build.
+
 ## Support update builds — 2026-09-09
 
 - Source commit: `ca4528925fdfe1e37b18b9a99ce52d955b7f2f16`, pushed to `master`. Adds the Support screen, playful Overview footer, phone/WhatsApp links, and Christian’s home with a bundled, attributed building photo.
@@ -56,7 +67,7 @@ Prepare and validate everything before uploading. Use EAS Build, EAS-managed sig
 - [x] Create and verify a Google service-account submission key and assign it in EAS.
 - [ ] Grant that service account app-scoped testing permissions after Google unlocks app creation.
 - Google Cloud terms were accepted by the user. Project `chrfalch-oslo-offsite-2026` and service account `eas-submit@chrfalch-oslo-offsite-2026.iam.gserviceaccount.com` are created. No Cloud IAM roles were granted to the service account. Android Publisher API is enabled. The locally generated key `7bc68e12694cec6434b4e9a5aac47c96fe924dcf` authenticated successfully with Google and is assigned in EAS for this app (EAS credential ID `8071c411-5f38-454d-94b8-b5966438a3af`), expiring 2027-09-09. Its local JSON and PEM files have restricted permissions in ignored `credentials/`. Play app permissions must wait for app creation. Both unused Google-generated keys from failed browser downloads were deleted after the user's explicit approval. The working key is retained.
-- [x] Confirm Android map behavior: the user chose the working external Google Maps button for this beta. An embedded Maps key and billing are not needed for this release.
+- [x] Configure the subsequently requested embedded Android Maps and billing; see the current Maps status above. The original beta used the external Google Maps button.
 - [x] Keep passwords, private keys, keystores, and service-account JSON out of Git and chat.
 
 ## 4. Expo Updates
@@ -118,7 +129,7 @@ Prepare and validate everything before uploading. Use EAS Build, EAS-managed sig
 - [x] Submit the verified iOS build to TestFlight with EAS Submit: 1.0.0 (4), submission `5b251776-4099-4974-9024-b37af52befcd`, successful; Apple processing `VALID`.
 - [ ] Submit the verified Android build to the confirmed Google Play testing track with EAS Submit (check current first-upload requirements).
 - [x] Confirm Apple processing (`VALID`) and external beta review submission (`WAITING_FOR_REVIEW`).
-- [ ] After Google identity approval: verify contact phone, create the app, grant app-scoped testing access, enroll Play App Signing, submit exact Android build `c6bdba9c-9e34-4ef0-97e2-3c993f2e6d6a` via EAS, and confirm Play processing.
+- [ ] After Google identity approval: verify contact phone, create the app, grant app-scoped testing access, enroll Play App Signing, add its SHA-1 to the Maps key, and submit a fresh verified Android build containing the Maps setup via EAS. Confirm Play processing and map rendering.
 - [ ] Once Apple approves the beta, collect the attendee tester addresses and authorize invitations. The group is empty and public links remain disabled.
 
 ## Initial audit

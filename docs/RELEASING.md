@@ -48,9 +48,16 @@ Use the current `RELEASE-CHECKLIST.md` to finish account, Maps, store informatio
 
 For embedded Google Maps on Android, create `GOOGLE_MAPS_API_KEY` in the EAS environments used for builds and updates. Use sensitive visibility so configuration can resolve it for both operations. Restrict the key to Maps SDK for Android, this package name, and the appropriate certificate fingerprints. Play-installed apps need the **Play app-signing** SHA-1; an EAS-distributed APK needs the **EAS upload key** SHA-1. The key is included in the native Android app, so API restrictions provide its protection. With no key configured, the existing external Maps fallback remains available.
 
-The user selected the external Google Maps button for this beta. Leave the Maps key unset for the release; the embedded-map instructions above apply to a future change.
+Embedded Android Maps was configured and verified locally on 2026-09-09. Google Cloud project `chrfalch-oslo-offsite-2026` has Maps SDK for Android enabled and the new “My Billing Account” linked under `christian.falch@mezzin.no`. The “Oslo Offsite Android Maps” key is restricted to that SDK, this package name, and the local debug/EAS upload certificates. `GOOGLE_MAPS_API_KEY` is saved in ignored `.env.local` and all three EAS environments with sensitive visibility. A rebuilt Android development app rendered street tiles and the Fuglen destination pin on the emulator.
 
-Verified EAS upload certificate SHA-1: `A0:4B:9D:B0:06:BB:21:48:CE:06:FA:15:25:70:E2:69:3D:06:28:C7`. This is public certificate metadata, not a signing secret. Obtain the separate Play app-signing fingerprint from Play Console before configuring a key for store-installed builds.
+The earlier Android beta binaries do not contain this native key. Build and verify a fresh Android release before distributing embedded Maps; an OTA update alone cannot add it. Add the Play app-signing SHA-1 to the key restrictions before testing a Play-installed release.
+
+Allowed certificate SHA-1 fingerprints (public certificate metadata):
+
+- Local debug: `5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25`.
+- EAS upload: `A0:4B:9D:B0:06:BB:21:48:CE:06:FA:15:25:70:E2:69:3D:06:28:C7`.
+
+Obtain the separate Play app-signing fingerprint from Play Console before configuring a key for store-installed builds.
 
 ## Build before submitting
 
@@ -66,7 +73,7 @@ Store build numbers are managed remotely and increment automatically. `expo.vers
 
 On 2026-09-09, iOS 1.0.0 (4) was uploaded through EAS Submit and processed successfully in TestFlight. EAS build: `ce7ace99-7e9d-486c-b676-03b3f72b8def`; submission: `5b251776-4099-4974-9024-b37af52befcd`. The build is in the private `Offsite attendees` group and waiting for external beta review. Automatic tester notifications and public links are disabled; no invitations have been sent.
 
-Android 1.0.0 (5), build `c6bdba9c-9e34-4ef0-97e2-3c993f2e6d6a`, is complete and verified. Google identity approval still blocks contact-phone verification and creation of its Play listing. Once unlocked, complete app setup and app-scoped service-account access, then submit this exact build through EAS.
+Android 1.0.0 (5), build `c6bdba9c-9e34-4ef0-97e2-3c993f2e6d6a`, is complete and verified for the earlier external-Maps behavior. Google identity approval still blocks contact-phone verification and creation of its Play listing. The requested embedded Maps requires a fresh Android build; select and verify that replacement before submission. See `RELEASE-CHECKLIST.md` for later build records.
 
 ## Submit the prepared artifacts
 
@@ -83,7 +90,7 @@ Replace the uppercase placeholders with the verified IDs. Do not select `--lates
 
 ## Publish compatible updates
 
-EAS configured `runtimeVersion: { "policy": "appVersion" }`. Both platform and app version must match the installed app. **Bump `expo.version` and create new native builds whenever native packages, permissions, Maps native configuration, or other native behavior changes.** Auto-incrementing build numbers does not change this compatibility boundary.
+EAS configured `runtimeVersion: { "policy": "appVersion" }`. Android builds with a Maps key override this with `<app version>-android-maps-v1`, isolating them from older binaries without a key; iOS retains the app-version policy. Builds and updates must use an EAS environment with the same Maps configuration. **Bump `expo.version` and create new native builds whenever native packages, permissions, or other native behavior changes.** Adding the first Android Maps key already changes the Android runtime; later key changes require a version bump and rebuild. Auto-incrementing build numbers does not change this compatibility boundary.
 
 Validate JavaScript and bundled content updates on preview first:
 

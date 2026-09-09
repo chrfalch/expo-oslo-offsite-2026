@@ -97,7 +97,11 @@ npm run prebuild -- --platform android
 npm run android
 ```
 
+Restart any running development server after changing `.env.local` so its app configuration picks up the key.
+
 Without a key, the Android screen shows the address and an external Maps button instead of mounting Google Maps. This keeps the guide usable and avoids the native missing-key crash. `app.config.ts` reads the key for native configuration; only a boolean availability flag is exposed to the screen.
+
+Configure the same `GOOGLE_MAPS_API_KEY` in the EAS `development`, `preview`, and `production` environments, using sensitive visibility. Builds and updates must resolve it consistently. Android builds with a key use the runtime `<app version>-android-maps-v1`, keeping their updates separate from existing Android installs without a native key. iOS retains its existing runtime. Adding a key requires a new Android binary; an over-the-air update alone cannot enable the embedded map.
 
 Apartment cards and location screens display their saved addresses and photo galleries. Confirmed coordinates place the apartment on the map; an address without coordinates opens an address search in Maps. Unknown apartment addresses stay unknown and link to the explicitly approximate Torshov area. Street-level coordinates are labelled approximate. Named airports without coordinates use a Maps search handoff.
 
