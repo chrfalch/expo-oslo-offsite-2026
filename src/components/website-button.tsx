@@ -1,4 +1,5 @@
-import { Button, Text } from '@expo/ui';
+import { Text } from '@/components/text';
+import { Button } from '@/components/button';
 import { useState } from 'react';
 import { Linking } from 'react-native';
 

@@ -1,0 +1,51 @@
+# SwiftUI result controls are exposed in the accessibility tree, but not in
+# Argent's UIView projection. Keep their live accessibility waits as raw tools.
+# Native search automatically focuses its field; keyboard steps preserve that behavior.
+steps:
+  - echo: On Places, open native search and enter a query with no matches. Expect an
+      actionable empty state above the keyboard.
+  - tap:
+      id: magnifyingglass
+  - await: { visible: { text: Search Oslo }, timeout: 5000 }
+  - tool: keyboard
+    args:
+      text: zzznomatch
+  - tool: await-ui-element
+    args:
+      condition: visible
+      selector:
+        identifier: places-reset
+      timeoutMs: 5000
+  - echo: The no-match state is visible. Clear the native search field, then search
+      for coffee.
+  - tap:
+      id: xmark.circle.fill
+  - tool: await-ui-element
+    args:
+      condition: hidden
+      selector:
+        identifier: places-reset
+      timeoutMs: 5000
+  - tool: keyboard
+    args:
+      text: coffee
+  - tool: await-ui-element
+    args:
+      condition: visible
+      selector:
+        identifier: place-java-espressobar
+      timeoutMs: 5000
+  - echo: Coffee results are visible while typing. Close search; the full list and
+      filter button should return.
+  - tap:
+      id: xmark
+  - await: { visible: { text: Filter places }, timeout: 5000 }
+  - tool: await-ui-element
+    args:
+      condition: visible
+      selector:
+        identifier: place-rebel-hangout
+      timeoutMs: 5000
+executionPrerequisite: On iOS 26 or later, Oslo Offsite is open on Places with
+  All places selected, All categories, walking from Rebel, empty search, search
+  closed, and default text size. Any attendee may be selected.

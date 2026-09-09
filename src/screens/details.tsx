@@ -1,5 +1,6 @@
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { formatBookingStatus, formatEventTime, formatOffsiteDate, formatWalkTime, getPlace, offsiteData, placeCategoryLabels } from '@/data/offsite';
+import { getGuideImage } from '@/media/guide-images';
 import { ContentPageView } from '@/presentation/content-page-view';
 import { useOffsiteNavigation } from '@/screens/navigation';
 import { usePreferences } from '@/state/preferences';
@@ -12,9 +13,9 @@ export function PlaceScreen() {
   if (!place) return <ContentPageView sections={[{ id: 'missing-place', title: 'Place not found', rows: [{ id: 'browse', title: 'Browse places', onPress: () => router.replace('/places') }] }]} />;
   const saved = personal.savedPlaceIds.includes(place.id);
   return <><Stack.Screen options={{ title: place.name }} /><ContentPageView intro={[placeCategoryLabels[place.category], place.cuisine, place.area].filter(Boolean).join(' · ')} sections={[
-    { id: 'place', cards: [{ id: place.id, title: place.name, description: place.description,
-      actions: [{ label: place.address ? `${place.address} · Map` : 'Location details', testID: 'place-map', onPress: () => location(`place:${place.id}`) },
-        { label: saved ? 'Saved on this phone' : 'Save place', testID: 'save-place', primary: saved, onPress: () => { void store.togglePlace(place.id); } }] }] },
+    { id: 'place', cards: [{ id: place.id, title: place.name, description: place.description, image: getGuideImage(place.image, place.name),
+      actions: [{ label: place.address ? 'Show on map' : 'Location details', testID: 'place-map', primary: true, onPress: () => location(`place:${place.id}`) },
+        { label: saved ? 'Saved' : 'Save place', testID: 'save-place', selected: saved, onPress: () => { void store.togglePlace(place.id); } }] }] },
     { id: 'getting-there', title: 'Getting there', description: 'Walking times are estimates from the guide’s reference points, not your current position or a measured route.', rows: [
       { id: 'walk-rebel', title: 'From Rebel', detail: formatWalkTime(place.walkMinutesFrom.rebel), onPress: () => location('workspace:rebel') },
       { id: 'walk-torshov', title: 'From Torshov area', detail: formatWalkTime(place.walkMinutesFrom.torshov), onPress: () => location('area:torshov') },
@@ -33,8 +34,9 @@ export function ActivityScreen() {
   const { location, router } = useOffsiteNavigation();
   if (!event) return <ContentPageView sections={[{ id: 'missing-event', title: 'Activity not found', rows: [{ id: 'schedule', title: 'See the schedule', onPress: () => router.replace('/schedule') }] }]} />;
   return <><Stack.Screen options={{ title: event.title }} /><ContentPageView intro="Team activity · Oslo local time" sections={[
-    { id: 'activity', cards: [{ id, title: event.title, eyebrow: formatBookingStatus(event.booked).toUpperCase(),
-      description: `${formatOffsiteDate(event.date, { weekday: 'long', day: 'numeric', month: 'long' })}\n${formatEventTime(event)}` }] },
+    { id: 'activity', cards: [{ id, title: event.title, image: getGuideImage(event.image, event.location), eyebrow: formatBookingStatus(event.booked).toUpperCase(),
+      description: `${formatOffsiteDate(event.date, { weekday: 'long', day: 'numeric', month: 'long' })}\n${formatEventTime(event)}`,
+      actions: [{ label: 'Show on map', primary: true, testID: 'activity-primary-map', onPress: () => location(`activity:${id}`) }] }] },
     { id: 'venue', title: 'Where', rows: [{ id: 'activity-map', title: event.location, detail: event.address ?? 'Address not provided', onPress: () => location(`activity:${id}`) }] },
     { id: 'event-notes', title: 'Good to know', description: event.notes,
       rows: id === 'sauna' ? [{ id: 'sauna-packing', title: 'Open packing checklist', onPress: () => router.push('/packing') }] : [] },

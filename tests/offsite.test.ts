@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
 import {
-  formatBookingStatus, formatDateRange, formatEventTime, formatOffsiteDate, formatTravelLeg,
+  formatAccommodationDetails, formatBookingStatus, formatDateRange, formatEventTime, formatOffsiteDate, formatTravelLeg,
   formatWalkTime, getFoodPlaces, getPlace, getPlaces, getSchedule, getScheduleDays, getTravel,
   offsite, offsiteData, placeCategoryLabels,
 } from '../src/data/offsite';
@@ -20,8 +20,8 @@ describe('bundled data integrity', () => {
     assert.equal(offsite.timeZone, offsiteData.event.timezone);
   });
 
-  test('has unique place and schedule IDs and supported categories', () => {
-    for (const records of [offsiteData.places, offsiteData.schedule]) {
+  test('has unique entity IDs and supported categories', () => {
+    for (const records of [offsiteData.places, offsiteData.schedule, offsiteData.foodToTry.fromSupermarket, offsiteData.foodToTry.outAndAbout, offsiteData.expoCustomerApps]) {
       assert.equal(new Set(records.map((record) => record.id)).size, records.length);
       assert.ok(records.every((record) => record.id.length > 0));
     }
@@ -34,6 +34,47 @@ describe('bundled data integrity', () => {
     for (const food of offsiteData.foodToTry.outAndAbout) {
       assert.deepEqual(getFoodPlaces(food).map((place) => place.id), food.placeIds, food.name);
     }
+  });
+
+  test('accommodation photos have bundled paths, HTTPS provenance and captions', () => {
+    for (const flat of offsiteData.accommodation.options) {
+      assert.ok(Array.isArray(flat.photos), flat.name);
+      assert.equal(new Set(flat.photos.map((photo) => photo.file)).size, flat.photos.length, flat.name);
+      for (const photo of flat.photos) {
+        assert.match(photo.file, new RegExp(`^assets/accommodation/${flat.id}-\\d+\\.jpg$`));
+        const url = new URL(photo.sourceUrl);
+        assert.equal(url.protocol, 'https:', flat.name);
+        assert.equal(url.username, '');
+        assert.equal(url.password, '');
+        assert.ok(photo.caption?.trim().length, flat.name);
+        assert.ok(!/x-amz-signature|x-amz-expires|x-goog-signature/i.test(url.search), 'Avoid expiring photo links');
+      }
+      if (flat.address !== null) assert.ok(flat.address.trim().length > 0, flat.name);
+    }
+  });
+
+  test('accommodation totals, check-in times and descriptive details match the updated listings', () => {
+    const { accommodation: a } = offsiteData;
+    assert.equal(new Set(a.options.map((flat) => flat.id)).size, a.options.length);
+    assert.equal(a.totalMaxGuests, a.options.reduce((total, flat) => total + flat.maxGuests, 0));
+    assert.equal(a.totalBedrooms, a.options.reduce((total, flat) => total + flat.bedrooms, 0));
+    assert.deepEqual(a.options.map((flat) => flat.photos.length), [3, 4, 4]);
+    for (const flat of a.options) {
+      assert.ok(flat.description.length > 0);
+      for (const time of [flat.checkInFrom, flat.checkInUntil, flat.checkOutBy]) {
+        if (time) assert.match(time, /^([01]\d|2[0-3]):[0-5]\d$/);
+      }
+    }
+    const bright = formatAccommodationDetails(a.options[0]);
+    assert.ok(bright.includes('Check-in from 15:00 · Check-out by 13:00'));
+    assert.ok(bright.includes('Self check-in available'));
+    const top = formatAccommodationDetails(a.options[1]);
+    assert.ok(top.includes('Check-in 12:00–21:00 · Check-out by 12:00'));
+    assert.ok(top.includes('6 guests maximum · 3 bedrooms · 1.5 bathrooms'));
+    assert.ok(!top.includes('Self check-in available'));
+    const unknown = formatAccommodationDetails({ ...a.options[0], checkInFrom: null, checkInUntil: null, checkOutBy: null, walkMinutesFrom: { rebel: null } });
+    assert.ok(unknown.includes('Check-in Not provided · Check-out not provided'));
+    assert.ok(!unknown.some((detail) => detail.includes('walk to Rebel')));
   });
 
   test('has valid coordinates and non-negative estimates with known base IDs', () => {
@@ -212,7 +253,7 @@ describe('schedule and travel', () => {
     const guide = createOffsiteGuide({ ...offsiteData, places: [], schedule: [], travel: [] });
     assert.deepEqual(guide.getScheduleDays(), []);
     assert.deepEqual(guide.getTravel(), []);
-    assert.deepEqual(guide.getFoodPlaces({ name: 'Food', description: '', placeIds: ['missing'] }), []);
+    assert.deepEqual(guide.getFoodPlaces({ id: 'food', name: 'Food', description: '', placeIds: ['missing'] }), []);
   });
 });
 

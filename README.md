@@ -29,11 +29,19 @@ npm run web
 
 Android requires Android Studio and an emulator or device. For subsequent JavaScript edits, start the development server with `npm start`. This canary scaffold includes `expo-dev-client`; use its development build for the matching native runtime.
 
-Native folders are generated and ignored by Git. After changing native configuration, regenerate using the pinned template:
+Android predictive back is disabled for this canary: on the Android 14 emulator, enabling it bypasses React Native's Back handling and backgrounds the app instead of dismissing a location sheet. Keep it disabled until the native compatibility issue is resolved, and verify Back after any SDK upgrade.
+
+Native folders are generated and ignored by Git. After adding/updating native dependencies or changing native configuration, regenerate using the pinned template **and rebuild/reinstall** the development app:
 
 ```sh
 npm run prebuild -- --platform ios
+npm run ios -- --device "iPhone 17 Pro"
+# For Android:
+npm run prebuild -- --platform android
+npm run android -- --device <emulator-or-device-id>
 ```
+
+The `preios`/`preandroid` hooks only generate missing native folders; they do not refresh existing projects after dependencies change. A JavaScript reload or export cannot add missing native libraries (for example, `ExpoAppMetrics` from Expo Observe, or Expo Updates). Confirm the rebuilt app launches successfully before considering a native dependency update complete. If Metro is already running for this project, reuse it and add `--no-bundler` to the build command.
 
 ## Project layout
 
@@ -55,6 +63,8 @@ src/data/offsite-types.ts Shared content types
 src/data/offsite-format.ts Calendar dates and missing-value formatting
 src/data/attendees.ts     Selectable attendees and stable device-local IDs
 src/data/locations.ts     Shared location lookup and external Maps URLs
+src/media/guide-images.ts  Static bundled guide image registry
+assets/                   Guide photos, logos and app icons available offline
 tests/                   Data, location and preference persistence tests
 src/theme.ts             Shared light/dark palette
 scripts/prepare-native.mjs  First-run canary native template selection
@@ -62,7 +72,7 @@ scripts/prepare-native.mjs  First-run canary native template selection
 
 On first launch, choose from a plain list of seven attendees. Christian Falch is excluded from that list, while the original travel data still includes him as the organizer. There is no account, password, or attendee search. The profile button lets you change person later.
 
-Overview shows your arrival and the next shared activity in Oslo time. Schedule has a day picker, working hours, activities, and team travel. Oslo leads to 43 places, saved places, workspace, accommodation, food, packing, and practical information. Place browsing supports search, category and walking-base filters, with eight results per page. Every venue, workspace, apartment and named travel location opens the shared location screen. Launcher icons are still the Expo template placeholders.
+Overview shows your next arrival or departure and the next shared activity in Oslo time. Schedule has a day picker, compact work and activity rows, and team travel; it opens on today during the offsite and All days outside it. Oslo leads to 43 places, saved places, workspace, accommodation, food, packing, and practical information. Place browsing uses a continuous list with native search, category and walking-base filters, and separate bookmarks. On iOS 26, the magnifying glass in the bottom toolbar expands into search above the keyboard. Every venue, workspace, apartment and named travel location opens the shared location screen. Launcher artwork uses the custom Oslo Offsite opera-house and fjord icon in `assets/branding/oslo-offsite-icon.png`. Expo generates the native sizes.
 
 ## Personal preferences
 
@@ -87,9 +97,15 @@ npm run android
 
 Without a key, the Android screen shows the address and an external Maps button instead of mounting Google Maps. This keeps the guide usable and avoids the native missing-key crash. `app.config.ts` reads the key for native configuration; only a boolean availability flag is exposed to the screen.
 
-Unknown apartment addresses stay unknown. Their location screens link to the explicitly approximate Torshov area; they never invent an entrance or room assignment. Street-level coordinates are labelled approximate. Named airports without coordinates use a Maps search handoff.
+Apartment cards and location screens display their saved addresses and photo galleries. Confirmed coordinates place the apartment on the map; an address without coordinates opens an address search in Maps. Unknown apartment addresses stay unknown and link to the explicitly approximate Torshov area. Street-level coordinates are labelled approximate. Named airports without coordinates use a Maps search handoff.
+
+Schema 1.4 adds optional `image` metadata to places, schedule events, foods, customer apps and the workspace: `file`, `type` (`photo`, `logo`, `icon`, `artwork`), `sourceUrl`, `sourcePage`, `sourceDomain`, `credit` and `licence`. Foods and apps have stable IDs. Apartment galleries keep `photos: [{ "file": "assets/accommodation/example.jpg", "sourceUrl": "https://…", "caption": "Living room" }]`. All 74 supplied JPG, PNG and WebP files are bundled through literal imports in `src/media/guide-images.ts`. Source URLs are retained for provenance and never used to load images. Supplied credits are displayed beneath images; missing images leave the text available. Photo galleries keep their captions, logos are contained, and app icons use a compact square. `assets.folders`, `imageFormats` and `rightsNote` retain the source's asset metadata.
+
+The 9 September accommodation update includes descriptions, capacities, amenities, check-in/check-out times, hosts, and estimated walks to Rebel. Airbnb coordinates are approximate to roughly 100–200 metres, and both the map and handoff labels make this explicit. Exact street addresses remain unknown until supplied from booking confirmations. The shared Torshov walking reference now uses the centre of the three approximate listing locations.
 
 ## Adjusting the design
+
+The [iOS design changes and screenshots](docs/DESIGN-FIXES-IOS.md) document the current hierarchy, Dynamic Type support, completion controls, and native search replay.
 
 The static Playground design uses a neutral background, a solid lilac hero, an amber year badge, and the bundled Expo mark. There is no mesh or gradient dependency. Edit `src/theme.ts` for the shared palette, spacing, radii and content width; edit `src/presentation/*-view.tsx` for layout and typography. `GuideCardModel` contains display-ready strings and links, so card changes do not need to touch the JSON schema or selectors.
 
@@ -97,7 +113,7 @@ Screen controllers in `src/screens/` select and format data, own filter state, a
 
 ## Offline data API
 
-Import from `@/data/offsite` in a screen or component. The JSON is included in the app bundle, so all guide data is available immediately, including on the first offline launch. No provider, hook, permission, fetch request or loading state is required. Website, Airbnb and App Store buttons open external destinations that require connectivity. This does not add offline map tiles or offline installation/caching of the web app itself.
+Import from `@/data/offsite` in a screen or component. The JSON is included in the app bundle, so all guide data is available immediately, including on the first offline launch. All bundled guide images are also available offline. No provider, hook, permission, fetch request or loading state is required. Website, Airbnb and App Store buttons open external destinations that require connectivity. This does not add offline map tiles or offline installation/caching of the web app itself.
 
 ```ts
 import { offsiteData, getPlaces, getPlace, getSchedule, getTravel, getFoodPlaces } from '@/data/offsite';
@@ -121,7 +137,7 @@ Coordinates include source and precision. Walking estimates use straight-line di
 
 ## Refresh the guide
 
-Replace `src/data/offsite-data.json` with the updated source JSON, then run `npm test` and `npm run typecheck`. For example, from the project root:
+Replace `src/data/offsite-data.json` with the updated source JSON, copy the referenced images into their matching `assets/` folders and update the literal imports in `src/media/guide-images.ts`, then run `npm test` and `npm run typecheck`. For example, from the project root:
 
 ```sh
 cp "/path/to/updated/offsite-data.json" src/data/offsite-data.json
@@ -129,7 +145,15 @@ npm test
 npm run typecheck
 ```
 
-The app has no dependency on the original source's location on a developer's computer. A changed snapshot is picked up by the development bundler; installed production apps receive it with the next app bundle. The tests check relationships, coordinates, date/time values, missing fields, sorting and the corrected overnight arrival. If the schema or confirmed itinerary changes, update the types and affected expectations alongside the JSON.
+The app has no dependency on the original source's location on a developer's computer. A changed snapshot is picked up by the development bundler; installed production apps receive it with the next app bundle. When merging an upstream snapshot, preserve verified local captions for unchanged files and retain `approximate` in `geo.precisionValues` for Airbnb coordinates. The tests check every referenced image’s file signature and offline resolution, relationships, coordinates, date/time values, missing fields, photo metadata, apartment Maps fallbacks, sorting and the corrected overnight arrival. If the schema or confirmed itinerary changes, update the types and affected expectations alongside the JSON.
+
+### Optimize refreshed images
+
+Optimize guide images before shipping a data refresh. The current 74 images were reduced from 19.1 MB to about 8.3 MB while preserving filenames, aspect ratios, transparency and source metadata in the JSON. Keep the full-resolution originals outside the app repository.
+
+Expo’s documented `npx expo-optimize . --quality 80 --include 'assets/{accommodation,places,food,apps,schedule,workspace}/**/*.{jpg,png}'` command uses `sharp-cli` (available on PATH). Keep its generated `.expo-shared/assets.json` so unchanged JPEGs and PNGs are not recompressed. The published Expo optimizer only handles JPEG/PNG; WebP files need a separate Sharp pass.
+
+For new images, use Sharp to fit photos/artwork within 1600 × 1600 pixels and app icons within 256 × 256, preserving aspect ratio and never enlarging. Use JPEG/WebP quality 80; PNGs can use a quality-90 palette with transparency preserved. Encode from the originals and replace a bundled file only when the result is smaller. Check representative images visually, run the existing image tests, and verify all referenced assets remain in the native exports. Repeat this step whenever new photos are imported.
 
 ## Checks
 

@@ -1,0 +1,59 @@
+{
+  "configVersion": 0,
+  "apple": {
+    "version": "1.0.0",
+    "release": {
+      "automaticRelease": false
+    },
+    "info": {
+      "en-US": {
+        "title": "Oslo Offsite",
+        "subtitle": "Your Oslo offsite guide",
+        "description": "Keep the Oslo offsite close at hand. See the shared schedule, find your travel details, explore places around the city, and keep track of what to pack.\n\nChoose your attendee profile to see your arrival and save your own places and packing checklist on this device. Browse accommodation, food, practical information, and activities from the bundled guide. Open destinations in Maps when you're ready to go.\n\nThe guide and your saved preferences work offline. Map tiles, external websites, and app updates require an internet connection.",
+        "keywords": [
+          "Oslo",
+          "offsite",
+          "travel",
+          "schedule",
+          "packing"
+        ],
+        "releaseNotes": "First attendee beta: your Oslo schedule, travel, places, and packing checklist.",
+        "privacyPolicyUrl": "https://oslo-offsite-2026.expo.app/privacy.html",
+        "supportUrl": "https://oslo-offsite-2026.expo.app/"
+      }
+    },
+    "advisory": {
+      "ageRatingOverride": "NONE",
+      "alcoholTobaccoOrDrugUseOrReferences": "INFREQUENT_OR_MILD",
+      "contests": "NONE",
+      "gambling": false,
+      "gamblingSimulated": "NONE",
+      "horrorOrFearThemes": "NONE",
+      "kidsAgeBand": null,
+      "koreaAgeRatingOverride": "NONE",
+      "lootBox": false,
+      "matureOrSuggestiveThemes": "NONE",
+      "medicalOrTreatmentInformation": "NONE",
+      "profanityOrCrudeHumor": "NONE",
+      "sexualContentGraphicAndNudity": "NONE",
+      "sexualContentOrNudity": "NONE",
+      "unrestrictedWebAccess": false,
+      "violenceCartoonOrFantasy": "NONE",
+      "violenceRealistic": "NONE",
+      "violenceRealisticProlongedGraphicOrSadistic": "NONE",
+      "advertising": false,
+      "ageAssurance": false,
+      "ageRatingOverrideV2": "NONE",
+      "developerAgeRatingInfoUrl": null,
+      "gunsOrOtherWeapons": "NONE",
+      "healthOrWellnessTopics": false,
+      "messagingAndChat": false,
+      "parentalControls": false,
+      "userGeneratedContent": false
+    },
+    "copyright": "2026 Christian Magnus Falch",
+    "categories": [
+      "TRAVEL"
+    ]
+  }
+}

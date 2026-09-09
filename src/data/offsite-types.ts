@@ -18,7 +18,7 @@ export interface Coordinates {
   lng: number;
   precision: string;
   source: string;
-  matchedAddress: string;
+  matchedAddress: string | null;
 }
 
 export interface ReferencePoint {
@@ -27,6 +27,20 @@ export interface ReferencePoint {
   city: string;
   coordinates: Coordinates | null;
   note?: string;
+}
+
+export const guideImageTypes = ['photo', 'logo', 'icon', 'artwork'] as const;
+
+export interface GuideImage {
+  /** Project-relative path included by the static guide image registry. */
+  file: string;
+  type: typeof guideImageTypes[number];
+  /** Provenance only; images load from bundled assets. */
+  sourceUrl: string;
+  sourcePage: string;
+  sourceDomain: string;
+  credit: string | null;
+  licence: string | null;
 }
 
 export interface Place {
@@ -45,6 +59,7 @@ export interface Place {
   hours: string | null;
   url: string | null;
   coordinates: Coordinates | null;
+  image?: GuideImage | null;
 }
 
 export interface ScheduleEvent {
@@ -59,6 +74,7 @@ export interface ScheduleEvent {
   booked: boolean | null;
   notes: string;
   coordinates: Coordinates | null;
+  image?: GuideImage | null;
 }
 
 export interface TravelLeg {
@@ -79,9 +95,54 @@ export interface Traveler {
 }
 
 export interface LocalFood {
+  id: string;
   name: string;
   description: string;
   placeIds: string[];
+  image?: GuideImage | null;
+}
+
+export interface AccommodationPhoto {
+  /** Project-relative path included by the static guide image registry. */
+  file: string;
+  /** Original listing image URL, kept for provenance rather than image loading. */
+  sourceUrl: string;
+  caption: string | null;
+}
+
+export interface AccommodationOption {
+  id: string;
+  name: string;
+  url: string;
+  listingId: string;
+  area: string;
+  address: string | null;
+  coordinates: Coordinates | null;
+  photos: AccommodationPhoto[];
+  status: string;
+  verified: boolean;
+  hostName: string;
+  hostNote: string | null;
+  rating: number | null;
+  reviewCount: number;
+  maxGuests: number;
+  bedrooms: number;
+  beds: number;
+  extraBeds: number;
+  bathrooms: number;
+  floor: number | null;
+  elevator: boolean | null;
+  selfCheckIn: boolean | null;
+  checkInFrom: string | null;
+  checkInUntil: string | null;
+  checkOutBy: string | null;
+  description: string;
+  neighbourhoodNote: string;
+  amenities: string[];
+  amenitiesMissing: string[];
+  notes: string[];
+  distanceMetersFrom: Partial<Record<ReferencePointId, number | null>>;
+  walkMinutesFrom: Partial<Record<ReferencePointId, number | null>>;
 }
 
 export interface OffsiteData {
@@ -104,15 +165,17 @@ export interface OffsiteData {
   schedule: ScheduleEvent[];
   places: Place[];
   foodToTry: {
-    fromSupermarket: { name: string; description: string; priceNok: string | null }[];
+    fromSupermarket: { id: string; name: string; description: string; priceNok: string | null; image?: GuideImage | null }[];
     outAndAbout: LocalFood[];
   };
   expoCustomerApps: {
+    id: string;
     name: string;
     emoji: string;
     description: string;
     appStoreUrl: string;
     siteUrl: string | null;
+    image?: GuideImage | null;
   }[];
   accommodation: {
     area: string;
@@ -120,14 +183,10 @@ export interface OffsiteData {
     status: string;
     verified: boolean;
     verifiedOn: string;
-    options: {
-      name: string;
-      url: string;
-      address: string | null;
-      coordinates: Coordinates | null;
-      status: string;
-      verified: boolean;
-    }[];
+    totalMaxGuests: number;
+    totalBedrooms: number;
+    coordinatePrecisionNote: string;
+    options: AccommodationOption[];
   };
   workspace: {
     name: string;
@@ -136,6 +195,7 @@ export interface OffsiteData {
     url: string;
     notes: string;
     coordinates: Coordinates | null;
+    image?: GuideImage | null;
   };
   packing: { item: string; notes: string[] }[];
   packingNote: string;
@@ -148,6 +208,13 @@ export interface OffsiteData {
     geocodedOn: string;
     precisionValues: string[];
     walkEstimate: string;
+  };
+  assets: {
+    basePath: string;
+    note: string;
+    folders: Record<'accommodation' | 'places' | 'food' | 'apps' | 'schedule' | 'workspace', string>;
+    imageFormats: string[];
+    rightsNote: string;
   };
 }
 

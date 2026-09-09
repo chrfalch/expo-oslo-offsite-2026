@@ -4,12 +4,14 @@ import { ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { offsiteScreenModifiers } from '@/components/offsite-screen-modifiers';
+import { useScreenObserve } from '@/screens/use-screen-observe';
 import { layout, useContentWidth, useOffsiteTheme } from '@/theme';
 
 const ScrollToTopContext = createContext(() => {});
 export const useScrollToTop = () => use(ScrollToTopContext);
 
 export function OffsiteScreen({ children, standalone = false }: PropsWithChildren<{ standalone?: boolean }>) {
+  useScreenObserve();
   const { colors, scheme } = useOffsiteTheme();
   const contentWidth = useContentWidth();
   const insets = useSafeAreaInsets();
@@ -21,6 +23,8 @@ export function OffsiteScreen({ children, standalone = false }: PropsWithChildre
       <ScrollView
         ref={scrollRef}
         keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="interactive"
+        automaticallyAdjustKeyboardInsets
         style={{ flex: 1, backgroundColor: colors.background }}
         contentInsetAdjustmentBehavior={standalone ? 'never' : 'automatic'}
         contentContainerStyle={{ padding: layout.pagePadding, paddingTop: standalone ? insets.top + 20 : 20, paddingBottom: insets.bottom + 40 }}>

@@ -1,4 +1,5 @@
-import { offsiteData, type Coordinates, type DeepReadonly } from './offsite';
+import { offsiteData, type AccommodationPhoto, type Coordinates, type DeepReadonly, type GuideImage, type OffsiteData } from './offsite';
+import { formatAccommodationDetails } from './accommodation';
 
 export type GuideLocation = {
   key: string;
@@ -8,54 +9,85 @@ export type GuideLocation = {
   notice?: string;
   areaKey?: string;
   searchQuery?: string;
+  photos?: readonly DeepReadonly<AccommodationPhoto>[];
+  image?: DeepReadonly<GuideImage> | null;
+  websiteUrl?: string;
+  websiteLabel?: string;
+  description?: string;
+  details?: readonly string[];
 };
 
-export function getLocation(key: string): GuideLocation | undefined {
+export function getLocation(key: string, data: DeepReadonly<OffsiteData> = offsiteData): GuideLocation | undefined {
   const [kind, ...parts] = key.split(':');
   const id = parts.join(':');
   if (kind === 'place') {
-    const place = offsiteData.places.find((place) => place.id === id);
+    const place = data.places.find((place) => place.id === id);
     if (place) return { key, title: place.name, address: place.address, coordinates: place.coordinates,
+      image: place.image, description: place.description, websiteUrl: place.url ?? undefined,
       notice: place.coordinates?.precision === 'street' ? 'Approximate street location, not a confirmed entrance.' : undefined,
       searchQuery: [place.name, place.address, 'Oslo'].filter(Boolean).join(', ') };
   }
   if (kind === 'activity') {
-    const event = offsiteData.schedule.find((event) => event.id === id);
+    const event = data.schedule.find((event) => event.id === id);
     if (event) return { key, title: event.location, address: event.address, coordinates: event.coordinates,
+      image: event.image, description: event.notes,
       searchQuery: [event.location, event.address, 'Oslo'].filter(Boolean).join(', ') };
   }
-  if (key === 'workspace:rebel') return { key, title: offsiteData.workspace.name,
-    address: offsiteData.workspace.address, coordinates: offsiteData.workspace.coordinates };
+  if (key === 'workspace:rebel') return { key, title: data.workspace.name,
+    image: data.workspace.image, description: data.workspace.notes, websiteUrl: data.workspace.url,
+    address: data.workspace.address, coordinates: data.workspace.coordinates };
   if (kind === 'area' && (id === 'torshov' || id === 'rebel')) {
-    const area = offsiteData.referencePoints[id];
+    const area = data.referencePoints[id];
     return { key, title: id === 'torshov' ? 'Torshov area' : area.label,
       address: id === 'torshov' ? 'Approximate neighbourhood centre' : area.address,
       coordinates: area.coordinates,
       notice: id === 'torshov' ? 'This is an approximate area reference, not an apartment entrance.' : area.note };
   }
-  if (kind === 'stay' && /^\d+$/.test(id)) {
-    const flat = offsiteData.accommodation.options[Number(id)];
+  if (kind === 'stay') {
+    const flat = data.accommodation.options.find((flat) => flat.id === id)
+      ?? (/^\d+$/.test(id) ? data.accommodation.options[Number(id)] : undefined);
     if (flat) return { key, title: flat.name, address: flat.address, coordinates: flat.coordinates,
-      notice: flat.coordinates ? undefined : 'The apartment is booked, but its address is not provided in the guide.',
-      areaKey: flat.coordinates ? undefined : 'area:torshov' };
+      photos: flat.photos, websiteUrl: flat.url, websiteLabel: 'View Airbnb', description: flat.description, details: formatAccommodationDetails(flat),
+      searchQuery: flat.address ? [flat.address, data.event.city, data.event.country].join(', ') : undefined,
+      notice: flat.coordinates?.precision === 'street' ? 'Approximate street location, not a confirmed entrance.'
+        : flat.coordinates?.precision === 'approximate' ? `${data.accommodation.coordinatePrecisionNote} This pin is not an apartment entrance.`
+        : flat.coordinates ? undefined
+        : flat.address ? 'The address is confirmed, but a map pin is not available. Open Maps to search for this address.'
+        : 'The apartment address is not provided in the guide.',
+      areaKey: !flat.coordinates && !flat.address ? 'area:torshov' : undefined };
   }
   if (kind === 'travel') {
-    const namedLocation = offsiteData.travel.flatMap((person) => [person.arrival?.departsFrom, person.departure?.departsFrom]).find((name) => name === id);
+    const namedLocation = data.travel.flatMap((person) => [person.arrival?.departsFrom, person.departure?.departsFrom]).find((name) => name === id);
     if (namedLocation) return { key, title: namedLocation, address: null, coordinates: null,
       notice: 'This departure location is named in the guide, but has no coordinates.', searchQuery: namedLocation };
   }
 }
 
+export function isApproximateLocation(location: GuideLocation): boolean {
+  return !!location.coordinates && (location.key === 'area:torshov' || location.coordinates.precision !== 'address');
+}
+
+export function formatLocationAccuracy(location: GuideLocation): string | undefined {
+  const c = location.coordinates;
+  if (!c) return undefined;
+  const accuracy = location.key === 'area:torshov' ? 'Approximate area reference'
+    : c.precision === 'street' ? 'Approximate street location'
+    : isApproximateLocation(location) ? 'Approximate area location' : 'Address-level location';
+  const source = c.source === 'geonorge' ? 'Kartverket' : c.source === 'airbnb-listing' ? 'Airbnb listing' : c.source;
+  return `${accuracy} · Source: ${source}\n${c.lat}, ${c.lng}`;
+}
+
 export function mapsUrls(location: GuideLocation, platform: 'ios' | 'android' | 'web') {
   const coordinate = location.coordinates ? `${location.coordinates.lat},${location.coordinates.lng}` : undefined;
   const query = coordinate ?? location.searchQuery;
+  const title = isApproximateLocation(location) ? `${location.title} (approximate)` : location.title;
   if (!query) return [];
   const web = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
   if (platform === 'ios') return [coordinate
-    ? `maps://?ll=${coordinate}&q=${encodeURIComponent(location.title)}`
+    ? `maps://?ll=${coordinate}&q=${encodeURIComponent(title)}`
     : `maps://?q=${encodeURIComponent(query)}`, web];
   if (platform === 'android') return [coordinate
-    ? `geo:${coordinate}?q=${encodeURIComponent(`${coordinate}(${location.title})`)}`
+    ? `geo:${coordinate}?q=${encodeURIComponent(`${coordinate}(${title})`)}`
     : `geo:0,0?q=${encodeURIComponent(query)}`, web];
   return [web];
 }

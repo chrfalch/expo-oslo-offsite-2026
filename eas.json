@@ -1,0 +1,62 @@
+{
+  "cli": {
+    "version": ">= 23.2.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "base": {
+      "node": "22.23.1",
+      "credentialsSource": "remote",
+      "prebuildCommand": "prebuild --template expo-template-bare-minimum@58.0.0-canary-20260902-26df09e",
+      "android": {
+        "image": "ubuntu-26.04-jdk-17-ndk-r27b-sdk-57"
+      },
+      "ios": {
+        "image": "macos-tahoe-26.5-xcode-26.6"
+      }
+    },
+    "development": {
+      "extends": "base",
+      "environment": "development",
+      "developmentClient": true,
+      "distribution": "internal",
+      "channel": "development"
+    },
+    "preview": {
+      "extends": "base",
+      "environment": "preview",
+      "uploadSourceMaps": true,
+      "distribution": "internal",
+      "channel": "preview"
+    },
+    "preview-simulator": {
+      "extends": "preview",
+      "ios": {
+        "simulator": true
+      }
+    },
+    "production": {
+      "extends": "base",
+      "environment": "production",
+      "distribution": "store",
+      "uploadSourceMaps": true,
+      "autoIncrement": true,
+      "channel": "production",
+      "android": {
+        "buildType": "app-bundle"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleTeamId": "7X29G4MCL4",
+        "ascAppId": "6810129391"
+      },
+      "android": {
+        "track": "internal",
+        "releaseStatus": "completed"
+      }
+    }
+  }
+}

@@ -1,4 +1,7 @@
-import { Button, Column, ListItem, Text } from '@expo/ui';
+import { Column } from '@expo/ui';
+import { ActionRowControl } from '@/components/action-row';
+import { Text } from '@/components/text';
+import { Button } from '@/components/button';
 
 import { OffsiteScreen } from '@/components/offsite-screen';
 import { useContentWidth, useOffsiteTheme } from '@/theme';
@@ -21,11 +24,8 @@ export function OnboardingView({ people, selected, onSelect, onContinue, changin
     </Text>
     <Text textStyle={{ color: colors.secondaryText, fontSize: 16, lineHeight: 24 }}>Choose your name. We’ll remember you on this phone.</Text>
     <Column spacing={4} style={{ width }}>
-      {people.map((person) => <ListItem key={person.id} onPress={() => onSelect(person.id)} testID={`attendee-${person.id}`}
-        colors={{ containerColor: colors.background, contentColor: colors.text }}
-        leading={<Text textStyle={{ color: colors.accent, fontSize: 24 }}>{selected === person.id ? '●' : '○'}</Text>}>
-        <Text style={{ paddingVertical: 12 }} textStyle={{ color: colors.text, fontSize: 18 }}>{person.name}</Text>
-      </ListItem>)}
+      {people.map((person) => <ActionRowControl key={person.id} title={person.name} selected={selected === person.id}
+        onPress={() => onSelect(person.id)} testID={`attendee-${person.id}`} />)}
     </Column>
     <Button label={selectedPerson ? `Continue as ${selectedPerson.name.split(' ')[0]}` : 'Choose a name to continue'}
       disabled={!selectedPerson} onPress={onContinue} testID="onboarding-continue" style={{ width }} />

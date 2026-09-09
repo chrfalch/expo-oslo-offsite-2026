@@ -1,4 +1,4 @@
-import { Text } from '@expo/ui';
+import { Text } from '@/components/text';
 import { View } from 'react-native';
 import { NativeContent } from '@/presentation/native-content';
 import { useOffsiteTheme } from '@/theme';

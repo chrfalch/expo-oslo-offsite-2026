@@ -1,7 +1,8 @@
 import { useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { Platform } from 'react-native';
-import { formatOffsiteDate, getFoodPlaces, offsiteData } from '@/data/offsite';
+import { formatAccommodationDetails, formatOffsiteDate, getFoodPlaces, offsiteData } from '@/data/offsite';
+import { getAccommodationPhotos, getGuideImage } from '@/media/guide-images';
 import { ContentPageView, type ContentSection } from '@/presentation/content-page-view';
 import { useOffsiteNavigation } from '@/screens/navigation';
 
@@ -13,14 +14,16 @@ export function BasesScreen() {
   return <ContentPageView choices={[{ id: 'base-section', label: 'Our bases', value: section, onChange: setSection,
     options: [{ value: 'work', label: 'Workspace' }, { value: 'stay', label: 'Accommodation' }] }]}
     sections={section === 'work' ? [
-      { id: 'workspace', cards: [{ id: 'workspace', title: w.name, eyebrow: w.area, description: w.notes,
-        actions: [{ label: `${w.address} · Map`, onPress: () => location('workspace:rebel'), testID: 'workspace-map' }], links: [{ label: 'Workspace website', url: w.url }] }] },
+      { id: 'workspace', cards: [{ id: 'workspace', title: w.name, eyebrow: w.area, description: w.notes, image: getGuideImage(w.image, w.name),
+        actions: [{ label: 'Show on map', primary: true, onPress: () => location('workspace:rebel'), testID: 'workspace-map' }], links: [{ label: 'Workspace website', url: w.url }] }] },
       { id: 'working-hours', description: `${event.workingDays.hours}\n${formatOffsiteDate(event.workingDays.startDate)}–${formatOffsiteDate(event.workingDays.endDate)}` },
     ] : [
-      { id: 'accommodation', title: a.area, description: `${a.note}\nVerified ${formatOffsiteDate(a.verifiedOn)}. Room assignments and exact apartment addresses are not provided.`,
+      { id: 'accommodation', title: a.area, description: `${a.options.length} apartments · ${a.status}. Exact addresses are in the booking confirmations; map pins are approximate.`,
+        disclosure: { label: 'Booking and location notes', details: [a.note, a.coordinatePrecisionNote] },
         rows: [{ id: 'torshov-map', title: 'Show Torshov area', detail: 'Approximate neighbourhood centre', onPress: () => location('area:torshov') }] },
-      { id: 'apartments', cards: a.options.map((flat, index) => ({ id: flat.url, title: flat.name, eyebrow: flat.status.toUpperCase(), description: flat.address ?? 'Address not provided',
-        actions: [{ label: 'Location details', testID: `apartment-location-${index}`, onPress: () => location(`stay:${index}`) }], links: [{ label: 'View Airbnb', url: flat.url }] })) },
+      { id: 'apartments', cards: a.options.map((flat, index) => ({ id: flat.id, title: flat.name, eyebrow: `${flat.status.toUpperCase()} · ${flat.area}`, description: flat.address ?? 'Exact address not provided', photos: getAccommodationPhotos(flat.photos),
+        details: formatAccommodationDetails(flat).slice(0, 2), disclosure: { label: 'About this apartment', details: [flat.description, ...formatAccommodationDetails(flat).slice(2)] },
+        actions: [{ label: 'Location details', primary: true, testID: `apartment-location-${index}`, onPress: () => location(`stay:${flat.id}`) }], links: [{ label: 'View Airbnb', url: flat.url }] })) },
     ]} />;
 }
 
@@ -29,10 +32,10 @@ export function FoodScreen() {
   const { place, router } = useOffsiteNavigation();
   const { foodToTry } = offsiteData;
   const sections: ContentSection[] = section === 'out' ? foodToTry.outAndAbout.map((food) => ({
-    id: food.name, title: food.name, description: food.description,
+    id: food.id, title: food.name, description: food.description, image: getGuideImage(food.image, food.name),
     rows: getFoodPlaces(food).map((venue) => ({ id: venue.id, title: venue.name, detail: venue.address ?? venue.area ?? '', onPress: () => place(venue.id) })),
   })) : [
-    { id: 'supermarket-food', cards: foodToTry.fromSupermarket.map((food) => ({ id: food.name, title: food.name, description: food.description,
+    { id: 'supermarket-food', cards: foodToTry.fromSupermarket.map((food) => ({ id: food.id, title: food.name, description: food.description, image: getGuideImage(food.image, food.name),
       details: food.priceNok ? [`NOK ${food.priceNok} · Guide estimate`] : [] })) },
     { id: 'supermarkets', rows: [{ id: 'find-supermarket', title: 'Find a supermarket', onPress: () => router.push({ pathname: '/places', params: { category: 'supermarket' } }) }] },
   ];
@@ -53,7 +56,7 @@ export function PracticalScreen() {
     { id: 'itinerary', rows: [{ id: 'open-travel', title: 'My trip & team travel', onPress: () => router.push('/travel') }] },
   ] : [
     { id: 'apps', description: Platform.OS === 'android' ? 'The guide includes Apple App Store links. Android download links are not provided.' : undefined,
-      cards: expoCustomerApps.map((app) => ({ id: app.name, title: `${app.emoji} ${app.name}`, description: app.description,
+      cards: expoCustomerApps.map((app) => ({ id: app.id, title: app.name, description: app.description, image: getGuideImage(app.image, app.name),
         links: [{ label: Platform.OS === 'android' ? 'View Apple listing' : 'View in App Store', url: app.appStoreUrl }, ...(app.siteUrl ? [{ label: 'Visit website', url: app.siteUrl }] : [])] })) },
   ];
   return <ContentPageView choices={[{ id: 'practical-section', label: 'Practical info', value: section, onChange: setSection,

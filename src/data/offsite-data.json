@@ -1,11 +1,11 @@
 {
-  "schemaVersion": "1.2",
-  "generatedAt": "2026-09-08",
+  "schemaVersion": "1.4",
+  "generatedAt": "2026-09-09",
   "source": {
     "name": "Oslo Offsite — September 2026 (Notion)",
     "url": "https://app.notion.com/p/383e5b57352481b18dc0ef30c9da41e8",
     "pageLastEditedAt": "2026-09-08T18:35:12Z",
-    "note": "All content derived from the public Notion invitation doc. Fields left null are not stated in the doc. Coordinates added from Kartverket's official Norwegian address register (ws.geonorge.no); walk times are computed from those coordinates, not measured routes."
+    "note": "Guide content comes from the Notion invitation. Accommodation listing details, photos and approximate coordinates come from the local guide update dated 9 September 2026. Other coordinates come from Kartverket’s official Norwegian address register (ws.geonorge.no). Walking times are estimates, not measured routes. Entity images come from the local schema 1.4 update; each image records its original source and available credit and licence information."
   },
   "event": {
     "name": "Oslo Offsite — September 2026",
@@ -38,17 +38,17 @@
       }
     },
     "torshov": {
-      "label": "Torshov (accommodation area)",
-      "address": "Vogts gate 45",
+      "label": "Torshov (the three booked flats)",
+      "address": null,
       "city": "Oslo",
       "coordinates": {
-        "lat": 59.933992,
-        "lng": 10.764322,
-        "precision": "address",
-        "source": "geonorge",
-        "matchedAddress": "Vogts gate 45A"
+        "lat": 59.935047,
+        "lng": 10.763833,
+        "precision": "approximate",
+        "source": "airbnb-listing",
+        "matchedAddress": null
       },
-      "note": "Approximate centre of the Torshov area; the flats have no confirmed address yet."
+      "note": "Centre of the three approximate Airbnb listing locations; not an apartment entrance. Walking estimates use this shared reference."
     }
   },
   "schedule": [
@@ -69,6 +69,15 @@
         "precision": "address",
         "source": "geonorge",
         "matchedAddress": "Nylandsveien 28"
+      },
+      "image": {
+        "file": "assets/schedule/sauna.jpg",
+        "type": "photo",
+        "sourceUrl": "https://oslobadstuforening.no/wp-content/uploads/2026/05/sukkerbiten.jpg",
+        "sourcePage": "https://oslobadstuforening.no/en/lokasjon-sukkerbiten/",
+        "sourceDomain": "oslobadstuforening.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -88,6 +97,15 @@
         "precision": "address",
         "source": "geonorge",
         "matchedAddress": "Mollergata 23"
+      },
+      "image": {
+        "file": "assets/schedule/official-dinner.png",
+        "type": "photo",
+        "sourceUrl": "https://static.wixstatic.com/media/3448bd_6a1c118d28a9419d844088e29807a539%7Emv2.png/v1/fit/w_2500,h_1330,al_c/3448bd_6a1c118d28a9419d844088e29807a539%7Emv2.png",
+        "sourcePage": "https://www.hellskitchenoslo.no/",
+        "sourceDomain": "hellskitchenoslo.no",
+        "credit": null,
+        "licence": null
       }
     }
   ],
@@ -101,7 +119,7 @@
       "address": "Vogts gate 54",
       "area": "Torshov",
       "walkMinutesFrom": {
-        "torshov": 3,
+        "torshov": 1,
         "rebel": 42
       },
       "vinkScore": 5,
@@ -117,8 +135,17 @@
         "matchedAddress": "Vogts gate 54"
       },
       "distanceMetersFrom": {
-        "torshov": 156,
+        "torshov": 66,
         "rebel": 2419
+      },
+      "image": {
+        "file": "assets/places/jungel-pizza.jpg",
+        "type": "photo",
+        "sourceUrl": "https://www.jungelpizza.no/wp-content/uploads/2025/11/DSC_3268_1.jpg",
+        "sourcePage": "https://jungelpizza.no",
+        "sourceDomain": "jungelpizza.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -130,7 +157,7 @@
       "address": "Vogts gate 60 A",
       "area": "Torshov",
       "walkMinutesFrom": {
-        "torshov": 4,
+        "torshov": 2,
         "rebel": 43
       },
       "vinkScore": 4,
@@ -146,8 +173,17 @@
         "matchedAddress": "Vogts gate 60A"
       },
       "distanceMetersFrom": {
-        "torshov": 214,
+        "torshov": 122,
         "rebel": 2479
+      },
+      "image": {
+        "file": "assets/places/tyren-torshov.webp",
+        "type": "photo",
+        "sourceUrl": "https://images.squarespace-cdn.com/content/v1/5b4606ec96d4557cbd0f1e5d/1666896014456-J73ZTZEPP9MO7DMUTKQO/Restaurant-Tyren-Oktober22-JacquelineUmutoni-10-min.jpeg",
+        "sourcePage": "https://meravoslo.no/nyheter/tyren-nabolagsrestaurant-pa-torshov",
+        "sourceDomain": "meravoslo.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -159,7 +195,7 @@
       "address": "Vogts gate 31",
       "area": "Torshov",
       "walkMinutesFrom": {
-        "torshov": 3,
+        "torshov": 5,
         "rebel": 36
       },
       "vinkScore": 4,
@@ -175,8 +211,17 @@
         "matchedAddress": "Vogts gate 31A"
       },
       "distanceMetersFrom": {
-        "torshov": 180,
+        "torshov": 286,
         "rebel": 2104
+      },
+      "image": {
+        "file": "assets/places/bff-torshov.webp",
+        "type": "photo",
+        "sourceUrl": "https://images.squarespace-cdn.com/content/v1/5b4606ec96d4557cbd0f1e5d/1b0d991b-cb04-4bea-b625-e211ba326487/BFF_Torshov_Februar23_MerAvOslo_LeneMH13.JPG",
+        "sourcePage": "https://meravoslo.no/nyheter/bff-torshov-ny-amerikansk-diner",
+        "sourceDomain": "meravoslo.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -188,7 +233,7 @@
       "address": "Seilduksgata 23",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 17,
+        "torshov": 19,
         "rebel": 25
       },
       "vinkScore": 5,
@@ -204,8 +249,17 @@
         "matchedAddress": "Seilduksgata 23A"
       },
       "distanceMetersFrom": {
-        "torshov": 977,
+        "torshov": 1087,
         "rebel": 1451
+      },
+      "image": {
+        "file": "assets/places/duken.webp",
+        "type": "photo",
+        "sourceUrl": "https://www.duken23.no/assets/images/DUKEN_13.webp",
+        "sourcePage": "https://duken23.no",
+        "sourceDomain": "duken23.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -217,8 +271,8 @@
       "address": "Sofienberggata 15",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 23,
-        "rebel": 22
+        "torshov": 25,
+        "rebel": 23
       },
       "vinkScore": 4,
       "signatureDish": null,
@@ -233,8 +287,17 @@
         "matchedAddress": "Sofienberggata 15"
       },
       "distanceMetersFrom": {
-        "torshov": 1318,
+        "torshov": 1431,
         "rebel": 1298
+      },
+      "image": {
+        "file": "assets/places/200.webp",
+        "type": "photo",
+        "sourceUrl": "http://static1.squarespace.com/static/653806dfd54aa5146816893c/b7765378-4758-4f2b-9ff0-b39b0fbc0e80/200_9APRIL26_MG+49.jpg",
+        "sourcePage": "https://www.200oslo.com/",
+        "sourceDomain": "200oslo.com",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -246,7 +309,7 @@
       "address": "Kirkegårdsgata 7 A",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 24,
+        "torshov": 26,
         "rebel": 24
       },
       "vinkScore": 4,
@@ -262,8 +325,17 @@
         "matchedAddress": "Kirkegårdsgata 7A"
       },
       "distanceMetersFrom": {
-        "torshov": 1406,
+        "torshov": 1523,
         "rebel": 1395
+      },
+      "image": {
+        "file": "assets/places/apostrophe.webp",
+        "type": "photo",
+        "sourceUrl": "https://images.squarespace-cdn.com/content/v1/6155d69e7593301729780531/1633015454476-3TEA1FHSNVSN6GKA41JC/Apo_190821_0011.jpg",
+        "sourcePage": "https://www.restaurant-apostrophe.com/",
+        "sourceDomain": "restaurant-apostrophe.com",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -275,7 +347,7 @@
       "address": "Thorvald Meyers gate 78",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 29,
+        "torshov": 31,
         "rebel": 19
       },
       "vinkScore": 4,
@@ -291,8 +363,17 @@
         "matchedAddress": "Thorvald Meyers gate 78A"
       },
       "distanceMetersFrom": {
-        "torshov": 1692,
+        "torshov": 1805,
         "rebel": 1109
+      },
+      "image": {
+        "file": "assets/places/trancher.png",
+        "type": "photo",
+        "sourceUrl": "http://trancher.no/wp-content/uploads/2014/07/MG_73323.png",
+        "sourcePage": "https://trancher.no/",
+        "sourceDomain": "trancher.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -304,7 +385,7 @@
       "address": "Toftes gate 19 B",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 9,
+        "torshov": 11,
         "rebel": 31
       },
       "vinkScore": 5,
@@ -320,8 +401,17 @@
         "matchedAddress": "Toftes gate 19B"
       },
       "distanceMetersFrom": {
-        "torshov": 524,
+        "torshov": 627,
         "rebel": 1777
+      },
+      "image": {
+        "file": "assets/places/render.jpg",
+        "type": "photo",
+        "sourceUrl": "https://renderburger.no/assets/img/about-hero-chef.jpg",
+        "sourcePage": "https://renderburger.no/",
+        "sourceDomain": "renderburger.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -333,7 +423,7 @@
       "address": "Markveien 46 A",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 25,
+        "torshov": 27,
         "rebel": 19
       },
       "vinkScore": 5,
@@ -349,8 +439,17 @@
         "matchedAddress": "Markveien 46A"
       },
       "distanceMetersFrom": {
-        "torshov": 1445,
+        "torshov": 1552,
         "rebel": 1068
+      },
+      "image": {
+        "file": "assets/places/pao.jpg",
+        "type": "photo",
+        "sourceUrl": "https://visitlokka.no/wp-content/uploads/2026/06/Pao-20026-2.jpg",
+        "sourcePage": "https://visitlokka.no/directory-visitlokka/listing/pao-thai-bar-barbecue/",
+        "sourceDomain": "visitlokka.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -362,7 +461,7 @@
       "address": "Olaf Ryes plass 12",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 21,
+        "torshov": 23,
         "rebel": 21
       },
       "vinkScore": 5,
@@ -378,8 +477,17 @@
         "matchedAddress": "Olaf Ryes plass 12"
       },
       "distanceMetersFrom": {
-        "torshov": 1210,
+        "torshov": 1318,
         "rebel": 1231
+      },
+      "image": {
+        "file": "assets/places/skaal.jpg",
+        "type": "photo",
+        "sourceUrl": "https://visitlokka.no/wp-content/uploads/2020/03/SKAAL_3.jpg",
+        "sourcePage": "https://visitlokka.no/directory-visitlokka/listing/skaal-matbar/",
+        "sourceDomain": "visitlokka.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -391,7 +499,7 @@
       "address": "Storgata 97",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 33,
+        "torshov": 35,
         "rebel": 15
       },
       "vinkScore": 5,
@@ -407,8 +515,17 @@
         "matchedAddress": "Storgata 97"
       },
       "distanceMetersFrom": {
-        "torshov": 1891,
+        "torshov": 1997,
         "rebel": 856
+      },
+      "image": {
+        "file": "assets/places/fourrage.webp",
+        "type": "photo",
+        "sourceUrl": "https://static.wixstatic.com/media/ae3af9_4be4db1599a64336a7de2a4aec96c711~mv2.jpg/v1/fill/w_1920,h_1080,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/ae3af9_4be4db1599a64336a7de2a4aec96c711~mv2.jpg",
+        "sourcePage": "https://www.fourrage.no/",
+        "sourceDomain": "fourrage.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -420,7 +537,7 @@
       "address": "Olaf Ryes plass 3",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 24,
+        "torshov": 26,
         "rebel": 19
       },
       "vinkScore": null,
@@ -436,8 +553,17 @@
         "matchedAddress": "Olaf Ryes plass 3A"
       },
       "distanceMetersFrom": {
-        "torshov": 1365,
+        "torshov": 1472,
         "rebel": 1103
+      },
+      "image": {
+        "file": "assets/places/bar-lupo.webp",
+        "type": "photo",
+        "sourceUrl": "https://images.squarespace-cdn.com/content/v1/68d6af8b1b239620fa38c34d/012340e9-5733-4939-9695-b8386114efe6/Web+1.jpg",
+        "sourcePage": "https://www.barlupo-oslo.com/",
+        "sourceDomain": "barlupo-oslo.com",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -449,7 +575,7 @@
       "address": "Markveien 42 A",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 24,
+        "torshov": 26,
         "rebel": 19
       },
       "vinkScore": 4,
@@ -465,8 +591,17 @@
         "matchedAddress": "Markveien 42A"
       },
       "distanceMetersFrom": {
-        "torshov": 1400,
+        "torshov": 1506,
         "rebel": 1087
+      },
+      "image": {
+        "file": "assets/places/kork.webp",
+        "type": "logo",
+        "sourceUrl": "https://images.squarespace-cdn.com/content/v1/6985f6a84f434100a193418a/54b8af18-c97d-4e6a-943b-8df6dc90c645/3.png?format=1500w",
+        "sourcePage": "https://www.kork-bistro.no/",
+        "sourceDomain": "kork-bistro.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -478,7 +613,7 @@
       "address": "Vulkan 7",
       "area": "Vulkan",
       "walkMinutesFrom": {
-        "torshov": 25,
+        "torshov": 27,
         "rebel": 15
       },
       "vinkScore": 5,
@@ -494,8 +629,17 @@
         "matchedAddress": "Vulkan 7"
       },
       "distanceMetersFrom": {
-        "torshov": 1445,
+        "torshov": 1537,
         "rebel": 871
+      },
+      "image": {
+        "file": "assets/places/175c-k-fried.webp",
+        "type": "logo",
+        "sourceUrl": "https://images.squarespace-cdn.com/content/v1/61f438763999764901fcd4e0/ce1c0658-8080-491e-9d20-e34f79f87c25/WechatIMG39.jpg?format=1500w",
+        "sourcePage": "https://www.175k-fried.no/",
+        "sourceDomain": "175k-fried.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -507,7 +651,7 @@
       "address": "Hesselbergs gate 1 C",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 13,
+        "torshov": 15,
         "rebel": 27
       },
       "vinkScore": 4,
@@ -523,8 +667,17 @@
         "matchedAddress": "Hesselbergs gate 1C"
       },
       "distanceMetersFrom": {
-        "torshov": 763,
+        "torshov": 866,
         "rebel": 1556
+      },
+      "image": {
+        "file": "assets/places/dumpling-as.webp",
+        "type": "photo",
+        "sourceUrl": "https://images.squarespace-cdn.com/content/v1/65bd88de93ff06464acf2489/7da4d6e2-df29-4809-9271-56e39224c7d6/IMG_7341-r+copy.jpg",
+        "sourcePage": "https://www.dumplingas.no/",
+        "sourceDomain": "dumplingas.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -536,7 +689,7 @@
       "address": "Thorvald Meyers gate 40 B",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 20,
+        "torshov": 22,
         "rebel": 22
       },
       "vinkScore": 5,
@@ -552,8 +705,17 @@
         "matchedAddress": "Thorvald Meyers gate 40B"
       },
       "distanceMetersFrom": {
-        "torshov": 1176,
+        "torshov": 1285,
         "rebel": 1283
+      },
+      "image": {
+        "file": "assets/places/hos-peder.jpg",
+        "type": "photo",
+        "sourceUrl": "https://www.hospeder.no/uploads/1/4/8/3/148370798/243509008-190960726446380-2688784131209687316-n_orig.jpg",
+        "sourcePage": "https://www.hospeder.no/meny.html",
+        "sourceDomain": "hospeder.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -565,7 +727,7 @@
       "address": "Hallings gate 5",
       "area": "St. Hanshaugen",
       "walkMinutesFrom": {
-        "torshov": 32,
+        "torshov": 33,
         "rebel": 10
       },
       "vinkScore": 5,
@@ -581,8 +743,17 @@
         "matchedAddress": "Hallings gate 3C (nearest registered address)"
       },
       "distanceMetersFrom": {
-        "torshov": 1865,
+        "torshov": 1928,
         "rebel": 563
+      },
+      "image": {
+        "file": "assets/places/grotto.webp",
+        "type": "photo",
+        "sourceUrl": "https://images.squarespace-cdn.com/content/v1/5b4606ec96d4557cbd0f1e5d/db83de48-a005-40f5-ab7d-b319fdf860df/Grotto_Nov23_Liveinemot%C3%B8njum-13-min.jpg",
+        "sourcePage": "https://meravoslo.no/nyheter/grotto-fra-unik-vinbar-til-fransk-bistro-paa-sthanshaugen",
+        "sourceDomain": "meravoslo.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -594,7 +765,7 @@
       "address": "Olaf Ryes plass 11",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 21,
+        "torshov": 23,
         "rebel": 21
       },
       "vinkScore": 4,
@@ -610,8 +781,17 @@
         "matchedAddress": "Olaf Ryes plass 11"
       },
       "distanceMetersFrom": {
-        "torshov": 1214,
+        "torshov": 1321,
         "rebel": 1217
+      },
+      "image": {
+        "file": "assets/places/parkteatret.jpg",
+        "type": "photo",
+        "sourceUrl": "https://parkteatret.b-cdn.net/uploads/Foto_fasaden/_1200x630_crop_center-center_82_none/Parkteatret_neonskilt_2000x1082.jpg?mtime=1624463639",
+        "sourcePage": "https://www.parkteatret.no/",
+        "sourceDomain": "parkteatret.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -623,7 +803,7 @@
       "address": "Heimdalsgata 2 C",
       "area": "Grünerløkka / Tøyen",
       "walkMinutesFrom": {
-        "torshov": 30,
+        "torshov": 32,
         "rebel": 21
       },
       "vinkScore": 5,
@@ -639,8 +819,17 @@
         "matchedAddress": "Heimdalsgata 2C"
       },
       "distanceMetersFrom": {
-        "torshov": 1728,
+        "torshov": 1843,
         "rebel": 1234
+      },
+      "image": {
+        "file": "assets/places/jamals-falafel.jpg",
+        "type": "photo",
+        "sourceUrl": "https://assets.cdn.filesafe.space/oTr8cRlAElMoJ2mxmMAd/media/6884b2a7b6ead283a45bfca7.jpeg",
+        "sourcePage": "https://jamalsfalafel.no/",
+        "sourceDomain": "jamalsfalafel.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -652,7 +841,7 @@
       "address": "Universitetsgata 2",
       "area": "Sentrum",
       "walkMinutesFrom": {
-        "torshov": 40,
+        "torshov": 41,
         "rebel": 0
       },
       "vinkScore": null,
@@ -668,8 +857,17 @@
         "matchedAddress": "Universitetsgata 2"
       },
       "distanceMetersFrom": {
-        "torshov": 2279,
+        "torshov": 2359,
         "rebel": 0
+      },
+      "image": {
+        "file": "assets/places/rebel-hangout.webp",
+        "type": "photo",
+        "sourceUrl": "https://images.squarespace-cdn.com/content/v1/6332cfae2976713409c82cf9/f3b11300-e8d6-4fb5-9d38-9c18756da172/rebel-hero-exterior.webp?format=1500w",
+        "sourcePage": "https://www.rebel.no/en",
+        "sourceDomain": "rebel.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -681,7 +879,7 @@
       "address": "Universitetsgata 2",
       "area": "Sentrum",
       "walkMinutesFrom": {
-        "torshov": 40,
+        "torshov": 41,
         "rebel": 0
       },
       "vinkScore": null,
@@ -697,8 +895,17 @@
         "matchedAddress": "Universitetsgata 2"
       },
       "distanceMetersFrom": {
-        "torshov": 2279,
+        "torshov": 2359,
         "rebel": 0
+      },
+      "image": {
+        "file": "assets/places/stykke-pizza.webp",
+        "type": "photo",
+        "sourceUrl": "https://stykke.no/cdn/shop/files/mix_slices_22ad3c4c-b915-451b-a572-02e1e2b065b4_800x.jpg?v=1634735415",
+        "sourcePage": "https://stykke.no/",
+        "sourceDomain": "stykke.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -710,7 +917,7 @@
       "address": "Kristian IVs gate 2",
       "area": "Sentrum",
       "walkMinutesFrom": {
-        "torshov": 44,
+        "torshov": 45,
         "rebel": 5
       },
       "vinkScore": null,
@@ -726,8 +933,17 @@
         "matchedAddress": "Kristian IVs gate 2"
       },
       "distanceMetersFrom": {
-        "torshov": 2523,
+        "torshov": 2610,
         "rebel": 308
+      },
+      "image": {
+        "file": "assets/places/kaffistova.jpg",
+        "type": "photo",
+        "sourceUrl": "https://cdn.prod.website-files.com/5f73064c9adf7a0c213d5281/5f7c50d1d36c5b2abba339b3_Bondeheimen_27.jpg",
+        "sourcePage": "https://www.bondeheimen.no/en/kaffistova/om-kaffistova",
+        "sourceDomain": "bondeheimen.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -755,8 +971,17 @@
         "matchedAddress": "Parkveien 12"
       },
       "distanceMetersFrom": {
-        "torshov": 2457,
+        "torshov": 2508,
         "rebel": 722
+      },
+      "image": {
+        "file": "assets/places/lorry.jpg",
+        "type": "photo",
+        "sourceUrl": "https://lorrys-hjemmeside.s3.eu-north-1.amazonaws.com/images/images/Lorry_Uteservering_2W8A2852_FotoHelgeBrekke.jpg",
+        "sourcePage": "https://lorry.no/",
+        "sourceDomain": "lorry.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -768,7 +993,7 @@
       "address": "Youngstorget 2B",
       "area": "Sentrum",
       "walkMinutesFrom": {
-        "torshov": 40,
+        "torshov": 42,
         "rebel": 11
       },
       "vinkScore": null,
@@ -784,8 +1009,17 @@
         "matchedAddress": "Youngstorget 2"
       },
       "distanceMetersFrom": {
-        "torshov": 2310,
+        "torshov": 2411,
         "rebel": 628
+      },
+      "image": {
+        "file": "assets/places/fiskeriet.webp",
+        "type": "photo",
+        "sourceUrl": "https://foodspace.imgix.net/foodspace/1774449985772.blob-1774449985772-t470up.png?width=1920&height=600&auto=format&format=webp&dpr=2",
+        "sourcePage": "https://www.fiskeriet.net/",
+        "sourceDomain": "fiskeriet.net",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -797,7 +1031,7 @@
       "address": "Universitetsgata 2 (cellar floor)",
       "area": "Sentrum",
       "walkMinutesFrom": {
-        "torshov": 40,
+        "torshov": 41,
         "rebel": 0
       },
       "vinkScore": null,
@@ -813,8 +1047,17 @@
         "matchedAddress": "Universitetsgata 2"
       },
       "distanceMetersFrom": {
-        "torshov": 2279,
+        "torshov": 2359,
         "rebel": 0
+      },
+      "image": {
+        "file": "assets/places/fuglen.webp",
+        "type": "photo",
+        "sourceUrl": "https://gotobooking.imgix.net/product_images/1163/3EivDkwZL6BTLyI0sXo9ybXQwZR?w=1200&fit=max&auto=format%2Ccompress",
+        "sourcePage": "https://www.visitoslo.com/eat/fuglen",
+        "sourceDomain": "visitoslo.com",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -826,7 +1069,7 @@
       "address": "Thorvald Meyers gate 18",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 12,
+        "torshov": 14,
         "rebel": 28
       },
       "vinkScore": null,
@@ -842,8 +1085,17 @@
         "matchedAddress": "Thorvald Meyers gate 18A"
       },
       "distanceMetersFrom": {
-        "torshov": 702,
+        "torshov": 802,
         "rebel": 1601
+      },
+      "image": {
+        "file": "assets/places/supreme-roastworks.webp",
+        "type": "photo",
+        "sourceUrl": "https://srw.no/cdn/shop/files/260A4364_Supreme-Roastworks_Supreme-Roastworks.jpg?v=1706558725&width=480",
+        "sourcePage": "https://srw.no/",
+        "sourceDomain": "srw.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -855,7 +1107,7 @@
       "address": "Ullevålsveien 47",
       "area": "St. Hanshaugen",
       "walkMinutesFrom": {
-        "torshov": 30,
+        "torshov": 31,
         "rebel": 13
       },
       "vinkScore": null,
@@ -871,8 +1123,17 @@
         "matchedAddress": "Ullevalsveien 47A"
       },
       "distanceMetersFrom": {
-        "torshov": 1735,
+        "torshov": 1788,
         "rebel": 776
+      },
+      "image": {
+        "file": "assets/places/java-espressobar.webp",
+        "type": "photo",
+        "sourceUrl": "https://static.wixstatic.com/media/a9579b_eeb8f00d676c486382b7f39d71013d6e~mv2.jpg/v1/fill/w_980,h_652,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/a9579b_eeb8f00d676c486382b7f39d71013d6e~mv2.jpg",
+        "sourcePage": "https://www.javamocca.no/java",
+        "sourceDomain": "javamocca.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -884,7 +1145,7 @@
       "address": "Niels Juels gate 70 B",
       "area": "Briskeby",
       "walkMinutesFrom": {
-        "torshov": 52,
+        "torshov": 53,
         "rebel": 21
       },
       "vinkScore": null,
@@ -900,8 +1161,17 @@
         "matchedAddress": "Niels Juels gate 70B"
       },
       "distanceMetersFrom": {
-        "torshov": 3018,
+        "torshov": 3060,
         "rebel": 1216
+      },
+      "image": {
+        "file": "assets/places/mocca-kaffebar.jpg",
+        "type": "photo",
+        "sourceUrl": "https://static.wixstatic.com/media/a9579b_33e40f6d405444dc9deb522730eac5bc~mv2.jpg",
+        "sourcePage": "https://www.javamocca.no/mocca",
+        "sourceDomain": "javamocca.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -913,7 +1183,7 @@
       "address": "Grüners gate 1",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 22,
+        "torshov": 24,
         "rebel": 19
       },
       "vinkScore": null,
@@ -929,8 +1199,17 @@
         "matchedAddress": "Gruners gate 1A"
       },
       "distanceMetersFrom": {
-        "torshov": 1278,
+        "torshov": 1379,
         "rebel": 1091
+      },
+      "image": {
+        "file": "assets/places/tim-wendelboe.jpg",
+        "type": "photo",
+        "sourceUrl": "https://timwendelboe.no/cdn/shop/files/tw-espresso-bar-exterior.webp?v=1757874304&width=2000",
+        "sourcePage": "https://www.timwendelboe.no",
+        "sourceDomain": "timwendelboe.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -942,7 +1221,7 @@
       "address": "Urtegata 48, 0187 Oslo",
       "area": "Grønland",
       "walkMinutesFrom": {
-        "torshov": 39,
+        "torshov": 41,
         "rebel": 26
       },
       "vinkScore": null,
@@ -958,8 +1237,17 @@
         "matchedAddress": "Urtegata 48A"
       },
       "distanceMetersFrom": {
-        "torshov": 2256,
+        "torshov": 2375,
         "rebel": 1513
+      },
+      "image": {
+        "file": "assets/places/papegoye.webp",
+        "type": "photo",
+        "sourceUrl": "http://static1.squarespace.com/static/66557e623e843f577919322f/t/6655887cb93818731243c754/1716881537954/_F9A5604.jpg?format=1500w",
+        "sourcePage": "https://www.prettybird.no/",
+        "sourceDomain": "prettybird.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -971,7 +1259,7 @@
       "address": "Edvard Munchs plass 1",
       "area": "Bjørvika",
       "walkMinutesFrom": {
-        "torshov": 54,
+        "torshov": 56,
         "rebel": 26
       },
       "vinkScore": null,
@@ -987,8 +1275,17 @@
         "matchedAddress": "Edvard Munchs plass 1"
       },
       "distanceMetersFrom": {
-        "torshov": 3141,
+        "torshov": 3253,
         "rebel": 1527
+      },
+      "image": {
+        "file": "assets/places/munch.jpg",
+        "type": "artwork",
+        "sourceUrl": "https://www.munch.no/globalassets/foto-utstillinger/samlingsutstillinger/monumental-alma-mater.jpg?w=800&quality=50",
+        "sourcePage": "https://www.munch.no/en",
+        "sourceDomain": "munch.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -1000,7 +1297,7 @@
       "address": "Markveien 35",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 24,
+        "torshov": 26,
         "rebel": 19
       },
       "vinkScore": null,
@@ -1016,8 +1313,17 @@
         "matchedAddress": "Markveien 35A"
       },
       "distanceMetersFrom": {
-        "torshov": 1368,
+        "torshov": 1473,
         "rebel": 1089
+      },
+      "image": {
+        "file": "assets/places/fabrikken-oslo.webp",
+        "type": "logo",
+        "sourceUrl": "http://static1.squarespace.com/static/67dab294f934e247da424ec0/t/67e2c8292e877124f7d25bef/1773236525636/Instagram+post+-+1.png?format=1500w",
+        "sourcePage": "https://fabrikkenoslo.no",
+        "sourceDomain": "fabrikkenoslo.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -1029,7 +1335,7 @@
       "address": "Møllergata 12",
       "area": "Sentrum",
       "walkMinutesFrom": {
-        "torshov": 41,
+        "torshov": 43,
         "rebel": 9
       },
       "vinkScore": null,
@@ -1045,8 +1351,17 @@
         "matchedAddress": "Mollergata 12"
       },
       "distanceMetersFrom": {
-        "torshov": 2356,
+        "torshov": 2453,
         "rebel": 521
+      },
+      "image": {
+        "file": "assets/places/oslo-camping.webp",
+        "type": "photo",
+        "sourceUrl": "https://campingen.imgix.net/meta.jpg?auto=compress%2Cformat&crop=focalpoint&fit=crop&fm=jpg&fp-x=0.5&fp-y=0.5&h=675&q=80&w=1200&s=ae879e09a0c3841a500cf8531d392816",
+        "sourcePage": "https://www.campingen.no",
+        "sourceDomain": "campingen.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -1058,7 +1373,7 @@
       "address": "Thorvald Meyers gate 30B",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 18,
+        "torshov": 20,
         "rebel": 24
       },
       "vinkScore": null,
@@ -1074,8 +1389,17 @@
         "matchedAddress": "Thorvald Meyers gate 30B"
       },
       "distanceMetersFrom": {
-        "torshov": 1033,
+        "torshov": 1141,
         "rebel": 1370
+      },
+      "image": {
+        "file": "assets/places/grunerlokka-brygghus.jpg",
+        "type": "photo",
+        "sourceUrl": "https://visitlokka.no/wp-content/uploads/2018/12/Brygghus-fra-web-1200x800.jpg",
+        "sourcePage": "https://visitlokka.no/directory-visitlokka/listing/grunerlokka-brygghus/",
+        "sourceDomain": "visitlokka.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -1087,7 +1411,7 @@
       "address": "Torggata 32",
       "area": "Sentrum",
       "walkMinutesFrom": {
-        "torshov": 34,
+        "torshov": 36,
         "rebel": 13
       },
       "vinkScore": null,
@@ -1103,8 +1427,17 @@
         "matchedAddress": "Torggata 32"
       },
       "distanceMetersFrom": {
-        "torshov": 1965,
+        "torshov": 2069,
         "rebel": 745
+      },
+      "image": {
+        "file": "assets/places/crow-bar.webp",
+        "type": "logo",
+        "sourceUrl": "http://static1.squarespace.com/static/62f379018c1afb3aee6b4308/t/6478f6b702f2b4708b66bb8b/1685649079151/Social+Sharing+Squarespace+Crow.png?format=1500w",
+        "sourcePage": "https://crowbryggeri.com",
+        "sourceDomain": "crowbryggeri.com",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -1116,7 +1449,7 @@
       "address": "Kongsveien 23",
       "area": "Ekeberg",
       "walkMinutesFrom": {
-        "torshov": 68,
+        "torshov": 70,
         "rebel": 41
       },
       "vinkScore": null,
@@ -1132,8 +1465,17 @@
         "matchedAddress": "Kongsveien 23"
       },
       "distanceMetersFrom": {
-        "torshov": 3950,
+        "torshov": 4066,
         "rebel": 2375
+      },
+      "image": {
+        "file": "assets/places/ekebergparken.jpg",
+        "type": "artwork",
+        "sourceUrl": "https://ekebergparken.com/uploads/transforms/Verksfoto/28-Rist-NPF/_920x1200_crop_center-center_85_none/27-RIST-KK-DETALJ-4_2026-06-08-072326_vxnx.jpg",
+        "sourcePage": "https://ekebergparken.com/en/",
+        "sourceDomain": "ekebergparken.com",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -1145,7 +1487,7 @@
       "address": "Brynjulf Bulls plass 3",
       "area": "Sentrum",
       "walkMinutesFrom": {
-        "torshov": 55,
+        "torshov": 56,
         "rebel": 16
       },
       "vinkScore": null,
@@ -1161,8 +1503,17 @@
         "matchedAddress": "Brynjulf Bulls plass 3"
       },
       "distanceMetersFrom": {
-        "torshov": 3179,
+        "torshov": 3256,
         "rebel": 905
+      },
+      "image": {
+        "file": "assets/places/national-museum.webp",
+        "type": "photo",
+        "sourceUrl": "https://www.nasjonalmuseet.no/cdn-cgi/image/width=1200,quality=85,format=auto/contentassets/9810b54113a04feba98af91b9f180f61/nam-eksterior-med-lyshallen-banner.jpg",
+        "sourcePage": "https://www.nasjonalmuseet.no/en/",
+        "sourceDomain": "nasjonalmuseet.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -1174,7 +1525,7 @@
       "address": "Badstugata 1",
       "area": null,
       "walkMinutesFrom": {
-        "torshov": 37,
+        "torshov": 39,
         "rebel": 11
       },
       "vinkScore": null,
@@ -1190,8 +1541,17 @@
         "matchedAddress": "Badstugata 1"
       },
       "distanceMetersFrom": {
-        "torshov": 2123,
+        "torshov": 2225,
         "rebel": 649
+      },
+      "image": {
+        "file": "assets/places/good-knight.jpg",
+        "type": "photo",
+        "sourceUrl": "https://goodknight.no/wp-content/uploads/2022/08/cropped-tn2k_TheGoodKnight-4-1024x576.jpg",
+        "sourcePage": "https://goodknight.no",
+        "sourceDomain": "goodknight.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -1203,7 +1563,7 @@
       "address": "Olaf Ryes plass 3",
       "area": "Grünerløkka",
       "walkMinutesFrom": {
-        "torshov": 24,
+        "torshov": 26,
         "rebel": 19
       },
       "vinkScore": null,
@@ -1219,8 +1579,17 @@
         "matchedAddress": "Olaf Ryes plass 3A"
       },
       "distanceMetersFrom": {
-        "torshov": 1365,
+        "torshov": 1472,
         "rebel": 1103
+      },
+      "image": {
+        "file": "assets/places/haralds-vaffel.webp",
+        "type": "photo",
+        "sourceUrl": "https://gotobooking.imgix.net/product_images/1027/3El5A05nW9HHeaRPoq64eVykLli?w=1200&fit=max&auto=format%2Ccompress",
+        "sourcePage": "https://www.visitoslo.com/eat/haralds-vaffel",
+        "sourceDomain": "visitoslo.com",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -1232,7 +1601,7 @@
       "address": "Åsengata 42",
       "area": "Torshov",
       "walkMinutesFrom": {
-        "torshov": 14,
+        "torshov": 13,
         "rebel": 53
       },
       "vinkScore": null,
@@ -1248,8 +1617,17 @@
         "matchedAddress": "Asengata 42A"
       },
       "distanceMetersFrom": {
-        "torshov": 790,
+        "torshov": 725,
         "rebel": 3067
+      },
+      "image": {
+        "file": "assets/places/apent-bakeri-torshov.webp",
+        "type": "photo",
+        "sourceUrl": "http://static1.squarespace.com/static/54bf8528e4b07102622ce67a/t/6a606e0cdc745b1f5dab5939/1784704524546/_Q9A2041+%283%29.jpg?format=1500w",
+        "sourcePage": "https://apentbakeri.no",
+        "sourceDomain": "apentbakeri.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -1261,7 +1639,7 @@
       "address": "Thereses gate 52",
       "area": "Bislett",
       "walkMinutesFrom": {
-        "torshov": 35,
+        "torshov": 36,
         "rebel": 18
       },
       "vinkScore": null,
@@ -1277,8 +1655,17 @@
         "matchedAddress": "Thereses gate 52A"
       },
       "distanceMetersFrom": {
-        "torshov": 2048,
+        "torshov": 2079,
         "rebel": 1057
+      },
+      "image": {
+        "file": "assets/places/godt-brod.webp",
+        "type": "photo",
+        "sourceUrl": "https://checkout.godtbrod.no/media/wysiwyg/footer_img.jpg",
+        "sourcePage": "https://godtbrod.no",
+        "sourceDomain": "godtbrod.no",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -1290,7 +1677,7 @@
       "address": "Maridalsveien 45B",
       "area": "Sagene",
       "walkMinutesFrom": {
-        "torshov": 16,
+        "torshov": 17,
         "rebel": 24
       },
       "vinkScore": null,
@@ -1306,8 +1693,17 @@
         "matchedAddress": "Maridalsveien 45B"
       },
       "distanceMetersFrom": {
-        "torshov": 911,
+        "torshov": 977,
         "rebel": 1392
+      },
+      "image": {
+        "file": "assets/places/syverkiosken.jpg",
+        "type": "photo",
+        "sourceUrl": "https://live.staticflickr.com/4519/38606652301_d44320c99d_b.jpg",
+        "sourcePage": "https://www.flickr.com/photos/157217140@N03/albums/72157689994143615/",
+        "sourceDomain": "flickr.com",
+        "credit": null,
+        "licence": null
       }
     },
     {
@@ -1319,7 +1715,7 @@
       "address": "Vogts gate 66",
       "area": "Torshov",
       "walkMinutesFrom": {
-        "torshov": 5,
+        "torshov": 4,
         "rebel": 45
       },
       "vinkScore": null,
@@ -1335,8 +1731,17 @@
         "matchedAddress": "Vogts gate 66"
       },
       "distanceMetersFrom": {
-        "torshov": 314,
+        "torshov": 218,
         "rebel": 2576
+      },
+      "image": {
+        "file": "assets/places/kiwi-vogts-gate.png",
+        "type": "logo",
+        "sourceUrl": "https://cdn.brandfetch.io/idgGOOp7ku/w/820/h/820/theme/light/logo.png?c=1bxid64Mup7aczewSAYMX&t=1781741015055",
+        "sourcePage": "https://brandfetch.com/kiwi.no",
+        "sourceDomain": "brandfetch.com",
+        "credit": null,
+        "licence": null
       }
     }
   ],
@@ -1345,42 +1750,122 @@
       {
         "name": "Brunost",
         "description": "Whey cheese boiled until the milk sugar caramelises. Sweet, fudge-like. The item first-time visitors most often dislike. Try it thin, on a waffle.",
-        "priceNok": "about 40 for 500 g"
+        "priceNok": "about 40 for 500 g",
+        "id": "brunost",
+        "image": {
+          "file": "assets/food/brunost.webp",
+          "type": "photo",
+          "sourceUrl": "https://www.tine.no/merkevarer/tine-brunost/produkter/tine-gudbrandsdalsost-g35/_/image/9aba4f89-7de3-4e73-b63d-4e26c75bf2b7:70756b662e57e51d3e13490d3c7a547ed64a744a/block-1200-630/tine_play_2019_1530_nyost_ny.jpg",
+          "sourcePage": "https://www.tine.no/merkevarer/tine-brunost/produkter/tine-gudbrandsdalsost-g35",
+          "sourceDomain": "tine.no",
+          "credit": null,
+          "licence": null
+        }
       },
       {
         "name": "Leverpostei",
         "description": "Baked liver pâté. The default sandwich topping.",
-        "priceNok": "27–33"
+        "priceNok": "27–33",
+        "id": "leverpostei",
+        "image": {
+          "file": "assets/food/leverpostei.jpg",
+          "type": "photo",
+          "sourceUrl": "https://mills.no/content/uploads/2022/10/Mills_Ovnsbakt-postei_1920x1280.jpg",
+          "sourcePage": "https://mills.no/mills/produkt/ovnsbakt-postei/",
+          "sourceDomain": "mills.no",
+          "credit": null,
+          "licence": null
+        }
       },
       {
         "name": "Kaviar",
         "description": "Smoked cod roe from a tube. Strongly acquired taste.",
-        "priceNok": "about 37"
+        "priceNok": "about 37",
+        "id": "kaviar",
+        "image": {
+          "file": "assets/food/kaviar.jpg",
+          "type": "photo",
+          "sourceUrl": "https://mills.no/content/uploads/sites/2/2022/09/Mills_Kaviar_samlebilde.jpg",
+          "sourcePage": "https://mills.no/mills/produkter/kaviar/",
+          "sourceDomain": "mills.no",
+          "credit": null,
+          "licence": null
+        }
       },
       {
         "name": "Makrell i tomat",
         "description": "Tinned mackerel in tomato sauce, on bread.",
-        "priceNok": null
+        "priceNok": null,
+        "id": "makrell-i-tomat",
+        "image": {
+          "file": "assets/food/makrell-i-tomat.png",
+          "type": "photo",
+          "sourceUrl": "https://www.stabbur-makrell.no/wp-content/uploads/sites/42/2025/06/1625.png",
+          "sourcePage": "https://www.stabbur-makrell.no/produkter/makrellfilet-170g/",
+          "sourceDomain": "stabbur-makrell.no",
+          "credit": null,
+          "licence": null
+        }
       },
       {
         "name": "Kvikk Lunsj",
         "description": "Chocolate-covered wafer bar.",
-        "priceNok": "18.50"
+        "priceNok": "18.50",
+        "id": "kvikk-lunsj",
+        "image": {
+          "file": "assets/food/kvikk-lunsj.webp",
+          "type": "photo",
+          "sourceUrl": "https://tastehub.mdlzapps.cloud/img-svc/d72a6e1d-37cb-4079-9bb9-2f9cc20af113.webp",
+          "sourcePage": "https://www.freia.no/produkter/kvikk-lunsj-47-g-1885/",
+          "sourceDomain": "freia.no",
+          "credit": null,
+          "licence": null
+        }
       },
       {
         "name": "Freia Melkesjokolade",
         "description": "Milk chocolate.",
-        "priceNok": "about 50 for 200 g"
+        "priceNok": "about 50 for 200 g",
+        "id": "freia-melkesjokolade",
+        "image": {
+          "file": "assets/food/freia-melkesjokolade.webp",
+          "type": "photo",
+          "sourceUrl": "https://tastehub.mdlzapps.cloud/img-svc/0626d070-2ed5-4089-b582-65d8ad15af01.webp",
+          "sourcePage": "https://freia.no/produkter/freia-melkesjokolade-200g-1831/",
+          "sourceDomain": "freia.no",
+          "credit": null,
+          "licence": null
+        }
       },
       {
         "name": "Solo",
         "description": "Orange soda, recipe brought from Spain in 1934. Outsold Coca-Cola here in the 1960s.",
-        "priceNok": "31.50"
+        "priceNok": "31.50",
+        "id": "solo",
+        "image": {
+          "file": "assets/food/solo.png",
+          "type": "photo",
+          "sourceUrl": "https://www.ringnes.no/media/oyvncwjx/solo-sleek-can.png",
+          "sourcePage": "https://www.ringnes.no/produkter/solo/solo/",
+          "sourceDomain": "ringnes.no",
+          "credit": null,
+          "licence": null
+        }
       },
       {
         "name": "Matpakke",
         "description": "The habit, not a product: bread with the toppings above, wrapped in paper with sheets between the slices. What Norwegians actually eat at work.",
-        "priceNok": null
+        "priceNok": null,
+        "id": "matpakke",
+        "image": {
+          "file": "assets/food/matpakke.jpg",
+          "type": "photo",
+          "sourceUrl": "https://images.matprat.no/auygez2ae6-normal/710/og.png",
+          "sourcePage": "https://www.matprat.no/artikler/ernaring/matpakker-til-barna/",
+          "sourceDomain": "matprat.no",
+          "credit": null,
+          "licence": null
+        }
       }
     ],
     "outAndAbout": [
@@ -1389,7 +1874,17 @@
         "description": "Heart-shaped, soft not crisp, with sour cream and jam or brunost.",
         "placeIds": [
           "haralds-vaffel"
-        ]
+        ],
+        "id": "vaffel",
+        "image": {
+          "file": "assets/food/vaffel.jpg",
+          "type": "photo",
+          "sourceUrl": "https://images.matprat.no/zmy67q6euv-normal/710/og.png",
+          "sourcePage": "https://www.matprat.no/oppskrifter/tradisjon/vafler/",
+          "sourceDomain": "matprat.no",
+          "credit": null,
+          "licence": null
+        }
       },
       {
         "name": "Kanelbolle / skillingsbolle / skolebrød",
@@ -1397,21 +1892,51 @@
         "placeIds": [
           "apent-bakeri-torshov",
           "godt-brod"
-        ]
+        ],
+        "id": "kanelbolle",
+        "image": {
+          "file": "assets/food/kanelbolle.jpg",
+          "type": "photo",
+          "sourceUrl": "https://images.matprat.no/xm6bkx7nqh-normal/710/og.png",
+          "sourcePage": "https://www.matprat.no/oppskrifter/kos/hveteboller-med-spro-kaneltopping/",
+          "sourceDomain": "matprat.no",
+          "credit": null,
+          "licence": null
+        }
       },
       {
         "name": "Pølse med lompe",
         "description": "Sausage in a potato flatbread.",
         "placeIds": [
           "syverkiosken"
-        ]
+        ],
+        "id": "polse-med-lompe",
+        "image": {
+          "file": "assets/food/polse-med-lompe.jpg",
+          "type": "photo",
+          "sourceUrl": "https://images.matprat.no/ne563l5ect-normal/710/og.png",
+          "sourcePage": "https://www.matprat.no/oppskrifter/familien/polser-med-lomper-og-syltet-rodlok/",
+          "sourceDomain": "matprat.no",
+          "credit": null,
+          "licence": null
+        }
       },
       {
         "name": "Fårikål",
         "description": "The national dish. September is the season, but Fårikålens festdag is 24 September, five days after we leave. Restaurant Schrøder or Kaffistova — phone ahead, not confirmed to be on the menu that week.",
         "placeIds": [
           "kaffistova"
-        ]
+        ],
+        "id": "farikal",
+        "image": {
+          "file": "assets/food/farikal.jpg",
+          "type": "photo",
+          "sourceUrl": "https://images.matprat.no/s78y4bz3sa-normal/710/og.png",
+          "sourcePage": "https://www.matprat.no/oppskrifter/tradisjon/farikal/",
+          "sourceDomain": "matprat.no",
+          "credit": null,
+          "licence": null
+        }
       }
     ]
   },
@@ -1421,67 +1946,326 @@
       "emoji": "🚂",
       "description": "Norway's state-owned national railway. Use it for train travel, not the airport express.",
       "appStoreUrl": "https://apps.apple.com/no/app/id439655098",
-      "siteUrl": null
+      "siteUrl": null,
+      "id": "vy",
+      "image": {
+        "file": "assets/apps/vy.jpg",
+        "type": "icon",
+        "sourceUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d8/a6/fb/d8a6fb57-a8d1-379b-0b0f-da0fd96e1229/VyIcon-0-0-1x_U007epad-0-1-0-sRGB-85-220.png/512x512bb.jpg",
+        "sourcePage": "https://apps.apple.com/no/app/id439655098",
+        "sourceDomain": "apple.com",
+        "credit": null,
+        "licence": null
+      }
     },
     {
       "name": "Cutters",
       "emoji": "💇",
       "description": "Hair salon chain.",
       "appStoreUrl": "https://apps.apple.com/no/app/id1466739130",
-      "siteUrl": null
+      "siteUrl": null,
+      "id": "cutters",
+      "image": {
+        "file": "assets/apps/cutters.jpg",
+        "type": "icon",
+        "sourceUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a4/1d/7f/a41d7fa5-6eb0-6e23-80b9-017c1a96660e/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/512x512bb.jpg",
+        "sourcePage": "https://apps.apple.com/no/app/id1466739130",
+        "sourceDomain": "apple.com",
+        "credit": null,
+        "licence": null
+      }
     },
     {
       "name": "Digg",
       "emoji": "🍕",
       "description": "Pizza delivery.",
       "appStoreUrl": "https://apps.apple.com/no/app/id1522202208",
-      "siteUrl": "http://Digg.no"
+      "siteUrl": "http://Digg.no",
+      "id": "digg",
+      "image": {
+        "file": "assets/apps/digg.jpg",
+        "type": "icon",
+        "sourceUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/2a/19/e3/2a19e33a-db7e-197b-955e-9d1637076f04/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
+        "sourcePage": "https://apps.apple.com/no/app/id1522202208",
+        "sourceDomain": "apple.com",
+        "credit": null,
+        "licence": null
+      }
     },
     {
       "name": "Take Take Take",
       "emoji": "♟️",
       "description": "Chess app by Play Magnus.",
       "appStoreUrl": "https://apps.apple.com/no/app/id6754937311",
-      "siteUrl": null
+      "siteUrl": null,
+      "id": "take-take-take",
+      "image": {
+        "file": "assets/apps/take-take-take.jpg",
+        "type": "icon",
+        "sourceUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/75/91/50/75915017-dfb3-5c3b-818f-07489caddf46/ios-app-0-0-1x_U007epad-0-1-sRGB-85-220.png/512x512bb.jpg",
+        "sourcePage": "https://apps.apple.com/no/app/id6754937311",
+        "sourceDomain": "apple.com",
+        "credit": null,
+        "licence": null
+      }
     },
     {
       "name": "Dr.Dropin",
       "emoji": "😷",
       "description": "Healthcare.",
       "appStoreUrl": "https://apps.apple.com/no/app/id1467608455",
-      "siteUrl": null
+      "siteUrl": null,
+      "id": "dr-dropin",
+      "image": {
+        "file": "assets/apps/dr-dropin.jpg",
+        "type": "icon",
+        "sourceUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/09/08/6a/09086adc-9635-3c20-d1a6-b82aab4d1fb6/DrDropinAppIconDark-0-0-1x_U007ephone-0-1-sRGB-85-220.png/512x512bb.jpg",
+        "sourcePage": "https://apps.apple.com/no/app/id1467608455",
+        "sourceDomain": "apple.com",
+        "credit": null,
+        "licence": null
+      }
     }
   ],
   "accommodation": {
     "area": "Torshov",
-    "note": "All three Torshov Airbnbs are booked and verified. Christian booked them. Private bedrooms for everyone, shared bathrooms.",
     "status": "booked",
     "verified": true,
     "verifiedOn": "2026-09-08",
+    "totalMaxGuests": 15,
+    "totalBedrooms": 9,
+    "note": "All three Torshov Airbnbs are booked and verified. Christian booked them. Private bedrooms for everyone, shared bathrooms. Listing details, photos and coordinates were read from the Airbnb listings on 9 Sept 2026.",
+    "coordinatePrecisionNote": "Airbnb publishes an approximate point, not the street address, so each flat's coordinates are area-accurate to roughly 100-200 m. Exact addresses arrive with the booking confirmations.",
     "options": [
       {
+        "id": "bright-and-nice-torshov",
         "name": "Bright and nice apartment in Torshov",
         "url": "https://www.airbnb.com/rooms/1164546549560682899",
-        "address": null,
-        "coordinates": null,
+        "listingId": "1164546549560682899",
         "status": "booked",
-        "verified": true
+        "verified": true,
+        "area": "Torshov / Sagene",
+        "address": null,
+        "coordinates": {
+          "lat": 59.935,
+          "lng": 10.7644,
+          "precision": "approximate",
+          "source": "airbnb-listing",
+          "matchedAddress": null
+        },
+        "hostName": "Håvard",
+        "hostNote": "Two years hosting. Rated 5.0 for communication, responds within an hour.",
+        "rating": 4.75,
+        "reviewCount": 8,
+        "maxGuests": 4,
+        "bedrooms": 2,
+        "beds": 3,
+        "extraBeds": 1,
+        "bathrooms": 1.0,
+        "floor": 3,
+        "elevator": false,
+        "selfCheckIn": true,
+        "checkInFrom": "15:00",
+        "checkInUntil": null,
+        "checkOutBy": "13:00",
+        "description": "Bright apartment on the third floor of a classic building. Master bedroom with a double bed, guest room with a single bed, open kitchen, high ceilings, newly renovated bathroom and a living room. Sleeps three, with a foldable bed for a fourth.",
+        "neighbourhoodNote": "Torshov/Sagene. Walking distance to Grünerløkka, Akerselva and the parks. Public transport nearby, city centre in about 20 minutes.",
+        "amenities": [
+          "Kitchen",
+          "WiFi",
+          "TV",
+          "Washer",
+          "Pets allowed",
+          "Self check-in with smartlock",
+          "Smoke alarm"
+        ],
+        "amenitiesMissing": [
+          "Carbon monoxide alarm not reported"
+        ],
+        "notes": [
+          "Third floor, no elevator.",
+          "Some storage in the flat is not for guest use."
+        ],
+        "photos": [
+          {
+            "file": "assets/accommodation/bright-and-nice-torshov-1.jpg",
+            "sourceUrl": "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE2NDU0NjU0OTU2MDY4Mjg5OQ%3D%3D/original/79294630-a0a7-4288-957f-685da6738ceb.jpeg?im_w=1200",
+            "caption": "Open kitchen and dining area"
+          },
+          {
+            "file": "assets/accommodation/bright-and-nice-torshov-2.jpg",
+            "sourceUrl": "https://a0.muscache.com/im/pictures/miso/Hosting-1164546549560682899/original/297b85ec-a363-4b0f-aff0-adc982a16f32.jpeg?im_w=1200",
+            "caption": "Hallway and blue bedroom"
+          },
+          {
+            "file": "assets/accommodation/bright-and-nice-torshov-3.jpg",
+            "sourceUrl": "https://a0.muscache.com/im/pictures/miso/Hosting-1164546549560682899/original/a424f55a-a6df-4772-9ec8-d207740412d6.jpeg?im_w=1200",
+            "caption": "Bathroom with washing machine"
+          }
+        ],
+        "distanceMetersFrom": {
+          "rebel": 2372
+        },
+        "walkMinutesFrom": {
+          "rebel": 41
+        }
       },
       {
+        "id": "top-apartment-torshov",
         "name": "Top apartment in Torshov",
         "url": "https://www.airbnb.com/rooms/41404820",
-        "address": null,
-        "coordinates": null,
+        "listingId": "41404820",
         "status": "booked",
-        "verified": true
+        "verified": true,
+        "area": "Torshov",
+        "address": null,
+        "coordinates": {
+          "lat": 59.9357,
+          "lng": 10.764,
+          "precision": "approximate",
+          "source": "airbnb-listing",
+          "matchedAddress": null
+        },
+        "hostName": "Maria",
+        "hostNote": null,
+        "rating": 4.33,
+        "reviewCount": 3,
+        "maxGuests": 6,
+        "bedrooms": 3,
+        "beds": 4,
+        "extraBeds": 0,
+        "bathrooms": 1.5,
+        "floor": null,
+        "elevator": null,
+        "selfCheckIn": null,
+        "checkInFrom": "12:00",
+        "checkInUntil": "21:00",
+        "checkOutBy": "12:00",
+        "description": "Two floors plus a loft in central Torshov. Two bedrooms with extra sleeping space, an office in the loft, bathroom, laundry room with toilet, living room, kitchen, loft living room and a balcony with good sun. Cosy backyard with grills.",
+        "neighbourhoodNote": "Central Torshov. Bus and light rail two minutes away. Street parking is usually available.",
+        "amenities": [
+          "Kitchen",
+          "WiFi",
+          "Dedicated workspace",
+          "TV",
+          "Washer",
+          "Balcony",
+          "Backyard with grills",
+          "Smoke alarm"
+        ],
+        "amenitiesMissing": [
+          "Carbon monoxide alarm not reported"
+        ],
+        "notes": [
+          "Rent includes internet and electricity.",
+          "Listing states it is not suitable for children aged 2 to 12.",
+          "Host prefers whole-month rentals in July and August, with some flexibility."
+        ],
+        "photos": [
+          {
+            "file": "assets/accommodation/top-apartment-torshov-1.jpg",
+            "sourceUrl": "https://a0.muscache.com/im/pictures/hosting/Hosting-41404820/original/8689c2f6-de30-4499-bf3c-c2e3e51c971d.jpeg?im_w=1200",
+            "caption": "Living room with balcony access"
+          },
+          {
+            "file": "assets/accommodation/top-apartment-torshov-2.jpg",
+            "sourceUrl": "https://a0.muscache.com/im/pictures/hosting/Hosting-41404820/original/5a48780e-756f-4e30-af96-1c441a30e424.jpeg?im_w=1200",
+            "caption": "Balcony overlooking the courtyard"
+          },
+          {
+            "file": "assets/accommodation/top-apartment-torshov-3.jpg",
+            "sourceUrl": "https://a0.muscache.com/im/pictures/hosting/Hosting-41404820/original/9b66ba45-d805-40f0-a558-f966af2b210b.jpeg?im_w=1200",
+            "caption": "Kitchen and dining table"
+          },
+          {
+            "file": "assets/accommodation/top-apartment-torshov-4.jpg",
+            "sourceUrl": "https://a0.muscache.com/im/pictures/hosting/Hosting-41404820/original/48cdb109-b941-4309-b9b8-9e8a68e73e0f.jpeg?im_w=1200",
+            "caption": "Loft sitting area with exposed beams"
+          }
+        ],
+        "distanceMetersFrom": {
+          "rebel": 2424
+        },
+        "walkMinutesFrom": {
+          "rebel": 42
+        }
       },
       {
+        "id": "large-loft-torshov",
         "name": "Large loft apartment in Torshov",
         "url": "https://www.airbnb.com/rooms/1401228997904837114",
-        "address": null,
-        "coordinates": null,
+        "listingId": "1401228997904837114",
         "status": "booked",
-        "verified": true
+        "verified": true,
+        "area": "Torshov",
+        "address": null,
+        "coordinates": {
+          "lat": 59.93444,
+          "lng": 10.7631,
+          "precision": "approximate",
+          "source": "airbnb-listing",
+          "matchedAddress": null
+        },
+        "hostName": "Kjersti Anne",
+        "hostNote": null,
+        "rating": 5.0,
+        "reviewCount": 8,
+        "maxGuests": 5,
+        "bedrooms": 4,
+        "beds": 5,
+        "extraBeds": 0,
+        "bathrooms": 1.0,
+        "floor": 5,
+        "elevator": false,
+        "selfCheckIn": null,
+        "checkInFrom": "15:00",
+        "checkInUntil": null,
+        "checkOutBy": "11:00",
+        "description": "Large loft apartment on two floors with a view over the city, suited to groups. Fifth floor has the bathroom and four bedrooms, one with a double mattress. Sixth floor is an airy loft with a mezzanine, dining room, sofa group and a well-equipped kitchen.",
+        "neighbourhoodNote": "Torshov, 12 minutes by tram from the city centre. Quiet area with cafes and neighbourhood pubs, close to Grünerløkka and Akerselva.",
+        "amenities": [
+          "Kitchen",
+          "WiFi",
+          "Dedicated workspace",
+          "HDTV with Disney+, Netflix and HBO Max",
+          "Washer",
+          "Smoke alarm"
+        ],
+        "amenitiesMissing": [
+          "Carbon monoxide alarm not reported"
+        ],
+        "notes": [
+          "Fifth and sixth floor, no lift.",
+          "Four bedrooms but a five-guest maximum, so one room is a single."
+        ],
+        "photos": [
+          {
+            "file": "assets/accommodation/large-loft-torshov-1.jpg",
+            "sourceUrl": "https://a0.muscache.com/im/pictures/miso/Hosting-1401228997904837114/original/13a7b54a-cc49-446b-b02a-aa533560b562.jpeg?im_w=1200",
+            "caption": "Dining area beneath the skylight at dusk"
+          },
+          {
+            "file": "assets/accommodation/large-loft-torshov-2.jpg",
+            "sourceUrl": "https://a0.muscache.com/im/pictures/miso/Hosting-1401228997904837114/original/691763e5-b38d-4b80-a0c1-0f1b340a6e33.jpeg?im_w=1200",
+            "caption": "Dining table and skylight seating in daylight"
+          },
+          {
+            "file": "assets/accommodation/large-loft-torshov-3.jpg",
+            "sourceUrl": "https://a0.muscache.com/im/pictures/miso/Hosting-1401228997904837114/original/6d329f5a-2be6-48c0-a38c-647dcdd36400.jpeg?im_w=1200",
+            "caption": "View over the neighbourhood rooftops"
+          },
+          {
+            "file": "assets/accommodation/large-loft-torshov-4.jpg",
+            "sourceUrl": "https://a0.muscache.com/im/pictures/miso/Hosting-1401228997904837114/original/bb1fa523-0798-4061-8e38-c68ac716fd33.jpeg?im_w=1200",
+            "caption": "Fireplace between the dining area and kitchen"
+          }
+        ],
+        "distanceMetersFrom": {
+          "rebel": 2280
+        },
+        "walkMinutesFrom": {
+          "rebel": 40
+        }
       }
     ]
   },
@@ -1497,6 +2281,15 @@
       "precision": "address",
       "source": "geonorge",
       "matchedAddress": "Universitetsgata 2"
+    },
+    "image": {
+      "file": "assets/workspace/rebel.webp",
+      "type": "photo",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/6332cfae2976713409c82cf9/f3b11300-e8d6-4fb5-9d38-9c18756da172/rebel-hero-exterior.webp?format=1500w",
+      "sourcePage": "https://rebel.no",
+      "sourceDomain": "rebel.no",
+      "credit": null,
+      "licence": null
     }
   },
   "packing": [
@@ -1674,8 +2467,27 @@
     "geocodedOn": "2026-09-08",
     "precisionValues": [
       "address",
-      "street"
+      "street",
+      "approximate"
     ],
     "walkEstimate": "Straight-line distance multiplied by 1.3 for street detour, at 4.5 km/h."
+  },
+  "assets": {
+    "basePath": "assets",
+    "note": "Asset paths are relative to the app project root. All guide images are bundled through the static asset registry.",
+    "folders": {
+      "accommodation": "assets/accommodation",
+      "places": "assets/places",
+      "food": "assets/food",
+      "apps": "assets/apps",
+      "schedule": "assets/schedule",
+      "workspace": "assets/workspace"
+    },
+    "imageFormats": [
+      "jpg",
+      "png",
+      "webp"
+    ],
+    "rightsNote": "Every image was downloaded from the source recorded on the entity: usually the venue's or producer's own website, otherwise VisitOSLO, VisitLokka, MerAvOslo, Flickr or the App Store. None is licensed for republication. Fine for an internal team app; clear the rights before using any of them in anything public."
   }
 }

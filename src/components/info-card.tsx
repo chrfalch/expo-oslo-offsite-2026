@@ -1,5 +1,6 @@
-import { Column, Text } from '@expo/ui';
-import type { PropsWithChildren } from 'react';
+import { Column, Row } from '@expo/ui';
+import { Text } from '@/components/text';
+import type { PropsWithChildren, ReactNode } from 'react';
 
 import { layout, useContentWidth, useOffsiteTheme } from '@/theme';
 
@@ -7,9 +8,10 @@ type InfoCardProps = PropsWithChildren<{
   title: string;
   description: string;
   eyebrow?: string;
+  leading?: ReactNode;
 }>;
 
-export function InfoCard({ title, description, eyebrow, children }: InfoCardProps) {
+export function InfoCard({ title, description, eyebrow, leading, children }: InfoCardProps) {
   const { colors } = useOffsiteTheme();
   const contentWidth = useContentWidth();
 
@@ -28,9 +30,12 @@ export function InfoCard({ title, description, eyebrow, children }: InfoCardProp
           {eyebrow}
         </Text>
       ) : null}
-      <Text textStyle={{ fontSize: 22, fontWeight: '600', color: colors.text }}>
-        {title}
-      </Text>
+      <Row spacing={12} alignment="center" style={{ width: contentWidth - 44 }}>
+        {leading}
+        <Column style={{ width: contentWidth - 44 - (leading ? 68 : 0) }}>
+          <Text role="title2" textStyle={{ fontWeight: '600', color: colors.text }}>{title}</Text>
+        </Column>
+      </Row>
       <Text textStyle={{ fontSize: 16, lineHeight: 24, color: colors.secondaryText }}>
         {description}
       </Text>

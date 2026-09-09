@@ -4,27 +4,26 @@
     "slug": "oslo-offsite-2026",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/branding/oslo-offsite-icon.png",
     "scheme": "oslooffsite2026",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon",
+      "icon": "./assets/branding/oslo-offsite-icon.png",
       "bundleIdentifier": "com.chrfalch.oslooffsite2026",
-      "supportsTablet": false
+      "appleTeamId": "7X29G4MCL4",
+      "supportsTablet": false,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
-      },
-      "predictiveBackGestureEnabled": true,
-      "package": "com.chrfalch.oslooffsite2026"
+      "predictiveBackGestureEnabled": false,
+      "package": "com.chrfalch.oslooffsite2026",
+      "config": {}
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/branding/oslo-offsite-icon.png"
     },
     "plugins": [
       "expo-router",
@@ -42,6 +41,19 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "ab545092-2fb5-4981-ab35-4da120f516d6"
+      }
+    },
+    "owner": "chrfalch",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/ab545092-2fb5-4981-ab35-4da120f516d6"
     }
   }
 }

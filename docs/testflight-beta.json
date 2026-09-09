@@ -1,0 +1,26 @@
+{
+  "appId": "6810129391",
+  "bundleIdentifier": "com.chrfalch.oslooffsite2026",
+  "localization": {
+    "locale": "en-US",
+    "description": "The private guide for Oslo Offsite attendees. Browse the shared schedule, travel details, places, accommodation, and practical information. Choose your attendee profile and keep saved places and a packing checklist on this device. The bundled guide works offline; maps, external websites, and updates need an internet connection.",
+    "feedbackEmail": "christian@expo.dev",
+    "marketingUrl": "https://oslo-offsite-2026.expo.app/",
+    "privacyPolicyUrl": "https://oslo-offsite-2026.expo.app/privacy.html"
+  },
+  "review": {
+    "contactFirstName": "Christian Magnus",
+    "contactLastName": "Falch",
+    "contactEmail": "christian@expo.dev",
+    "demoAccountRequired": false,
+    "notes": "This beta is intended only for offsite attendees. No login or demo account is required. On first launch, select any listed attendee and continue. This selection personalizes the device and does not authenticate the person. The profile screen lets you change attendee. Guide content is bundled; saved places and packing choices are local to the device. iOS uses Apple Maps for destination maps. The app does not request the device's current location. Please test first launch, attendee selection, schedule and place navigation, saved preferences after restarting, and the guide offline."
+  },
+  "group": {
+    "name": "Offsite attendees",
+    "isInternalGroup": false,
+    "publicLinkEnabled": false,
+    "feedbackEnabled": true,
+    "hasAccessToAllBuilds": false
+  },
+  "whatToTest": "Please test first launch, attendee selection, schedule and place navigation, saved places and packing after restarting, the guide offline, and opening destination maps. Report incorrect itinerary or place details to christian@expo.dev."
+}
