@@ -1,6 +1,7 @@
-import { Button, Column, Row } from '@expo/ui';
+import { Column, Row } from '@expo/ui';
 import type { ReactNode } from 'react';
 import { rowContentModifiers, rowModifiers } from './control-modifiers';
+import { RowButton } from './row-button';
 import { SystemSymbol } from './symbol';
 import { Text } from './text';
 import { useContentWidth, useOffsiteTheme } from '@/theme';
@@ -11,7 +12,7 @@ export function ActionRowControl({ title, detail, leading, onPress, testID, sele
   const defaultWidth = useContentWidth();
   const width = suppliedWidth ?? defaultWidth;
   const { colors } = useOffsiteTheme();
-  return <Button variant="text" onPress={onPress} testID={testID} modifiers={rowModifiers([title, detail].filter(Boolean).join(', '), selected, testID)}>
+  return <RowButton variant="text" onPress={onPress} testID={testID} modifiers={rowModifiers([title, detail].filter(Boolean).join(', '), selected, testID)}>
     <Row alignment="center" spacing={12} style={{ width, paddingVertical: 10 }} modifiers={rowContentModifiers(width)}>
       {leading}
       {selected !== undefined ? <Column style={{ width: 28 }}><SystemSymbol name={selected ? 'checkmark.circle.fill' : 'circle'} color={selected ? colors.accent : colors.secondaryText} /></Column> : null}
@@ -21,5 +22,5 @@ export function ActionRowControl({ title, detail, leading, onPress, testID, sele
       </Column>
       {selected === undefined ? <Column style={{ width: 22 }}><SystemSymbol name="chevron.right" color={colors.secondaryText} /></Column> : null}
     </Row>
-  </Button>;
+  </RowButton>;
 }

@@ -7,13 +7,13 @@ import { rowContentModifiers } from '@/components/control-modifiers';
 import { Image, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ActionRow, type ActionRowModel } from '@/presentation/content-page-view';
-import { GuideCard, type GuideCardModel } from '@/presentation/guide-card';
+import { UpcomingActivityCard, type UpcomingActivityModel } from '@/presentation/upcoming-activity-card';
 import { NativeContent } from '@/presentation/native-content';
 import { layout, useOffsiteTheme } from '@/theme';
 
 export type OverviewViewProps = {
   title: string; year: string; dates: string;
-  onProfile: () => void; onSupport: () => void; arrival: ActionRowModel; upcoming?: GuideCardModel; rows: readonly ActionRowModel[];
+  onProfile: () => void; onSupport: () => void; arrival: ActionRowModel; upcoming?: UpcomingActivityModel; rows: readonly ActionRowModel[];
 };
 
 export function OverviewView(props: OverviewViewProps) {
@@ -42,7 +42,7 @@ export function OverviewView(props: OverviewViewProps) {
       <NativeContent><Column spacing={18}>
         <ActionRow row={props.arrival} />
         <Text textStyle={{ fontSize: 18, fontWeight: '600', color: colors.text }}>{props.upcoming ? 'Coming up' : 'Your offsite guide'}</Text>
-        {props.upcoming ? <GuideCard card={props.upcoming} /> : <Text textStyle={{ color: colors.secondaryText }}>No more shared activities are listed. Your schedule and city guide are still here.</Text>}
+        {props.upcoming ? <UpcomingActivityCard activity={props.upcoming} /> : <Text textStyle={{ color: colors.secondaryText }}>No more shared activities are listed. Your schedule and city guide are still here.</Text>}
         {props.rows.map((row) => <ActionRow key={row.id} row={row} />)}
       </Column></NativeContent>
       <View style={[styles.footer, { borderTopColor: colors.border }]}>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { AppState } from 'react-native';
 import { formatOffsiteDate, formatTravelLeg, getSchedule, offsiteData } from '@/data/offsite';
 import { getOffsiteMoment, getUpcomingTravel } from '@/data/offsite-time';
+import { getGuideImage } from '@/media/guide-images';
 import { OverviewView } from '@/presentation/overview-view';
 import { useOffsiteNavigation } from '@/screens/navigation';
 import { usePreferences } from '@/state/preferences';
@@ -31,9 +32,8 @@ export default function OverviewScreen() {
     arrival={{ id: 'overview-travel', icon: '✈️', title: travelDirection ? `Your ${travelDirection}` : 'Your trip',
       detail: travelDirection ? formatTravelLeg(attendee?.[travelDirection] ?? null) : 'Arrival, departure and where to stay', onPress: () => router.push('/travel') }}
     upcoming={next ? { id: next.id, eyebrow: `${formatOffsiteDate(next.date, { weekday: 'short', day: 'numeric', month: 'short' })} · ${next.startTime}`,
-      title: next.title, description: next.location,
-      actions: [{ label: 'View activity', onPress: () => activity(next.id), testID: 'overview-activity', primary: true },
-        { label: `${next.location} · Map`, testID: 'overview-map', onPress: () => location(`activity:${next.id}`) }] } : undefined}
+      title: next.title, description: next.location, image: getGuideImage(next.image, next.location),
+      onPress: () => activity(next.id) } : undefined}
     rows={[
       { id: 'overview-work', icon: '💻', title: 'Rebel workspace', detail: offsiteData.workspace.address, onPress: () => location('workspace:rebel') },
       { id: 'overview-stay', icon: '🛏️', title: 'Where we’re staying', detail: offsiteData.accommodation.area, onPress: () => router.push({ pathname: '/bases', params: { section: 'stay' } }) },
