@@ -50,7 +50,7 @@ For embedded Google Maps on Android, create `GOOGLE_MAPS_API_KEY` in the EAS env
 
 Embedded Android Maps was configured and verified locally on 2026-09-09. Google Cloud project `chrfalch-oslo-offsite-2026` has Maps SDK for Android enabled and the new “My Billing Account” linked under `christian.falch@mezzin.no`. The “Oslo Offsite Android Maps” key is restricted to that SDK, this package name, and the local debug/EAS upload certificates. `GOOGLE_MAPS_API_KEY` is saved in ignored `.env.local` and all three EAS environments with sensitive visibility. A rebuilt Android development app rendered street tiles and the Fuglen destination pin on the emulator.
 
-The earlier Android beta binaries do not contain this native key. Build and verify a fresh Android release before distributing embedded Maps; an OTA update alone cannot add it. Add the Play app-signing SHA-1 to the key restrictions before testing a Play-installed release.
+The earlier Android beta binaries do not contain this native key; Android 1.0.0 (9) is the verified replacement containing it. Users need the new Android binary because an OTA update alone cannot add the native key. Add the Play app-signing SHA-1 to the key restrictions before testing a Play-installed release.
 
 Allowed certificate SHA-1 fingerprints (public certificate metadata):
 
@@ -73,7 +73,7 @@ Store build numbers are managed remotely and increment automatically. `expo.vers
 
 On 2026-09-09, iOS 1.0.0 (4) was uploaded through EAS Submit and processed successfully in TestFlight. EAS build: `ce7ace99-7e9d-486c-b676-03b3f72b8def`; submission: `5b251776-4099-4974-9024-b37af52befcd`. The build is in the private `Offsite attendees` group and waiting for external beta review. Automatic tester notifications and public links are disabled; no invitations have been sent.
 
-Android 1.0.0 (5), build `c6bdba9c-9e34-4ef0-97e2-3c993f2e6d6a`, is complete and verified for the earlier external-Maps behavior. Google identity approval still blocks contact-phone verification and creation of its Play listing. The requested embedded Maps requires a fresh Android build; select and verify that replacement before submission. See `RELEASE-CHECKLIST.md` for later build records.
+Android 1.0.0 (9), [EAS build `13c49daf-65d5-4e9f-8902-ba390b0a471d`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/builds/13c49daf-65d5-4e9f-8902-ba390b0a471d), finished at 16:58 UTC on 2026-09-09 from commit `d8dfd823a65ac943b4d7e66ccf314e890c6138a6`. The signed AAB is verified: Maps key, package/version, production update channel/project, runtime `1.0.0-android-maps-v1`, and EAS upload certificate all match. This replaces the earlier Android candidates for embedded Maps. It has not been submitted to Google Play. Google identity approval still blocks contact-phone verification and creation of the Play listing; add the Play app-signing SHA-1 to the Maps key and verify a Play-installed build once available.
 
 ## Submit the prepared artifacts
 

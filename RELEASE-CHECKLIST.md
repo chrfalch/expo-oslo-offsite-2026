@@ -10,7 +10,7 @@ Prepare and validate everything before uploading. Use EAS Build, EAS-managed sig
 - [x] Save `GOOGLE_MAPS_API_KEY` in ignored `.env.local` and the EAS development, preview, and production environments with sensitive visibility.
 - [x] Isolate Maps-enabled Android updates with runtime `1.0.0-android-maps-v1`; preserve the iOS runtime.
 - [x] Rebuild and install the Android development app, then verify rendered street tiles and the Fuglen destination pin on the emulator. All 56 tests, TypeScript, lint, and native configuration checks pass.
-- [ ] Build and verify a fresh Android release before distribution. Earlier beta binaries lack the native Maps key.
+- [x] Build and verify a fresh Android release: Android 1.0.0 (9), [EAS build `13c49daf-65d5-4e9f-8902-ba390b0a471d`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/builds/13c49daf-65d5-4e9f-8902-ba390b0a471d), finished at 16:58 UTC from pushed source commit `d8dfd823a65ac943b4d7e66ccf314e890c6138a6`. The signed AAB contains the configured Maps key, runtime `1.0.0-android-maps-v1`, correct package, production update channel/project, and no device-location permissions. Its signature matches the allowed EAS upload certificate. Local Android export and cloud native compilation passed. No store submission was requested or performed.
 - [ ] Add the Play app-signing SHA-1 to this key once Play App Signing is available, then verify Maps in a Play-installed build.
 
 ## Support update builds — 2026-09-09
@@ -129,7 +129,7 @@ Prepare and validate everything before uploading. Use EAS Build, EAS-managed sig
 - [x] Submit the verified iOS build to TestFlight with EAS Submit: 1.0.0 (4), submission `5b251776-4099-4974-9024-b37af52befcd`, successful; Apple processing `VALID`.
 - [ ] Submit the verified Android build to the confirmed Google Play testing track with EAS Submit (check current first-upload requirements).
 - [x] Confirm Apple processing (`VALID`) and external beta review submission (`WAITING_FOR_REVIEW`).
-- [ ] After Google identity approval: verify contact phone, create the app, grant app-scoped testing access, enroll Play App Signing, add its SHA-1 to the Maps key, and submit a fresh verified Android build containing the Maps setup via EAS. Confirm Play processing and map rendering.
+- [ ] After Google identity approval: verify contact phone, create the app, grant app-scoped testing access, enroll Play App Signing, add its SHA-1 to the Maps key, and submit the verified Android Maps build recorded above via EAS. Confirm Play processing and map rendering.
 - [ ] Once Apple approves the beta, collect the attendee tester addresses and authorize invitations. The group is empty and public links remain disabled.
 
 ## Initial audit
