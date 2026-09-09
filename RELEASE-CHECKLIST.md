@@ -2,7 +2,15 @@
 
 Prepare and validate everything before uploading. Use EAS Build, EAS-managed signing credentials, EAS Update, EAS Observe, and EAS Submit. Audience confirmed: only offsite attendees. Destinations: a private TestFlight beta and Google Play internal testing. Ask setup questions one at a time.
 
-## Current release status — 2026-09-09
+## Support update builds — 2026-09-09
+
+- Source commit: `ca4528925fdfe1e37b18b9a99ce52d955b7f2f16`, pushed to `master`. Adds the Support screen, playful Overview footer, phone/WhatsApp links, and Christian’s home with a bundled, attributed building photo.
+- Validation before upload: TypeScript, lint, all 53 tests, and Android/iOS/web production exports passed. The updated screens were also checked in the iOS simulator.
+- Android 1.0.0 (6): [EAS build `b8c44ae8-075c-4842-8665-15d26b9cc633`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/builds/b8c44ae8-075c-4842-8665-15d26b9cc633), accepted at 13:49 UTC with the `production` profile.
+- iOS 1.0.0 (5): [EAS build `efb2c6f4-fe04-4e0d-af77-ea3c574233ff`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/builds/efb2c6f4-fe04-4e0d-af77-ea3c574233ff), accepted at 13:50 UTC with the `production` profile.
+- Both build records identify the source commit above. This request starts builds only; automatic store submission is disabled. Check completion and verify the resulting artifacts before selecting either for a later submission.
+
+## Previous submitted release status — 2026-09-09
 
 - Final source/config/assets snapshot: `fc9e527f7ac811d2ee4f926648e376cf10f5fd6110d9000bd7dd4d886bb44cfa` (175 files), unchanged across both final store uploads. Includes the concurrent design changes and current accommodation data. TypeScript, lint, and all 53 tests pass.
 - iOS 1.0.0 (4): `ce7ace99-7e9d-486c-b676-03b3f72b8def`, finished at 10:36 UTC. Strict signed-artifact verification passes; correct bundle ID, production Updates channel, runtime 1.0.0 and EAS project. EAS Submit job `5b251776-4099-4974-9024-b37af52befcd` finished successfully. Apple received build 4 at 10:50 UTC and reports processing state `VALID` (App Store Connect build `da36f042-917e-4ea1-8af0-353995759957`). Beta notes are saved, the build is assigned to the private `Offsite attendees` group, automatic tester notifications are disabled, and external beta review is `WAITING_FOR_REVIEW`. No invitations have been sent.
