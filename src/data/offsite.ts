@@ -37,6 +37,7 @@ export const offsiteData: DeepReadonly<OffsiteData> = freezeData({
   },
   expoCustomerApps: snapshot.expoCustomerApps.map(withImage),
   workspace: withImage(snapshot.workspace),
+  support: { ...snapshot.support, home: withImage(snapshot.support.home) },
 });
 
 export const offsiteGuide = createOffsiteGuide(offsiteData);

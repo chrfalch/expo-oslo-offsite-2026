@@ -52,7 +52,7 @@ All guide content is bundled with the app. Apple Maps is used on iOS. Android op
 - Oslo Offsite launcher artwork is configured for both platforms in `assets/branding/oslo-offsite-icon.png`; verify generated native icons in the final builds.
 - Capture current release screenshots after native validation.
 - Support and privacy pages are published on EAS Hosting at the URLs above; all three public assets returned HTTP 200 on 2026-09-09.
-- Finish Apple beta contact information as required for the selected tester audience.
+- Apple beta contact information, including the private review phone, is saved and verified.
 - Complete store privacy/data-safety declarations using the shipped SDK behavior.
 - Finish Google identity approval and contact-phone verification, then create the app for internal testing.
 
@@ -70,4 +70,4 @@ Do not submit a "no data collected" declaration without accounting for Observe, 
 
 ## TestFlight setup saved
 
-`docs/testflight-beta.json` contains the prepared English beta description and review instructions. App Store Connect has the beta description, feedback email, privacy URL, and empty external group `Offsite attendees` (`b97c3a33-e50a-4fb0-9702-19bbbb757b8b`). Public links are disabled. Apple requires a contact phone before review details can be saved; the question is pending. Tester addresses and invitations remain outstanding.
+`docs/testflight-beta.json` contains the prepared English beta description and review instructions. App Store Connect has the beta description, feedback email, privacy URL, and empty external group `Offsite attendees` (`b97c3a33-e50a-4fb0-9702-19bbbb757b8b`). Public links are disabled. Apple review details, including the private phone, are saved and verified. Build 1.0.0 (4), App Store Connect build `da36f042-917e-4ea1-8af0-353995759957`, has processed successfully and is assigned to this group. Beta notes are saved and external beta review is `WAITING_FOR_REVIEW`. Automatic notifications are disabled. Tester addresses and invitations remain outstanding.

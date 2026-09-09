@@ -24,6 +24,27 @@
     "currency": "NOK",
     "timezone": "Europe/Oslo"
   },
+  "support": {
+    "phone": "+47 911 85 912",
+    "phoneUrl": "tel:+4791185912",
+    "whatsappUrl": "https://wa.me/4791185912",
+    "home": {
+      "name": "Christian’s home",
+      "address": "Stensgata 26A, 0358 Oslo",
+      "notes": "The home of your local host and one-person support team. Give Christian a call or send a WhatsApp message before dropping by.",
+      "image": {
+        "file": "assets/places/christian-home.jpg",
+        "type": "photo",
+        "sourceUrl": "https://upload.wikimedia.org/wikipedia/commons/2/25/Stensgata_26.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Stensgata_26.jpg",
+        "sourceDomain": "commons.wikimedia.org",
+        "credit": "Photo: Jan-Tore Egge · Wikimedia Commons. Resized for the guide.",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "aspectRatio": 0.971875
+      }
+    }
+  },
   "referencePoints": {
     "rebel": {
       "label": "Rebel (workspace)",

@@ -8,15 +8,21 @@ import { useOffsiteNavigation } from '@/screens/navigation';
 
 export function BasesScreen() {
   const params = useLocalSearchParams<{ section?: string }>();
-  const [section, setSection] = useState(params.section === 'stay' ? 'stay' : 'work');
-  const { location } = useOffsiteNavigation();
-  const { workspace: w, accommodation: a, event } = offsiteData;
+  const [section, setSection] = useState(params.section === 'stay' || params.section === 'home' ? params.section : 'work');
+  const { location, router } = useOffsiteNavigation();
+  const { workspace: w, accommodation: a, event, support } = offsiteData;
   return <ContentPageView choices={[{ id: 'base-section', label: 'Our bases', value: section, onChange: setSection,
-    options: [{ value: 'work', label: 'Workspace' }, { value: 'stay', label: 'Accommodation' }] }]}
+    options: [{ value: 'work', label: 'Workspace' }, { value: 'stay', label: 'Apartments' }, { value: 'home', label: 'Home' }] }]}
     sections={section === 'work' ? [
       { id: 'workspace', cards: [{ id: 'workspace', title: w.name, eyebrow: w.area, description: w.notes, image: getGuideImage(w.image, w.name),
         actions: [{ label: 'Show on map', primary: true, onPress: () => location('workspace:rebel'), testID: 'workspace-map' }], links: [{ label: 'Workspace website', url: w.url }] }] },
       { id: 'working-hours', description: `${event.workingDays.hours}\n${formatOffsiteDate(event.workingDays.startDate)}–${formatOffsiteDate(event.workingDays.endDate)}` },
+    ] : section === 'home' ? [
+      { id: 'home', cards: [{ id: 'christian-home', title: support.home.name, eyebrow: 'SUPPORT HQ',
+        description: support.home.address, details: [support.home.notes, `Phone & WhatsApp · ${support.phone}`],
+        image: getGuideImage(support.home.image, support.home.name),
+        actions: [{ label: 'Show on map', primary: true, testID: 'home-map', onPress: () => location('home:christian') },
+          { label: 'Contact Christian', testID: 'home-support', onPress: () => router.push('/support') }] }] },
     ] : [
       { id: 'accommodation', title: a.area, description: `${a.options.length} apartments · ${a.status}. Exact addresses are in the booking confirmations; map pins are approximate.`,
         disclosure: { label: 'Booking and location notes', details: [a.note, a.coordinatePrecisionNote] },

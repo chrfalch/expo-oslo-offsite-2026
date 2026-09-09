@@ -41,6 +41,9 @@ export interface GuideImage {
   sourceDomain: string;
   credit: string | null;
   licence: string | null;
+  licenceUrl?: string;
+  /** Preserve the complete frame for photos used to recognise an entrance. */
+  aspectRatio?: number;
 }
 
 export interface Place {
@@ -160,6 +163,12 @@ export interface OffsiteData {
     workingDays: { startDate: string; endDate: string; hours: string; note: string };
     currency: string;
     timezone: string;
+  };
+  support: {
+    phone: string;
+    phoneUrl: string;
+    whatsappUrl: string;
+    home: { name: string; address: string; notes: string; image?: GuideImage | null };
   };
   referencePoints: Record<ReferencePointId, ReferencePoint>;
   schedule: ScheduleEvent[];

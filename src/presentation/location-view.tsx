@@ -46,15 +46,15 @@ export function LocationView({ title, address, notice, accuracy, map, image, pho
   const [{ height, width }, setSize] = useState({ height: window.height, width: window.width });
   const insets = useSafeAreaInsets();
   const emptyMap = <View style={{ flex: 1, padding: 24, justifyContent: 'center' }}><NativeContent centered>
-    <Text textStyle={{ color: colors.text, fontSize: 20, fontWeight: '600' }}>{map ? 'Map unavailable' : onOpenMaps ? 'Map pin unavailable' : 'Exact location not in guide'}</Text>
+    <Text textStyle={{ color: colors.text, fontSize: 20, fontWeight: '600' }}>{map ? 'Map unavailable' : 'Exact location not in guide'}</Text>
     <Text textStyle={{ color: colors.secondaryText, fontSize: 15 }}>{map ? 'The saved location details are still available below.' : 'No pin placed.'}</Text>
   </NativeContent></View>;
   return <ScrollView style={{ flex: 1, backgroundColor: colors.background }} contentInsetAdjustmentBehavior="automatic"
     contentContainerStyle={{ paddingBottom: insets.bottom + 24 }}
     onLayout={({ nativeEvent: { layout } }) => setSize({ width: layout.width, height: layout.height })}>
-    <View style={{ height: Math.max(160, Math.min(320, height * 0.4)), backgroundColor: colors.surface }} accessibilityLabel={`Map for ${title}`}>
+    {map || !onOpenMaps ? <View style={{ height: Math.max(160, Math.min(320, height * 0.4)), backgroundColor: colors.surface }} accessibilityLabel={`Map for ${title}`}>
       {map ? <MapBoundary fallback={emptyMap}>{map}</MapBoundary> : emptyMap}
-    </View>
+    </View> : null}
     <View style={{ padding: 20, gap: 16 }}>
       <NativeContent><Text testID="location-title" textStyle={{ color: colors.text, fontSize: 25, fontWeight: '700' }}>{title}</Text></NativeContent>
       <SelectableText selectable testID="location-address" style={{ color: colors.text, fontSize: 17 }}>{address}</SelectableText>

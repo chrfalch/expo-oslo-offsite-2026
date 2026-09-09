@@ -56,10 +56,10 @@ test('all entity images resolve locally with the right media type and accessible
     ...offsiteData.places,
     ...offsiteData.schedule.map((event) => ({ ...event, name: event.location })),
     ...offsiteData.foodToTry.fromSupermarket, ...offsiteData.foodToTry.outAndAbout,
-    ...offsiteData.expoCustomerApps, offsiteData.workspace,
+    ...offsiteData.expoCustomerApps, offsiteData.workspace, offsiteData.support.home,
   ];
   const referenced = new Set(offsiteData.accommodation.options.flatMap((flat) => flat.photos.map((photo) => join(root, photo.file))));
-  assert.equal(entities.length, 63);
+  assert.equal(entities.length, 64);
   for (const entity of entities) {
     const image = entity.image!;
     const model = exports.getGuideImage(image, entity.name)!;
@@ -84,7 +84,7 @@ test('optional images stay absent, credits survive, and unbundled paths fail cle
 
 test('image metadata retains supported types, local folders and original provenance', () => {
   const groups = {
-    places: offsiteData.places,
+    places: [...offsiteData.places, offsiteData.support.home],
     schedule: offsiteData.schedule,
     food: [...offsiteData.foodToTry.fromSupermarket, ...offsiteData.foodToTry.outAndAbout],
     apps: offsiteData.expoCustomerApps,

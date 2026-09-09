@@ -2,6 +2,7 @@ import { Column, Row } from '@expo/ui';
 import { Text } from '@/components/text';
 import { Button } from '@/components/button';
 import { SystemSymbol } from '@/components/symbol';
+import { SupportHeading } from '@/components/support-heading';
 import { rowContentModifiers } from '@/components/control-modifiers';
 import { Image, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -12,7 +13,7 @@ import { layout, useOffsiteTheme } from '@/theme';
 
 export type OverviewViewProps = {
   title: string; year: string; dates: string;
-  onProfile: () => void; arrival: ActionRowModel; upcoming?: GuideCardModel; rows: readonly ActionRowModel[];
+  onProfile: () => void; onSupport: () => void; arrival: ActionRowModel; upcoming?: GuideCardModel; rows: readonly ActionRowModel[];
 };
 
 export function OverviewView(props: OverviewViewProps) {
@@ -44,12 +45,28 @@ export function OverviewView(props: OverviewViewProps) {
         {props.upcoming ? <GuideCard card={props.upcoming} /> : <Text textStyle={{ color: colors.secondaryText }}>No more shared activities are listed. Your schedule and city guide are still here.</Text>}
         {props.rows.map((row) => <ActionRow key={row.id} row={row} />)}
       </Column></NativeContent>
+      <View style={[styles.footer, { borderTopColor: colors.border }]}>
+        <View style={[styles.supportBadge, { backgroundColor: colors.autumn }]} accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+          <NativeContent centered><SystemSymbol name="hand.wave.fill" color={colors.autumnText} size={30} /></NativeContent>
+        </View>
+        <NativeContent centered><Column alignment="center" spacing={6}>
+          <SupportHeading color={colors.text} />
+          <Text role="subheadline" textStyle={{ color: colors.secondaryText, textAlign: 'center' }}>Oslo questions. Human answers.</Text>
+          <Button accessibilityLabel="Support · Ask Christian" variant="text" onPress={props.onSupport} testID="overview-support">
+            <Column style={{ paddingVertical: 12, paddingHorizontal: 16 }}>
+              <Text role="subheadline" textStyle={{ color: colors.accent }}>Support · Ask Christian</Text>
+            </Column>
+          </Button>
+        </Column></NativeContent>
+      </View>
     </View>
   </ScrollView>;
 }
 const styles = StyleSheet.create({
   content: { width: '100%', maxWidth: layout.maxWidth, alignSelf: 'center', gap: 18 },
   heading: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 10 },
+  footer: { marginTop: 8, paddingTop: 28, borderTopWidth: StyleSheet.hairlineWidth, alignItems: 'center', gap: 14 },
+  supportBadge: { width: 58, height: 58, borderRadius: 20, justifyContent: 'center', transform: [{ rotate: '-10deg' }] },
   hero: { padding: 18, borderRadius: layout.heroRadius, gap: 12, flexDirection: 'row', alignItems: 'center' },
   logoTile: { width: 38, height: 38, backgroundColor: '#FFFFFF', borderRadius: 11, alignItems: 'center', justifyContent: 'center' },
   logo: { width: 23, height: 23, tintColor: '#111113', resizeMode: 'contain' },

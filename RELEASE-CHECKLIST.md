@@ -2,6 +2,16 @@
 
 Prepare and validate everything before uploading. Use EAS Build, EAS-managed signing credentials, EAS Update, EAS Observe, and EAS Submit. Audience confirmed: only offsite attendees. Destinations: a private TestFlight beta and Google Play internal testing. Ask setup questions one at a time.
 
+## Current release status — 2026-09-09
+
+- Final source/config/assets snapshot: `fc9e527f7ac811d2ee4f926648e376cf10f5fd6110d9000bd7dd4d886bb44cfa` (175 files), unchanged across both final store uploads. Includes the concurrent design changes and current accommodation data. TypeScript, lint, and all 53 tests pass.
+- iOS 1.0.0 (4): `ce7ace99-7e9d-486c-b676-03b3f72b8def`, finished at 10:36 UTC. Strict signed-artifact verification passes; correct bundle ID, production Updates channel, runtime 1.0.0 and EAS project. EAS Submit job `5b251776-4099-4974-9024-b37af52befcd` finished successfully. Apple received build 4 at 10:50 UTC and reports processing state `VALID` (App Store Connect build `da36f042-917e-4ea1-8af0-353995759957`). Beta notes are saved, the build is assigned to the private `Offsite attendees` group, automatic tester notifications are disabled, and external beta review is `WAITING_FOR_REVIEW`. No invitations have been sent.
+- Android 1.0.0 (5): `c6bdba9c-9e34-4ef0-97e2-3c993f2e6d6a`, finished at 10:45 UTC. AAB signature, EAS upload certificate, package/version code, production update channel and project URL all match. All 48 inspected 64-bit native libraries pass 16 KB ELF alignment. Google Play app creation remains blocked by Google's pending identity-document review.
+- User explicitly authorized sending the bundled attendee names, travel and accommodation details to Expo for builds/preview updates and to both stores for the attendee-only beta.
+- Current preview update group `ee29ca85-8fc9-43ed-b2f7-1cf09907ad07` published at 10:23 UTC. iOS `01a085b1-84fd-79a8-9e03-769a01f0742e`; Android `01a085b1-84fd-76c2-a1bb-5e8b5f609a7d`. Observe confirms 42 iOS and nine Android events from this update. No production OTA has been published.
+- Current UI checked on local iOS 26.5 and Android 15 release previews. Both destination sheets and external map handoffs open Sukkerbiten correctly. Android also passed clean onboarding with no active network, bundled content/photo loading, and attendee/packing persistence after restart while offline.
+- The Apple review contact is saved and verified; no attendee invitations have been sent. Both temporary local QA devices and their Argent services have been stopped.
+
 ## 1. Audit and ownership
 
 - [x] Inspect app configuration, dependencies, native generation, and Git state.
@@ -35,10 +45,11 @@ Prepare and validate everything before uploading. Use EAS Build, EAS-managed sig
 - [ ] Create the Play app record for internal testing. A new personal account can use internal testing; public production access requires 12 closed-test participants opted in continuously for 14 days and Google's approval.
 - [x] Generate the Android upload keystore through EAS for `com.chrfalch.oslooffsite2026`.
 - [ ] Confirm Play App Signing after Play Console enrollment.
-- [ ] Configure a Google Play service account with the required app/track permissions in EAS.
-- Google Cloud is signed into `christian.falch@mezzin.no` but is showing its first-use Terms of Service dialog. No project/service account has been created and no terms were accepted by the agent. The setup page is left open for the user; complete this after the pending Apple review-phone question.
+- [x] Create and verify a Google service-account submission key and assign it in EAS.
+- [ ] Grant that service account app-scoped testing permissions after Google unlocks app creation.
+- Google Cloud terms were accepted by the user. Project `chrfalch-oslo-offsite-2026` and service account `eas-submit@chrfalch-oslo-offsite-2026.iam.gserviceaccount.com` are created. No Cloud IAM roles were granted to the service account. Android Publisher API is enabled. The locally generated key `7bc68e12694cec6434b4e9a5aac47c96fe924dcf` authenticated successfully with Google and is assigned in EAS for this app (EAS credential ID `8071c411-5f38-454d-94b8-b5966438a3af`), expiring 2027-09-09. Its local JSON and PEM files have restricted permissions in ignored `credentials/`. Play app permissions must wait for app creation. Both unused Google-generated keys from failed browser downloads were deleted after the user's explicit approval. The working key is retained.
 - [x] Confirm Android map behavior: the user chose the working external Google Maps button for this beta. An embedded Maps key and billing are not needed for this release.
-- [ ] Keep passwords, private keys, keystores, and service-account JSON out of Git and chat.
+- [x] Keep passwords, private keys, keystores, and service-account JSON out of Git and chat.
 
 ## 4. Expo Updates
 
@@ -54,9 +65,10 @@ Prepare and validate everything before uploading. Use EAS Build, EAS-managed sig
 - [x] Install expo-observe at `58.0.0-canary-20260902-26df09e`.
 - [x] Add ObserveRoot and interactive timing after the preference-gated screens mount.
 - [x] Enable Expo Router navigation metrics, filtering dynamic `id` and `key` parameters. Use the installed update channel to label the telemetry environment; default debug dispatch stays disabled.
-- [x] Confirm iOS cloud compilation of Observe/AppMetrics and source-map upload. Verify Observe CLI access.
+- [x] Confirm native compilation of Observe/AppMetrics and source-map uploads in the final iOS and Android EAS build logs. Verify Observe CLI access.
 - [x] Verify native release compatibility and receipt of metrics in EAS on both platforms: 32 iOS events and 26 Android events from one test installation each, observed 2026-09-09. Both include the applied preview OTA. Detailed metric queries require a paid EAS subscription; the version/event-count query works on the current Free account.
-- [ ] Include Observe's actual telemetry in store privacy declarations.
+- [x] Prepare the actual Observe telemetry inventory and public privacy policy in `docs/PRIVACY-REVIEW.md`.
+- [ ] Apply that inventory to any store privacy forms required when the Play listing becomes available or distribution expands.
 
 ## 6. Store preparation and validation
 
@@ -68,7 +80,8 @@ Prepare and validate everything before uploading. Use EAS Build, EAS-managed sig
 - [x] Publish and verify support/privacy pages on EAS Hosting: https://oslo-offsite-2026.expo.app/ and https://oslo-offsite-2026.expo.app/privacy.html. Latest deployment `5sr6vh8gms`; only public support/privacy text and CSS are included. Both links also opened successfully from the iOS release preview's Profile screen.
 - [x] Prepare `store.config.json` through EAS Metadata, with the published URLs and manual release. Local EAS metadata validation passes; no metadata push or public release has occurred. The age questionnaire accounts for infrequent references to bars/alcohol in the guide.
 - [x] Complete and verify Apple's private beta review contact, including the provided phone number.
-- [ ] Complete applicable store privacy declarations and any screenshots needed for the selected beta/store flow.
+- [x] Complete the private TestFlight submission requirements: beta metadata, privacy URL, review contact, build notes and export compliance. Apple accepted the beta review submission.
+- [ ] Complete Google's applicable app setup forms after verification unlocks its listing. Listing screenshots and full store privacy labels remain necessary before broader distribution where required.
 - [x] Run local validation after integration: 50 current data tests pass and TypeScript/lint pass after subsequent content changes. Dependency checks, Expo Doctor (20/20), and all-platform production exports passed on the earlier snapshot. The source changed after cloud uploads, so prepare fresh final candidates once release details are settled.
 - [x] Inspect the EAS source archive: generated native projects and credentials are excluded, and release configuration/dependencies are included.
 - [x] Validate cloud prebuild configuration and signing setup: both production builds finished successfully.
@@ -81,22 +94,24 @@ Prepare and validate everything before uploading. Use EAS Build, EAS-managed sig
 - Android preview APK build for QA: `813c0e80-af0b-4cc0-beec-e8154dc9ea81`, finished successfully at 2026-09-09 08:45 UTC. Android 15 / API 35 EAS checks passed: onboarding, attendee and packing persistence after restart, external Google Maps handoff to Sukkerbiten at `59.905115, 10.752999`, Observe and OTA application. EAS session `01a08560-fde5-71d9-9f07-6a804f40458f` was stopped after testing. Both cloud test sessions are stopped.
 - Preview Updates endpoint returns HTTP 200 with the expected platform-specific update IDs and runtime `1.0.0`; the iOS preview artifact requests channel `preview`. Both platforms' OTA application is confirmed by Observe.
 - Android submit profile resolves to the `internal` track with release status `completed`. EAS-managed Google submission credentials cannot be attached to a Play app until account verification permits app creation.
-- [ ] Validate release launches, onboarding, preferences, maps, offline guide, Updates, and Observe.
-- Native launch/onboarding, attendee and packing persistence, Maps, Updates and Observe passed for the validation builds. Offline data loading passes with networking disabled in the automated tests. Full native offline smoke checks, final artwork/screenshots, and tests of the refreshed upload candidates remain. Android cloud screenshots work at quarter size; full-resolution capture returned a controller size-mismatch error.
+- [x] Validate release launches, onboarding, preferences and maps on both platforms, native offline behavior on Android, and Updates/Observe delivery on both platforms. iOS offline behavior has shared data-test coverage; a complete native iOS offline run was not performed.
+- Native launch/onboarding, attendee and packing persistence, Maps, Updates and Observe passed for the validation builds. Current native Android offline checks also pass. The final UI snapshot was applied to both release preview binaries and verified before the final store submission. Store artwork is integrated and validated. Android cloud screenshots work at quarter size; full-resolution capture returned a controller size-mismatch error.
 - [x] Record exact build IDs and review the prepared upload destinations. Candidate build IDs below are retained for audit; newer concurrent UI work still needs a fresh verified upload build.
 - The first refreshed candidates (`87d9d6ae-304e-4e70-8562-5fa2f5b4deae`, `af7662c4-a4d6-433a-9ea3-70a301ccbd24`) and their previews (`990b0496-aa2b-425e-9865-4d231e128706`, `17bafd27-91e9-4fa5-9935-973d601cecaa`) were canceled before upload to include in-app Privacy and Support links. Their source digest was `ed7e1d5f8b79edf20873de187630c8339f57f7d7d9dbc7a65024043153b1ca84`; do not submit them.
 - Replacement release and preview builds started with source/config/asset digest `2e1f13e6bad467beb3d5b63bc0d835fc1a2e028d3811cd584bd9d302eb402533`. TypeScript, lint, diff checks and all-platform exports passed after adding the profile links. Existing 50 data tests passed before this UI-only change. No automatic submission is enabled.
 - Replacement iOS production: `2a8b2c0f-0881-4c3f-a597-6b3c5dfb5d53`, version 1.0.0 (3), finished at 09:56 UTC. Android production: `4061977b-74ed-48e5-89fb-56855117e617`, version 1.0.0 (4), finished at 09:57 UTC. iOS preview: `bcaa890b-150b-49aa-acc2-3096822e0cfa`, finished at 09:50 UTC; actual simulator binary is build 1 although EAS reports build 2 (preview does not auto-increment). Android preview: `737513f8-bea5-42c4-8024-39b48b280c60`, build 4, finished at 09:57 UTC. App code/config/assets stayed unchanged throughout all four uploads.
 - [x] Verify the replacement artifacts: iOS strict code signature, bundle/version, icon and production Updates configuration pass; Android AAB signature and upload certificate match EAS. All 48 inspected 64-bit Android native libraries meet 16 KB ELF alignment, and the preview APK passes 16 KB ZIP alignment verification.
 - [x] Verify refreshed iOS onboarding and in-app Privacy/Support links on a fresh local iPhone 17 Pro Max / iOS 26.5 simulator. Both published pages rendered successfully. This was an interactive check; the recorder's SwiftUI selector mismatch prevented a reliable saved replay, so no passing automated flow is claimed.
-- [ ] Build and validate the newer UI changes before store upload. At 10:13 UTC, 18 existing source files and 16 new source files differed from the 09:41 UTC build snapshot, including shared controls, screen presentations, and Oslo-time behavior. Preserve those concurrent edits. Current workspace checks at 10:11 UTC passed all 53 tests, TypeScript, and lint; they do not establish native behavior or inclusion in the already finished builds.
-- Full native offline checks and refreshed Android UI checks remain outstanding. No store submission, production OTA, or attendee invitations have occurred.
+- [x] Include and validate the newer UI changes before store upload. See the current release status above. Historical boundary: At 10:13 UTC, 18 existing source files and 16 new source files differed from the 09:41 UTC build snapshot, including shared controls, screen presentations, and Oslo-time behavior. Preserve those concurrent edits. Current workspace checks at 10:11 UTC passed all 53 tests, TypeScript, and lint; they do not establish native behavior or inclusion in the already finished builds.
+- Native Android offline and refreshed UI checks are now complete (see current status above). EAS iOS submission has completed successfully; no production OTA or attendee invitations have occurred.
 
 ## 7. Upload after preparation
 
-- [ ] Submit the verified iOS build to TestFlight with EAS Submit.
+- [x] Submit the verified iOS build to TestFlight with EAS Submit: 1.0.0 (4), submission `5b251776-4099-4974-9024-b37af52befcd`, successful; Apple processing `VALID`.
 - [ ] Submit the verified Android build to the confirmed Google Play testing track with EAS Submit (check current first-upload requirements).
-- [ ] Confirm processing status and report any remaining store-side actions.
+- [x] Confirm Apple processing (`VALID`) and external beta review submission (`WAITING_FOR_REVIEW`).
+- [ ] After Google identity approval: verify contact phone, create the app, grant app-scoped testing access, enroll Play App Signing, submit exact Android build `c6bdba9c-9e34-4ef0-97e2-3c993f2e6d6a` via EAS, and confirm Play processing.
+- [ ] Once Apple approves the beta, collect the attendee tester addresses and authorize invitations. The group is empty and public links remain disabled.
 
 ## Initial audit
 

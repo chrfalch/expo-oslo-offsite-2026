@@ -5,7 +5,7 @@ import { Linking } from 'react-native';
 
 import { useOffsiteTheme } from '@/theme';
 
-export function WebsiteButton({ url, label }: { url: string; label: string }) {
+export function WebsiteButton({ url, label, failureMessage }: { url: string; label: string; failureMessage?: string }) {
   const [failed, setFailed] = useState(false);
   const { colors } = useOffsiteTheme();
 
@@ -23,7 +23,7 @@ export function WebsiteButton({ url, label }: { url: string; label: string }) {
       <Button label={label} variant="outlined" onPress={() => { void open(); }} />
       {failed ? (
         <Text textStyle={{ color: colors.secondaryText }}>
-          {`Could not open this link. Try again when connected: ${url}`}
+          {failureMessage ?? `Could not open this link. Try again when connected: ${url}`}
         </Text>
       ) : null}
     </>

@@ -38,6 +38,7 @@ const sources: Record<string, ImageSourcePropType> = {
   'assets/places/bar-lupo.webp': require('../../assets/places/bar-lupo.webp'),
   'assets/places/bff-torshov.webp': require('../../assets/places/bff-torshov.webp'),
   'assets/places/crow-bar.webp': require('../../assets/places/crow-bar.webp'),
+  'assets/places/christian-home.jpg': require('../../assets/places/christian-home.jpg'),
   'assets/places/duken.webp': require('../../assets/places/duken.webp'),
   'assets/places/dumpling-as.webp': require('../../assets/places/dumpling-as.webp'),
   'assets/places/ekebergparken.jpg': require('../../assets/places/ekebergparken.jpg'),
@@ -94,6 +95,10 @@ export function getGuideImage(image: DeepReadonly<GuideImage> | null | undefined
     caption: image.type === 'photo' ? name : `${name} ${image.type}`,
     kind: image.type,
     credit: image.credit?.trim() || undefined,
+    creditUrl: image.credit?.trim() ? image.sourcePage : undefined,
+    licence: image.licenceUrl ? image.licence ?? undefined : undefined,
+    licenceUrl: image.licenceUrl,
+    aspectRatio: image.aspectRatio,
   };
 }
 

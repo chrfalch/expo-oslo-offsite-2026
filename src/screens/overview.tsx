@@ -27,6 +27,7 @@ export default function OverviewScreen() {
     year={`’${event.startDate.slice(2, 4)}`}
     dates={`${formatOffsiteDate(event.startDate, { day: 'numeric' })}–${formatOffsiteDate(event.endDate, { day: 'numeric', month: 'short' })}`}
     onProfile={() => router.push('/profile')}
+    onSupport={() => router.push('/support')}
     arrival={{ id: 'overview-travel', title: travelDirection ? `Your ${travelDirection}` : 'Your trip',
       detail: travelDirection ? formatTravelLeg(attendee?.[travelDirection] ?? null) : 'Arrival, departure and where to stay', onPress: () => router.push('/travel') }}
     upcoming={next ? { id: next.id, eyebrow: `${formatOffsiteDate(next.date, { weekday: 'short', day: 'numeric', month: 'short' })} · ${next.startTime}`,
@@ -36,6 +37,7 @@ export default function OverviewScreen() {
     rows={[
       { id: 'overview-work', title: 'Rebel workspace', detail: offsiteData.workspace.address, onPress: () => location('workspace:rebel') },
       { id: 'overview-stay', title: 'Where we’re staying', detail: offsiteData.accommodation.area, onPress: () => router.push({ pathname: '/bases', params: { section: 'stay' } }) },
+      { id: 'overview-home', title: offsiteData.support.home.name, detail: offsiteData.support.home.address, onPress: () => location('home:christian') },
       { id: 'overview-plan', title: 'Schedule', detail: 'Work, shared activities and team travel', onPress: () => router.navigate('/schedule') },
       { id: 'overview-city', title: 'Oslo', detail: `${offsiteData.places.length} places, food and practical details`, onPress: () => router.navigate('/oslo') },
       { id: 'overview-packing', title: 'Packing checklist', detail: `${personal.packedItems.length} of ${offsiteData.packing.length} packed`, onPress: () => router.push('/packing') },

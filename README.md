@@ -74,6 +74,8 @@ On first launch, choose from a plain list of seven attendees. Christian Falch is
 
 Overview shows your next arrival or departure and the next shared activity in Oslo time. Schedule has a day picker, compact work and activity rows, and team travel; it opens on today during the offsite and All days outside it. Oslo leads to 43 places, saved places, workspace, accommodation, food, packing, and practical information. Place browsing uses a continuous list with native search, category and walking-base filters, and separate bookmarks. On iOS 26, the magnifying glass in the bottom toolbar expands into search above the keyboard. Every venue, workspace, apartment and named travel location opens the shared location screen. Launcher artwork uses the custom Oslo Offsite opera-house and fjord icon in `assets/branding/oslo-offsite-icon.png`. Expo generates the native sizes.
 
+Support is available from the footer at the bottom of Overview, with Christian’s phone number, call and WhatsApp links, and a friendly one-person help desk. Christian’s home at Stensgata 26A, 0358 Oslo appears alongside the workspace and apartments in Overview, Oslo’s Our bases section, and the Home option on the Our bases screen. The location opens an address search in Maps; no unverified coordinates are stored. Contact details and the home address live in `offsiteData.support` and remain available offline. The home and Support screens include a bundled exterior photo by Jan-Tore Egge from Wikimedia Commons, with source and CC BY-SA 4.0 links. Its complete frame is preserved so visitors can see the entrance. Attribution and resize details are also recorded in `assets/places/christian-home.LICENSE.md`.
+
 ## Personal preferences
 
 AsyncStorage 2.2 persists the chosen attendee ID and each attendee’s saved place IDs and packing items under `@oslo-offsite/preferences/v1`. Switching attendee preserves separate lists on this device. Writes are serialized so rapid changes cannot replace newer values with an older snapshot. A failed save offers retry; a failed load does not overwrite stored data. Removed guide items are pruned during hydration. Uninstalling the app clears these preferences; there is no cross-device sync.
@@ -149,7 +151,7 @@ The app has no dependency on the original source's location on a developer's com
 
 ### Optimize refreshed images
 
-Optimize guide images before shipping a data refresh. The current 74 images were reduced from 19.1 MB to about 8.3 MB while preserving filenames, aspect ratios, transparency and source metadata in the JSON. Keep the full-resolution originals outside the app repository.
+Optimize guide images before shipping a data refresh. The original 74 guide images were reduced from 19.1 MB to about 8.3 MB while preserving filenames, aspect ratios, transparency and source metadata in the JSON. The additional home photo is resized to 1600 pixels on its longest side. Keep the full-resolution originals outside the app repository.
 
 Expo’s documented `npx expo-optimize . --quality 80 --include 'assets/{accommodation,places,food,apps,schedule,workspace}/**/*.{jpg,png}'` command uses `sharp-cli` (available on PATH). Keep its generated `.expo-shared/assets.json` so unchanged JPEGs and PNGs are not recompressed. The published Expo optimizer only handles JPEG/PNG; WebP files need a separate Sharp pass.
 

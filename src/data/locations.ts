@@ -36,6 +36,12 @@ export function getLocation(key: string, data: DeepReadonly<OffsiteData> = offsi
   if (key === 'workspace:rebel') return { key, title: data.workspace.name,
     image: data.workspace.image, description: data.workspace.notes, websiteUrl: data.workspace.url,
     address: data.workspace.address, coordinates: data.workspace.coordinates };
+  if (key === 'home:christian') return { key, title: data.support.home.name,
+    address: data.support.home.address, coordinates: null, description: data.support.home.notes,
+    image: data.support.home.image,
+    details: [`Phone & WhatsApp · ${data.support.phone}`],
+    websiteUrl: data.support.whatsappUrl, websiteLabel: 'Chat on WhatsApp',
+    searchQuery: `${data.support.home.address}, ${data.event.country}` };
   if (kind === 'area' && (id === 'torshov' || id === 'rebel')) {
     const area = data.referencePoints[id];
     return { key, title: id === 'torshov' ? 'Torshov area' : area.label,

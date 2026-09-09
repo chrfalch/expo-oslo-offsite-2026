@@ -19,7 +19,7 @@ export type GuideCardModel = {
   photos?: readonly PhotoModel[];
   details?: readonly string[];
   disclosure?: { label: string; details: readonly string[] };
-  links?: readonly { label: string; url: string }[];
+  links?: readonly { label: string; url: string; failureMessage?: string }[];
   actions?: readonly { label: string; onPress: () => void; testID?: string; primary?: boolean; selected?: boolean }[];
 };
 

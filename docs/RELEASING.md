@@ -62,9 +62,15 @@ Record both exact build IDs and links in the checklist. Inspect cloud logs and a
 
 Store build numbers are managed remotely and increment automatically. `expo.version` remains the user-facing version and the Updates compatibility boundary.
 
+## Current uploaded release
+
+On 2026-09-09, iOS 1.0.0 (4) was uploaded through EAS Submit and processed successfully in TestFlight. EAS build: `ce7ace99-7e9d-486c-b676-03b3f72b8def`; submission: `5b251776-4099-4974-9024-b37af52befcd`. The build is in the private `Offsite attendees` group and waiting for external beta review. Automatic tester notifications and public links are disabled; no invitations have been sent.
+
+Android 1.0.0 (5), build `c6bdba9c-9e34-4ef0-97e2-3c993f2e6d6a`, is complete and verified. Google identity approval still blocks contact-phone verification and creation of its Play listing. Once unlocked, complete app setup and app-scoped service-account access, then submit this exact build through EAS.
+
 ## Submit the prepared artifacts
 
-The iOS `ascAppId` is saved in `eas.json`, and its App Manager submission key is assigned in EAS. Finish personal Play enrollment, create its app record, enable Play App Signing, and store the Google service-account submission key in EAS. The submit profile targets internal testing with release status completed; finish app-scoped submission credentials before using it. Internal testing is available to new personal accounts; public production access requires a qualifying closed test and Google's approval.
+The iOS `ascAppId` is saved in `eas.json`, and its App Manager submission key is assigned in EAS. The Google service-account key is also assigned in EAS and verified with Google. Its public certificate expires on 2027-09-09; rotate it before expiry. Google Cloud project `chrfalch-oslo-offsite-2026` has Android Publisher API enabled. Finish Play identity/phone verification, create the app record, enable Play App Signing, and grant the service account app-scoped testing permissions. The submit profile targets internal testing with release status completed; finish app-scoped submission credentials before using it. Internal testing is available to new personal accounts; public production access requires a qualifying closed test and Google's approval.
 
 Submit by exact build ID after preparation and verification:
 
@@ -111,7 +117,7 @@ Verify that data ingestion is enabled and that the expected version, platform, a
 
 The preview releases have sent telemetry from both iOS and Android test installations, including events from the applied preview OTA on both platforms. The current Free account can query version/event counts, but detailed metric queries return a subscription-required error. Upgrade decisions remain with the account owner.
 
-The preview channel currently contains the earlier delivery-test snapshot. A new preview binary can download that compatible older snapshot and apply it on a later cold launch. Publish and verify the intended current snapshot on preview before testing a new candidate across restarts, or explicitly isolate its embedded bundle for that test. No production OTA has been published.
+The preview channel contains the current UI validation snapshot, published on 2026-09-09 as group `ee29ca85-8fc9-43ed-b2f7-1cf09907ad07`. Its application is verified on both platforms by visible UI and Observe events. iOS update: `01a085b1-84fd-79a8-9e03-769a01f0742e`; Android update: `01a085b1-84fd-76c2-a1bb-5e8b5f609a7d`. No production OTA has been published. Always replace or isolate an older compatible preview update before testing a new embedded candidate across restarts.
 
 ## References
 
