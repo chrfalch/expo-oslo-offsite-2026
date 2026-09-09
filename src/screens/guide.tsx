@@ -1,6 +1,5 @@
 import { useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { Platform } from 'react-native';
 import { formatAccommodationDetails, formatOffsiteDate, getFoodPlaces, offsiteData } from '@/data/offsite';
 import { getAccommodationPhotos, getGuideImage } from '@/media/guide-images';
 import { ContentPageView, type ContentSection } from '@/presentation/content-page-view';
@@ -52,19 +51,15 @@ export function FoodScreen() {
 export function PracticalScreen() {
   const [section, setSection] = useState('faq');
   const { router } = useOffsiteNavigation();
-  const { faq, logistics, event, expoCustomerApps } = offsiteData;
+  const { faq, logistics, event } = offsiteData;
   const sections: ContentSection[] = section === 'faq' ? [
     { id: 'faq', cards: faq.map((item) => ({ id: item.question, title: item.question, description: item.answer })) },
     { id: 'basics', description: `Currency · ${event.currency}\nTime zone · ${event.timezone}` },
-  ] : section === 'travel' ? [
+  ] : [
     { id: 'logistics', cards: [{ id: 'flights', title: 'Flights', description: logistics.flights },
       { id: 'travel-doc', title: 'Travel details', description: logistics.travelDoc }, { id: 'registration', title: 'Registration', description: logistics.registration }] },
     { id: 'itinerary', rows: [{ id: 'open-travel', title: 'My trip & team travel', onPress: () => router.push('/travel') }] },
-  ] : [
-    { id: 'apps', description: Platform.OS === 'android' ? 'The guide includes Apple App Store links. Android download links are not provided.' : undefined,
-      cards: expoCustomerApps.map((app) => ({ id: app.id, title: app.name, description: app.description, image: getGuideImage(app.image, app.name),
-        links: [{ label: Platform.OS === 'android' ? 'View Apple listing' : 'View in App Store', url: app.appStoreUrl }, ...(app.siteUrl ? [{ label: 'Visit website', url: app.siteUrl }] : [])] })) },
   ];
   return <ContentPageView choices={[{ id: 'practical-section', label: 'Practical info', value: section, onChange: setSection,
-    options: [{ value: 'faq', label: 'FAQ' }, { value: 'travel', label: 'Travel info' }, { value: 'apps', label: 'Expo apps' }] }]} sections={sections} />;
+    options: [{ value: 'faq', label: 'FAQ' }, { value: 'travel', label: 'Travel info' }] }]} sections={sections} />;
 }

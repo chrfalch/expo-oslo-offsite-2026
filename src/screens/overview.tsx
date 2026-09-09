@@ -28,19 +28,19 @@ export default function OverviewScreen() {
     dates={`${formatOffsiteDate(event.startDate, { day: 'numeric' })}–${formatOffsiteDate(event.endDate, { day: 'numeric', month: 'short' })}`}
     onProfile={() => router.push('/profile')}
     onSupport={() => router.push('/support')}
-    arrival={{ id: 'overview-travel', title: travelDirection ? `Your ${travelDirection}` : 'Your trip',
+    arrival={{ id: 'overview-travel', icon: '✈️', title: travelDirection ? `Your ${travelDirection}` : 'Your trip',
       detail: travelDirection ? formatTravelLeg(attendee?.[travelDirection] ?? null) : 'Arrival, departure and where to stay', onPress: () => router.push('/travel') }}
     upcoming={next ? { id: next.id, eyebrow: `${formatOffsiteDate(next.date, { weekday: 'short', day: 'numeric', month: 'short' })} · ${next.startTime}`,
       title: next.title, description: next.location,
       actions: [{ label: 'View activity', onPress: () => activity(next.id), testID: 'overview-activity', primary: true },
         { label: `${next.location} · Map`, testID: 'overview-map', onPress: () => location(`activity:${next.id}`) }] } : undefined}
     rows={[
-      { id: 'overview-work', title: 'Rebel workspace', detail: offsiteData.workspace.address, onPress: () => location('workspace:rebel') },
-      { id: 'overview-stay', title: 'Where we’re staying', detail: offsiteData.accommodation.area, onPress: () => router.push({ pathname: '/bases', params: { section: 'stay' } }) },
-      { id: 'overview-home', title: offsiteData.support.home.name, detail: offsiteData.support.home.address, onPress: () => location('home:christian') },
-      { id: 'overview-plan', title: 'Schedule', detail: 'Work, shared activities and team travel', onPress: () => router.navigate('/schedule') },
-      { id: 'overview-city', title: 'Oslo', detail: `${offsiteData.places.length} places, food and practical details`, onPress: () => router.navigate('/oslo') },
-      { id: 'overview-packing', title: 'Packing checklist', detail: `${personal.packedItems.length} of ${offsiteData.packing.length} packed`, onPress: () => router.push('/packing') },
+      { id: 'overview-work', icon: '💻', title: 'Rebel workspace', detail: offsiteData.workspace.address, onPress: () => location('workspace:rebel') },
+      { id: 'overview-stay', icon: '🛏️', title: 'Where we’re staying', detail: offsiteData.accommodation.area, onPress: () => router.push({ pathname: '/bases', params: { section: 'stay' } }) },
+      { id: 'overview-plan', icon: '🗓️', title: 'Schedule', detail: 'Work, shared activities and team travel', onPress: () => router.navigate('/schedule') },
+      { id: 'overview-city', icon: '🧭', title: 'Oslo', detail: `${offsiteData.places.length} places, food and practical details`, onPress: () => router.navigate('/oslo') },
+      { id: 'overview-packing', icon: '🎒', title: 'Packing checklist', detail: `${personal.packedItems.length} of ${offsiteData.packing.length} packed`, onPress: () => router.push('/packing') },
+      { id: 'overview-products', icon: '🚀', title: 'Expo products to try', detail: `${offsiteData.expoCustomerApps.length} apps to explore`, onPress: () => router.push('/products') },
     ]}
   />;
 }

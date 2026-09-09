@@ -1967,6 +1967,7 @@
       "emoji": "🚂",
       "description": "Norway's state-owned national railway. Use it for train travel, not the airport express.",
       "appStoreUrl": "https://apps.apple.com/no/app/id439655098",
+      "googlePlayUrl": "https://play.google.com/store/apps/details?id=com.intele.nsbmob.app",
       "siteUrl": null,
       "id": "vy",
       "image": {
@@ -1984,6 +1985,7 @@
       "emoji": "💇",
       "description": "Hair salon chain.",
       "appStoreUrl": "https://apps.apple.com/no/app/id1466739130",
+      "googlePlayUrl": "https://play.google.com/store/apps/details?id=no.shortcut.cutters",
       "siteUrl": null,
       "id": "cutters",
       "image": {
@@ -2001,6 +2003,7 @@
       "emoji": "🍕",
       "description": "Pizza delivery.",
       "appStoreUrl": "https://apps.apple.com/no/app/id1522202208",
+      "googlePlayUrl": "https://play.google.com/store/apps/details?id=no.digg",
       "siteUrl": "http://Digg.no",
       "id": "digg",
       "image": {
@@ -2018,6 +2021,7 @@
       "emoji": "♟️",
       "description": "Chess app by Play Magnus.",
       "appStoreUrl": "https://apps.apple.com/no/app/id6754937311",
+      "googlePlayUrl": "https://play.google.com/store/apps/details?id=com.taketaketake.mate",
       "siteUrl": null,
       "id": "take-take-take",
       "image": {
@@ -2035,6 +2039,7 @@
       "emoji": "😷",
       "description": "Healthcare.",
       "appStoreUrl": "https://apps.apple.com/no/app/id1467608455",
+      "googlePlayUrl": "https://play.google.com/store/apps/details?id=com.drdropin",
       "siteUrl": null,
       "id": "dr-dropin",
       "image": {
@@ -2042,6 +2047,24 @@
         "type": "icon",
         "sourceUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/09/08/6a/09086adc-9635-3c20-d1a6-b82aab4d1fb6/DrDropinAppIconDark-0-0-1x_U007ephone-0-1-sRGB-85-220.png/512x512bb.jpg",
         "sourcePage": "https://apps.apple.com/no/app/id1467608455",
+        "sourceDomain": "apple.com",
+        "credit": null,
+        "licence": null
+      }
+    },
+    {
+      "name": "Thon Hotels",
+      "emoji": "🏨",
+      "description": "Arriving early and staying at a Thon Hotel? Keep your booking handy, check in and out, and use your phone as your room key.",
+      "appStoreUrl": "https://apps.apple.com/no/app/id1308171406",
+      "googlePlayUrl": "https://play.google.com/store/apps/details?id=otg.thonhotel",
+      "siteUrl": "https://www.thonhotels.com/app/",
+      "id": "thon-hotels",
+      "image": {
+        "file": "assets/apps/thon-hotels.jpg",
+        "type": "icon",
+        "sourceUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b5/70/5a/b5705ab2-dd14-4c34-4e4d-2bb5345f9e49/AppIcon.otg.thonhotels.thonhotels-0-0-1x_U007ephone-0-9-0-85-220.png/512x512bb.jpg",
+        "sourcePage": "https://apps.apple.com/no/app/id1308171406",
         "sourceDomain": "apple.com",
         "credit": null,
         "licence": null

@@ -18,7 +18,7 @@ export default function OsloScreen() {
     { id: 'guide', title: 'The useful things', rows: [
       { id: 'food', title: 'Food to try', detail: 'Norwegian favourites and where to find them', onPress: () => router.push('/food') },
       { id: 'packing', title: 'Packing checklist', detail: 'Layers, rain protection and sauna gear', onPress: () => router.push('/packing') },
-      { id: 'practical', title: 'Practical info', detail: 'Money, travel logistics and Expo apps', onPress: () => router.push('/practical') },
+      { id: 'practical', title: 'Practical info', detail: 'Money and travel logistics', onPress: () => router.push('/practical') },
     ] },
   ]} />;
 }

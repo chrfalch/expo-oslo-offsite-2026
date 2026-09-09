@@ -18,6 +18,7 @@ const sources: Record<string, ImageSourcePropType> = {
   'assets/apps/digg.jpg': require('../../assets/apps/digg.jpg'),
   'assets/apps/dr-dropin.jpg': require('../../assets/apps/dr-dropin.jpg'),
   'assets/apps/take-take-take.jpg': require('../../assets/apps/take-take-take.jpg'),
+  'assets/apps/thon-hotels.jpg': require('../../assets/apps/thon-hotels.jpg'),
   'assets/apps/vy.jpg': require('../../assets/apps/vy.jpg'),
   'assets/food/brunost.webp': require('../../assets/food/brunost.webp'),
   'assets/food/farikal.jpg': require('../../assets/food/farikal.jpg'),

@@ -183,6 +183,7 @@ export interface OffsiteData {
     emoji: string;
     description: string;
     appStoreUrl: string;
+    googlePlayUrl: string;
     siteUrl: string | null;
     image?: GuideImage | null;
   }[];

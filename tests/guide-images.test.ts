@@ -59,7 +59,7 @@ test('all entity images resolve locally with the right media type and accessible
     ...offsiteData.expoCustomerApps, offsiteData.workspace, offsiteData.support.home,
   ];
   const referenced = new Set(offsiteData.accommodation.options.flatMap((flat) => flat.photos.map((photo) => join(root, photo.file))));
-  assert.equal(entities.length, 64);
+  assert.equal(entities.length, 65);
   for (const entity of entities) {
     const image = entity.image!;
     const model = exports.getGuideImage(image, entity.name)!;

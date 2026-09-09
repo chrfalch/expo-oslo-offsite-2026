@@ -1,4 +1,5 @@
 import { Column, RNHostView } from '@expo/ui';
+import { Image, Text as IconText, View } from 'react-native';
 import { Text } from '@/components/text';
 import { ActionRowControl } from '@/components/action-row';
 import { ChoiceControl } from '@/components/choice-control';
@@ -9,7 +10,7 @@ import { GuideCard, type GuideCardModel } from '@/presentation/guide-card';
 import { GuideImage, type GuideImageModel } from '@/presentation/guide-image';
 import { useContentWidth, useOffsiteTheme } from '@/theme';
 
-export type ActionRowModel = { id: string; title: string; detail?: string; onPress: () => void; testID?: string };
+export type ActionRowModel = { id: string; title: string; detail?: string; icon?: string; image?: GuideImageModel; onPress: () => void; testID?: string };
 export type ChoiceModel = { id: string; label: string; value: string; options: readonly { value: string; label: string }[]; onChange: (value: string) => void };
 export type ContentSection = {
   id: string;
@@ -23,7 +24,15 @@ export type ContentSection = {
 };
 
 export function ActionRow({ row }: { row: ActionRowModel }) {
-  return <ActionRowControl {...row} testID={row.testID ?? row.id} />;
+  const { colors } = useOffsiteTheme();
+  const leading = row.image || row.icon ? <RNHostView matchContents>
+    <View pointerEvents="none" accessibilityElementsHidden importantForAccessibility="no-hide-descendants"
+      style={{ width: 44, height: 44, borderRadius: 14, overflow: 'hidden', backgroundColor: row.image ? colors.surface : colors.accentSoft, alignItems: 'center', justifyContent: 'center' }}>
+      {row.image ? <Image source={row.image.source} style={{ width: 44, height: 44 }} resizeMode="contain" />
+        : <IconText allowFontScaling={false} style={{ fontSize: 25 }}>{row.icon}</IconText>}
+    </View>
+  </RNHostView> : undefined;
+  return <ActionRowControl {...row} leading={leading} testID={row.testID ?? row.id} />;
 }
 
 export function ContentPageView({ intro, choices, sections }: { intro?: string; choices?: readonly ChoiceModel[]; sections: readonly ContentSection[] }) {
