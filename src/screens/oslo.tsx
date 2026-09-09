@@ -1,65 +1,23 @@
-import { useState } from 'react';
-
-import { getFoodPlaces, offsite, offsiteData } from '@/data/offsite';
-import type { GuideCardModel } from '@/presentation/guide-card';
-import { OsloView } from '@/presentation/oslo-view';
-import { PlacesBrowser } from '@/screens/places';
-
-const sections = [
-  { id: 'places', label: 'Places to explore' },
-  { id: 'stay', label: 'Stay & logistics' },
-  { id: 'food', label: 'Norwegian food' },
-  { id: 'packing', label: 'What to pack' },
-  { id: 'apps', label: 'Expo customer apps' },
-  { id: 'faq', label: 'Good to know' },
-];
+import { offsiteData } from '@/data/offsite';
+import { ContentPageView } from '@/presentation/content-page-view';
+import { useOffsiteNavigation } from '@/screens/navigation';
+import { usePreferences } from '@/state/preferences';
 
 export default function OsloScreen() {
-  const [section, setSection] = useState('places');
-  const { workspace, accommodation, packing, packingNote, foodToTry, expoCustomerApps, logistics, faq } = offsiteData;
-  const cardsBySection: Record<string, GuideCardModel[]> = {
-    stay: [
-      { id: 'stay', title: `Staying in ${accommodation.area}`, description: accommodation.note },
-      ...accommodation.options.map((flat) => ({
-        id: flat.url, title: flat.name, eyebrow: flat.status === 'booked' ? 'BOOKED' : flat.status,
-        description: flat.address ?? 'Address and check-in details to follow.',
-        links: [{ url: flat.url, label: 'View apartment' }],
-      })),
-      { id: 'flights', title: 'Flights & travel details', description: `${logistics.flights}\n${logistics.travelDoc}` },
-      { id: 'registration', title: 'Registration', description: logistics.registration },
-    ],
-    food: [
-      ...foodToTry.outAndAbout.map((food) => ({
-        id: food.name, title: food.name, eyebrow: 'OUT & ABOUT', description: food.description,
-        details: getFoodPlaces(food).map((place) => [place.name, place.address].filter(Boolean).join(' · ')),
-      })),
-      ...foodToTry.fromSupermarket.map((food) => ({
-        id: food.name, title: food.name, eyebrow: 'FROM THE SUPERMARKET',
-        description: [food.description, food.priceNok ? `Price in NOK: ${food.priceNok}` : null].filter(Boolean).join('\n'),
-      })),
-    ],
-    packing: [
-      { id: 'packing', title: 'Ready for September', description: packingNote },
-      ...packing.map((item) => ({ id: item.item, title: item.item, description: item.notes.join('\n') })),
-    ],
-    apps: expoCustomerApps.map((app) => ({
-      id: app.name, title: `${app.emoji} ${app.name}`, description: app.description,
-      links: [{ url: app.appStoreUrl, label: 'View in App Store' },
-        ...(app.siteUrl ? [{ url: app.siteUrl, label: 'Visit website' }] : [])],
-    })),
-    faq: faq.map((item) => ({ id: item.question, title: item.question, description: item.answer })),
-  };
-  return (
-    <OsloView
-      location={offsite.location}
-      workspace={{ id: 'workspace', eyebrow: 'OUR OSLO BASE', title: workspace.name,
-        description: `${workspace.address} · ${workspace.area}\n${workspace.notes}`,
-        links: [{ url: workspace.url, label: 'Visit Rebel' }] }}
-      sections={sections}
-      section={section}
-      onSectionChange={setSection}
-      cards={cardsBySection[section] ?? []}
-      places={section === 'places' ? <PlacesBrowser /> : undefined}
-    />
-  );
+  const { router } = useOffsiteNavigation();
+  const { personal } = usePreferences();
+  return <ContentPageView intro="Your offsite field guide" sections={[
+    { id: 'explore', cards: [{ id: 'explore', title: 'A city to explore.', eyebrow: 'COFFEE, FOOD & GOOD COMPANY', description: `${offsiteData.places.length} places from the offsite guide.`,
+      actions: [{ label: 'Find a place', testID: 'find-places', primary: true, onPress: () => router.push('/places') }] }],
+      rows: [{ id: 'oslo-saved', title: 'Saved places', detail: `${personal.savedPlaceIds.length} saved on this phone`, onPress: () => router.push({ pathname: '/places', params: { saved: 'true' } }) }] },
+    { id: 'bases', title: 'Our bases', rows: [
+      { id: 'workspace', title: offsiteData.workspace.name, detail: offsiteData.workspace.address, onPress: () => router.push('/bases') },
+      { id: 'accommodation', title: `Stay in ${offsiteData.accommodation.area}`, detail: `${offsiteData.accommodation.options.length} apartments in the guide`, onPress: () => router.push({ pathname: '/bases', params: { section: 'stay' } }) },
+    ] },
+    { id: 'guide', title: 'The useful things', rows: [
+      { id: 'food', title: 'Food to try', detail: 'Norwegian favourites and where to find them', onPress: () => router.push('/food') },
+      { id: 'packing', title: 'Packing checklist', detail: 'Layers, rain protection and sauna gear', onPress: () => router.push('/packing') },
+      { id: 'practical', title: 'Practical info', detail: 'Money, travel logistics and Expo apps', onPress: () => router.push('/practical') },
+    ] },
+  ]} />;
 }

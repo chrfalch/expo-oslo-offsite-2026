@@ -1,0 +1,32 @@
+executionPrerequisite: Android app on profile; Gabriel has no saved places. Google Maps welcome screens have been dismissed.
+steps:
+  - tap: { id: change-attendee }
+  - await: { visible: { id: onboarding-title } }
+  - await: { idle: true }
+  - tap: { text: Gabriel }
+  - tap: { id: onboarding-continue }
+  - await: { visible: { text: Overview } }
+  - await: { idle: true }
+  - tap: { text: Overview }
+  - await: { text: { in: { id: overview-title }, equals: 'Hey, Gabriel.' } }
+  - await: { idle: true }
+  - tap: { text: Oslo }
+  - await: { visible: { id: find-places } }
+  - await: { idle: true }
+  - tap: { id: find-places }
+  - await: { visible: { id: place-search } }
+  - await: { idle: true }
+  - scroll-to: { target: { id: place-fuglen } }
+  - tap: { id: place-fuglen }
+  - await: { visible: { id: save-place } }
+  - await: { idle: true }
+  - tap: { id: save-place }
+  - await: { text: { in: { id: save-place }, equals: 'Saved on this phone' } }
+  - tap: { id: place-map }
+  - await: { text: { in: { id: location-title }, equals: Fuglen } }
+  - await: { idle: true }
+  - tap: { id: open-native-maps }
+  - tool: await-ui-element
+    args:
+      condition: visible
+      selector: { text: 'Directions to Fuglen' }

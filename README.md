@@ -39,10 +39,13 @@ npm run prebuild -- --platform ios
 
 ```text
 src/app/                 Routes and per-tab layouts only
-  (overview)/            Overview at /
-  schedule/              Schedule at /schedule
-  oslo/                  Practical details at /oslo
+  (tabs)/                Overview /, Schedule /schedule, and Oslo /oslo
+  onboarding.tsx         First-run attendee selection
+  place/, activity/      Guide detail routes
+  location/              Shared location route
+  profile.tsx, packing.tsx, travel.tsx, bases.tsx, food.tsx, practical.tsx
 src/screens/             Data adapters, filter state, and navigation callbacks
+src/state/               Per-device preferences store and React provider
 src/presentation/        Expo UI views accepting display models and actions
 src/components/          Navigation, screen host, and shared cards
 src/data/offsite-data.json  Bundled offline source of truth
@@ -50,18 +53,47 @@ src/data/offsite.ts       Public typed data API and display helpers
 src/data/offsite-guide.ts Pure filtering, lookup and sorting helpers
 src/data/offsite-types.ts Shared content types
 src/data/offsite-format.ts Calendar dates and missing-value formatting
-tests/                   Data integrity and selector tests
+src/data/attendees.ts     Selectable attendees and stable device-local IDs
+src/data/locations.ts     Shared location lookup and external Maps URLs
+tests/                   Data, location and preference persistence tests
 src/theme.ts             Shared light/dark palette
 scripts/prepare-native.mjs  First-run canary native template selection
 ```
 
-The overview buttons navigate to the corresponding tabs. The Oslo guide has searchable places, category and walking-base filters, and eight results per page. A guide picker exposes accommodation, logistics, FAQ, food, packing and customer apps. Schedule shows shared activities and separate arrival/departure lists. Launcher icons are the original Expo template placeholders.
+On first launch, choose from a plain list of seven attendees. Christian Falch is excluded from that list, while the original travel data still includes him as the organizer. There is no account, password, or attendee search. The profile button lets you change person later.
+
+Overview shows your arrival and the next shared activity in Oslo time. Schedule has a day picker, working hours, activities, and team travel. Oslo leads to 43 places, saved places, workspace, accommodation, food, packing, and practical information. Place browsing supports search, category and walking-base filters, with eight results per page. Every venue, workspace, apartment and named travel location opens the shared location screen. Launcher icons are still the Expo template placeholders.
+
+## Personal preferences
+
+AsyncStorage 2.2 persists the chosen attendee ID and each attendee’s saved place IDs and packing items under `@oslo-offsite/preferences/v1`. Switching attendee preserves separate lists on this device. Writes are serialized so rapid changes cannot replace newer values with an older snapshot. A failed save offers retry; a failed load does not overwrite stored data. Removed guide items are pruned during hydration. Uninstalling the app clears these preferences; there is no cross-device sync.
+
+## Maps
+
+`expo-maps` uses Apple Maps on iOS and Google Maps on Android. No device location permission is requested: the app shows destinations from the guide. The location screen also opens the device’s native Maps app, with a browser fallback. Map tiles and external links may need internet access.
+
+For Android, add a Maps SDK for Android key to the ignored `.env.local` file:
+
+```dotenv
+GOOGLE_MAPS_API_KEY=your_android_maps_key
+```
+
+Enable Maps SDK for Android for the key and restrict it to `com.chrfalch.oslooffsite2026` and the signing certificate used for your build. Regenerate and rebuild the Android app after adding or changing it:
+
+```sh
+npm run prebuild -- --platform android
+npm run android
+```
+
+Without a key, the Android screen shows the address and an external Maps button instead of mounting Google Maps. This keeps the guide usable and avoids the native missing-key crash. `app.config.ts` reads the key for native configuration; only a boolean availability flag is exposed to the screen.
+
+Unknown apartment addresses stay unknown. Their location screens link to the explicitly approximate Torshov area; they never invent an entrance or room assignment. Street-level coordinates are labelled approximate. Named airports without coordinates use a Maps search handoff.
 
 ## Adjusting the design
 
 The static Playground design uses a neutral background, a solid lilac hero, an amber year badge, and the bundled Expo mark. There is no mesh or gradient dependency. Edit `src/theme.ts` for the shared palette, spacing, radii and content width; edit `src/presentation/*-view.tsx` for layout and typography. `GuideCardModel` contains display-ready strings and links, so card changes do not need to touch the JSON schema or selectors.
 
-Screen controllers in `src/screens/` select and format data, own filter state, and pass actions into the views. Presentation files do not import the data layer or router; lint enforces this boundary. `src/components/` contains the shared native host, cards, link controls and navigation. Expo UI renders text and controls through SwiftUI / Compose, while React Native handles responsive page geometry, decorative shapes and the composite home-card touch targets.
+Screen controllers in `src/screens/` select and format data, own filter state, and pass actions into the views. Presentation files do not import data, preference state or the router; lint enforces this boundary. `src/components/` contains the shared native host, cards, link controls and navigation. Expo UI renders text and controls through SwiftUI / Compose, while React Native handles responsive page geometry and decorative shapes.
 
 ## Offline data API
 
@@ -110,9 +142,13 @@ npx expo-doctor
 npx expo export --platform all
 ```
 
-`npm test` compiles the pure data modules and tests into a temporary directory, runs Node's built-in test runner with no additional test framework, and removes the generated files. Tests use their own TypeScript configuration so Node test types do not enter the app's compilation.
+`npm test` compiles the pure data and preferences modules and tests into a temporary directory, runs Node's built-in test runner with no additional test framework, and removes the generated files. Tests use their own TypeScript configuration so Node test types do not enter the app's compilation.
+
+Native walkthroughs are saved in `.argent/flows/`: `offsite-personal-android` verifies packing and identity after restarting the app; `offsite-switch-and-save-android` covers choosing an attendee, browsing, saving, and Google Maps handoff; `offsite-maps-ios` covers the embedded Apple map and Apple Maps handoff. Read each flow’s entry prerequisites. The iOS flow uses AX-gated coordinates for SwiftUI controls that are absent from Argent’s projected UIKit tree, and is scoped to iPhone 17 Pro on iOS 26.5. All three flows passed after authoring.
 
 ## Canary compatibility notes
+
+The Maps canary’s precompiled iOS framework imports unavailable Swift Testing modules under Xcode 26.6. `expo.autolinking.ios.buildFromSource: ["expo-maps"]` in `package.json` builds the matching Maps source instead. Both native builds pass with this configuration. Revisit it with the next SDK 58 canary.
 
 `react-native-safe-area-context` is pinned to **5.9.1** because the template's 5.7.0 references the removed Android `UIImplementation` API and does not compile with React Native 0.87. It is explicitly excluded from Expo's older recommended-version check. The [upstream release notes](https://github.com/AppAndFlow/react-native-safe-area-context/releases) document the fix and AGP 9 support. Both native apps were rebuilt with this dependency.
 

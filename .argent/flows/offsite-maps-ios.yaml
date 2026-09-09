@@ -1,0 +1,25 @@
+executionPrerequisite: iPhone 17 Pro iOS 26.5 development app open at top of Overview after onboarding, before the sauna date; Apple Maps welcome screens dismissed.
+# SwiftUI controls are visible in AX but absent from Argent's projected UIView
+# tree, confirmed after injection and a depth-70 native hierarchy read.
+# Coordinate actions are bounded to this device and gated by live AX identity.
+steps:
+  - tool: await-ui-element
+    args:
+      bundleId: com.chrfalch.oslooffsite2026
+      condition: visible
+      selector: { identifier: overview-map }
+  - await: { idle: true }
+  - tap: { x: 0.3, y: 0.789 }
+  - tool: await-ui-element
+    args:
+      bundleId: com.chrfalch.oslooffsite2026
+      condition: visible
+      selector: { identifier: open-native-maps }
+  - await: { idle: true }
+  - tap: { x: 0.27, y: 0.67 }
+  - tool: await-ui-element
+    args:
+      bundleId: com.apple.Maps
+      condition: text
+      selector: { identifier: PlaceHeaderTitle }
+      expectedText: Sukkerbiten

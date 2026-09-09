@@ -1,4 +1,4 @@
-import { Text } from '@expo/ui';
+import { Button, Text } from '@expo/ui';
 
 import { InfoCard } from '@/components/info-card';
 import { WebsiteButton } from '@/components/website-button';
@@ -11,6 +11,7 @@ export type GuideCardModel = {
   eyebrow?: string;
   details?: readonly string[];
   links?: readonly { label: string; url: string }[];
+  actions?: readonly { label: string; onPress: () => void; testID?: string; primary?: boolean }[];
 };
 
 export function GuideCard({ card }: { card: GuideCardModel }) {
@@ -23,6 +24,7 @@ export function GuideCard({ card }: { card: GuideCardModel }) {
         </Text>
       ))}
       {card.links?.map((link) => <WebsiteButton key={link.url} {...link} />)}
+      {card.actions?.map((action) => <Button key={action.label} label={action.label} onPress={action.onPress} testID={action.testID} variant={action.primary ? 'filled' : 'outlined'} />)}
     </InfoCard>
   );
 }

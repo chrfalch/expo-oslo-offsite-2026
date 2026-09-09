@@ -6,6 +6,9 @@ import { GuideCard, type GuideCardModel } from '@/presentation/guide-card';
 import { useContentWidth, useOffsiteTheme } from '@/theme';
 
 export type PlacesViewProps = {
+  savedOnly: boolean;
+  savedCount: number;
+  onSavedOnlyChange: (value: boolean) => void;
   category: string;
   categories: readonly { value: string; label: string }[];
   onCategoryChange: (value: string) => void;
@@ -28,6 +31,10 @@ export function PlacesView(props: PlacesViewProps) {
   const scrollToTop = useScrollToTop();
   return (
     <>
+      <Picker selectedValue={props.savedOnly ? 'saved' : 'all'} onValueChange={(value) => props.onSavedOnlyChange(value === 'saved')} testID="places-mode">
+        <Picker.Item label="All places" value="all" />
+        <Picker.Item label={`Saved · ${props.savedCount}`} value="saved" />
+      </Picker>
       <InfoCard title="Find your Oslo" description="Food, coffee and things to do, closest first.">
         <TextInput
           placeholder="Search places, food or neighbourhoods"
@@ -52,7 +59,7 @@ export function PlacesView(props: PlacesViewProps) {
       <Column spacing={16} style={{ width: contentWidth }}>
         {props.places.map((card) => <GuideCard key={card.id} card={card} />)}
       </Column>
-      {!props.places.length ? <InfoCard title="No places found" description="Try a different search or choose All places." /> : null}
+      {!props.places.length ? <InfoCard title={props.savedOnly ? 'No saved places match' : 'No places found'} description={props.savedOnly ? 'Save a place from its details, or adjust your filters.' : 'Try a different search or choose All categories.'} /> : null}
       {props.pageCount > 1 ? (
         <Row spacing={12}>
           <Button label="Previous" variant="outlined" disabled={props.page === 1} onPress={() => { props.onPreviousPage(); scrollToTop(); }} />

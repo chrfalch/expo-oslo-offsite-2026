@@ -1,6 +1,7 @@
 import { Column, Host } from '@expo/ui';
 import { createContext, use, useCallback, useRef, type PropsWithChildren } from 'react';
 import { ScrollView } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { offsiteScreenModifiers } from '@/components/offsite-screen-modifiers';
 import { layout, useContentWidth, useOffsiteTheme } from '@/theme';
@@ -8,9 +9,10 @@ import { layout, useContentWidth, useOffsiteTheme } from '@/theme';
 const ScrollToTopContext = createContext(() => {});
 export const useScrollToTop = () => use(ScrollToTopContext);
 
-export function OffsiteScreen({ children }: PropsWithChildren) {
+export function OffsiteScreen({ children, standalone = false }: PropsWithChildren<{ standalone?: boolean }>) {
   const { colors, scheme } = useOffsiteTheme();
   const contentWidth = useContentWidth();
+  const insets = useSafeAreaInsets();
   const scrollRef = useRef<ScrollView>(null);
   const scrollToTop = useCallback(() => scrollRef.current?.scrollTo({ y: 0, animated: false }), []);
 
@@ -20,8 +22,8 @@ export function OffsiteScreen({ children }: PropsWithChildren) {
         ref={scrollRef}
         keyboardShouldPersistTaps="handled"
         style={{ flex: 1, backgroundColor: colors.background }}
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={{ padding: layout.pagePadding, paddingBottom: 40 }}>
+        contentInsetAdjustmentBehavior={standalone ? 'never' : 'automatic'}
+        contentContainerStyle={{ padding: layout.pagePadding, paddingTop: standalone ? insets.top + 20 : 20, paddingBottom: insets.bottom + 40 }}>
         <Host
           matchContents={{ vertical: true }}
           ignoreSafeArea="all"

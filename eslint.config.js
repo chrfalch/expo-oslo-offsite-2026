@@ -11,7 +11,7 @@ module.exports = defineConfig([
     rules: {
       'no-restricted-imports': ['error', {
         patterns: [{
-          group: ['@/data/*', '../data/*', '@/screens/*', 'expo-router', 'expo-router/*'],
+          group: ['@/data/*', '../data/*', '@/screens/*', '@/state/*', '../state/*', 'expo-router', 'expo-router/*'],
           message: 'Presentation receives display models and callbacks from screen controllers.',
         }],
       }],

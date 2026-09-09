@@ -1,0 +1,22 @@
+executionPrerequisite: Android development build open on Overview as Hirbod, with no packing items checked; Metro is running on port 8081 and adb reverse is active.
+steps:
+  - tap: { id: open-profile }
+  - await: { visible: { text: 'Packing checklist' } }
+  - await: { idle: true }
+  - tap: { text: 'Packing checklist' }
+  - await: { visible: { id: packing-progress-heading } }
+  - await: { idle: true }
+  - tap: { id: packing-item-0 }
+  - assert: { text: { in: { id: packing-progress-heading }, equals: '1 of 6 packed' } }
+  - launch: com.chrfalch.oslooffsite2026
+  - tool: open-url
+    args:
+      url: 'exp+oslo-offsite-2026://expo-development-client/?url=http%3A%2F%2F127.0.0.1%3A8081'
+  - await: { text: { in: { id: overview-title }, equals: 'Hey, Hirbod.' }, timeout: 15000 }
+  - await: { idle: true }
+  - tap: { id: open-profile }
+  - tool: await-ui-element
+    args:
+      condition: visible
+      selector: { text: 'Packing checklist / 1 of 6 packed' }
+  - await: { idle: true }
