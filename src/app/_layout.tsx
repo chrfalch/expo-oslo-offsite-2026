@@ -70,6 +70,7 @@ function Navigation() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false, title: 'Oslo Offsite' }} />
         <Stack.Screen name="choose-attendee" options={{ title: 'Change attendee' }} />
         <Stack.Screen name="profile" options={{ title: 'You' }} />
+        <Stack.Screen name="team" options={{ title: 'My Team' }} />
         <Stack.Screen name="travel" options={{ title: 'Travel' }} />
         <Stack.Screen name="packing" options={{ title: 'Packing' }} />
         <Stack.Screen name="places" options={{ title: 'Find a place' }} />
