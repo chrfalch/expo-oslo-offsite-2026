@@ -19,7 +19,7 @@ export function TeamScreen() {
       detail: member.arrival
         ? `${formatOffsiteDate(member.arrival.date, { day: 'numeric', month: 'short' })} · ${member.arrival.time}`
         : 'Arrival not provided',
-      onPress: () => router.push({ pathname: '/travel', params: { mode: 'all' } }),
+      onPress: () => router.push({ pathname: '/travel', params: { attendee: member.id } }),
     })),
   }]} />;
 }
