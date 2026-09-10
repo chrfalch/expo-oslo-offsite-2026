@@ -2,6 +2,13 @@
 
 Prepare and validate everything before uploading. Use EAS Build, EAS-managed signing credentials, EAS Update, EAS Observe, and EAS Submit. Audience confirmed: only offsite attendees. Destinations: a private TestFlight beta and Google Play internal testing. Ask setup questions one at a time.
 
+## Android attendee APK — 2026-09-10
+
+- [x] Build the directly installable Android preview on EAS: 1.0.0 (9), [build `a0586211-0b10-4768-b52d-0ea95503c153`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/builds/a0586211-0b10-4768-b52d-0ea95503c153), finished at 07:30 UTC from source commit `e9db0cc003ad82a970eac874d7eb899a862901f7`.
+- [x] Verify anonymous access to the build's public sharing endpoint and [APK download](https://expo.dev/artifacts/eas/tWHMr9IzDxHpG4UGM8Z4k-J4OBtX46gFwZQLKfEG_sE.apk). Attendees do not need Expo accounts or Google Play test enrollment. Anyone holding the link can download it; share within the attendee group. EAS currently records artifact expiry as 2026-12-09.
+- [x] Verify the APK's signature against the Maps-allowed EAS certificate, embedded Maps key, package/version, release mode, preview update channel/project, and runtime `1.0.0-android-maps-v1`. No device-location permissions are requested. It supports Android 7.0/API 24 and newer, contains all four ARM/x86 architectures, and passes 16 KB ZIP/ELF alignment checks for all 48 inspected 64-bit native libraries.
+- [x] Install over preview build 4 on the Android 15 test emulator. The saved attendee selection is retained, the app opens independently of Metro, and the Fuglen map renders street tiles and its destination pin. The Maps runtime's preview update endpoint returned HTTP 204, so an earlier preview update cannot replace this bundle.
+
 ## Embedded Android Maps — 2026-09-09
 
 - [x] Enable Maps SDK for Android in `chrfalch-oslo-offsite-2026`, with the user's approval of the activation terms.
