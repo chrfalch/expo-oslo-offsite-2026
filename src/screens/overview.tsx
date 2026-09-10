@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AppState } from 'react-native';
 import { formatOffsiteDate, formatTravelLeg, getSchedule, offsiteData } from '@/data/offsite';
+import { attendees } from '@/data/attendees';
 import { getOffsiteMoment, getUpcomingTravel } from '@/data/offsite-time';
 import { getGuideImage } from '@/media/guide-images';
 import { OverviewView } from '@/presentation/overview-view';
@@ -31,6 +32,14 @@ export default function OverviewScreen() {
     onSupport={() => router.push('/support')}
     arrival={{ id: 'overview-travel', icon: '✈️', title: travelDirection ? `Your ${travelDirection}` : 'Your trip',
       detail: travelDirection ? formatTravelLeg(attendee?.[travelDirection] ?? null) : 'Arrival, departure and where to stay', onPress: () => router.push('/travel') }}
+    team={attendees.map((member) => ({
+      id: `overview-team-${member.id}`,
+      title: member.name,
+      detail: member.arrival
+        ? `${formatOffsiteDate(member.arrival.date, { day: 'numeric', month: 'short' })} · ${member.arrival.time}`
+        : 'Arrival not provided',
+      onPress: () => router.push({ pathname: '/travel', params: { mode: 'all' } }),
+    }))}
     upcoming={next ? { id: next.id, eyebrow: `${formatOffsiteDate(next.date, { weekday: 'short', day: 'numeric', month: 'short' })} · ${next.startTime}`,
       title: next.title, description: next.location, image: getGuideImage(next.image, next.location),
       onPress: () => activity(next.id) } : undefined}

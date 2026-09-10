@@ -13,7 +13,7 @@ import { layout, useOffsiteTheme } from '@/theme';
 
 export type OverviewViewProps = {
   title: string; year: string; dates: string;
-  onProfile: () => void; onSupport: () => void; arrival: ActionRowModel; upcoming?: UpcomingActivityModel; rows: readonly ActionRowModel[];
+  onProfile: () => void; onSupport: () => void; arrival: ActionRowModel; team: readonly ActionRowModel[]; upcoming?: UpcomingActivityModel; rows: readonly ActionRowModel[];
 };
 
 export function OverviewView(props: OverviewViewProps) {
@@ -41,6 +41,11 @@ export function OverviewView(props: OverviewViewProps) {
       </View> : null}
       <NativeContent><Column spacing={18}>
         <ActionRow row={props.arrival} />
+        <Column spacing={6}>
+          <Text textStyle={{ fontSize: 18, fontWeight: '600', color: colors.text }}>My Team</Text>
+          <Text textStyle={{ color: colors.secondaryText }}>Arrivals in Oslo local time</Text>
+        </Column>
+        <Column spacing={4}>{props.team.map((member) => <ActionRow key={member.id} row={member} />)}</Column>
         <Text textStyle={{ fontSize: 18, fontWeight: '600', color: colors.text }}>{props.upcoming ? 'Coming up' : 'Your offsite guide'}</Text>
         {props.upcoming ? <UpcomingActivityCard activity={props.upcoming} /> : <Text textStyle={{ color: colors.secondaryText }}>No more shared activities are listed. Your schedule and city guide are still here.</Text>}
         {props.rows.map((row) => <ActionRow key={row.id} row={row} />)}
