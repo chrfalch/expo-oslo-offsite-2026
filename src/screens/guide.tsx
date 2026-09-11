@@ -26,8 +26,7 @@ export function BasesScreen() {
         actions: [{ label: 'Show on map', primary: true, testID: 'home-map', onPress: () => location('home:christian') },
           { label: 'Contact Christian', testID: 'home-support', onPress: () => router.push('/support') }] }] },
     ] : [
-      { id: 'accommodation', title: 'Apartments', description: a.note,
-        disclosure: { label: 'Map preview note', details: [a.coordinatePrecisionNote] } },
+      { id: 'accommodation', title: 'Apartments', description: a.note },
       { id: 'apartments', cards: orderAccommodationOptions(a.options).map((flat) => {
         const details = formatAccommodationDetails(flat);
         const visibleNotes = flat.notes.filter((note) => /floor|lift|elevator/i.test(note));
@@ -35,7 +34,8 @@ export function BasesScreen() {
         return { id: flat.id, title: flat.name,
           eyebrow: flat.residentAttendeeIds.includes(attendee?.id ?? '') ? 'YOUR APARTMENT' : flat.area.toUpperCase(),
           description: flat.address ?? flat.area, photos: getAccommodationPhotos(flat.photos),
-          details: [`Staying here · ${residents.join(', ')}`, details[0], details[1], ...(flat.selfCheckIn ? ['Smartlock self check-in'] : []), ...visibleNotes],
+          housemates: residents,
+          details: [details[0], details[1], ...(flat.selfCheckIn ? ['Smartlock self check-in'] : []), ...visibleNotes],
           disclosure: { label: 'About this apartment', details: [flat.description, ...details.slice(2).filter((detail) => !visibleNotes.includes(detail) && detail !== 'Self check-in available')] },
           actions: [{ label: 'Directions', primary: true, testID: `apartment-location-${flat.number}`, onPress: () => location(`stay:${flat.id}`) }],
           links: [{ label: 'View Airbnb', url: flat.url }] };

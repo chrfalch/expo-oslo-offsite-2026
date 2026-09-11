@@ -28,10 +28,11 @@ export function LocationSheet({ children }: { children: ReactNode }) {
   </View>;
 }
 
-export function LocationView({ title, address, notice, accuracy, map, image, photos, websiteUrl, websiteLabel = 'Visit website', description, details, openLabel, onOpenMaps, onOpenArea, error }: {
+export function LocationView({ title, address, notice, accuracy, map, image, photos, websiteUrl, websiteLabel = 'Visit website', description, details, residents, openLabel, onOpenMaps, onOpenArea, error }: {
   title: string; address: string; notice?: string; accuracy?: string; map?: ReactNode;
   image?: GuideImageModel; photos?: readonly PhotoModel[]; websiteUrl?: string; websiteLabel?: string;
   description?: string; details?: readonly string[];
+  residents?: readonly string[];
   openLabel: string; onOpenMaps?: () => void; onOpenArea?: () => void; error?: string;
 }) {
   const { colors } = useOffsiteTheme();
@@ -51,6 +52,11 @@ export function LocationView({ title, address, notice, accuracy, map, image, pho
     <View style={{ padding: 20, gap: 16 }}>
       <NativeContent><Text testID="location-title" textStyle={{ color: colors.text, fontSize: 25, fontWeight: '700' }}>{title}</Text></NativeContent>
       <SelectableText selectable testID="location-address" style={{ color: colors.text, fontSize: 17 }}>{address}</SelectableText>
+      {residents?.length ? <View testID="apartment-residents" style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 8 }}>
+        {residents.map((name) => <View key={name} style={{ maxWidth: '100%', borderRadius: 18, backgroundColor: colors.accentSoft, paddingHorizontal: 12, paddingVertical: 6 }}>
+          <SelectableText style={{ fontSize: 15, fontWeight: '600', color: colors.accent }}>{name}</SelectableText>
+        </View>)}
+      </View> : null}
       <NativeContent><Column spacing={16}>
         {notice ? <Text testID="location-notice" textStyle={{ color: colors.text, fontSize: 15, lineHeight: 23 }}>{notice}</Text> : null}
         {onOpenMaps ? <Button label={openLabel} onPress={onOpenMaps} testID="open-native-maps" /> : null}

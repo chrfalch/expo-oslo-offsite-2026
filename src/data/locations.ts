@@ -16,6 +16,7 @@ export type GuideLocation = {
   websiteLabel?: string;
   description?: string;
   details?: readonly string[];
+  residents?: readonly string[];
 };
 
 export function getLocation(key: string, data: DeepReadonly<OffsiteData> = offsiteData): GuideLocation | undefined {
@@ -54,13 +55,13 @@ export function getLocation(key: string, data: DeepReadonly<OffsiteData> = offsi
     const flat = data.accommodation.options.find((flat) => flat.id === id)
       ?? (/^\d+$/.test(id) ? data.accommodation.options[Number(id)] : undefined);
     if (flat) {
-      const residents = flat.residentAttendeeIds.map((residentId) => data.travel.find((person) => attendeeId(person.name) === residentId)?.name).filter(Boolean);
+      const residents = flat.residentAttendeeIds.map((residentId) => data.travel.find((person) => attendeeId(person.name) === residentId)?.name).filter((name): name is string => Boolean(name));
       return { key, title: flat.name, address: flat.address, coordinates: flat.coordinates,
       photos: flat.photos, websiteUrl: flat.url, websiteLabel: 'View Airbnb', description: flat.description,
-      details: [`Staying here · ${residents.join(', ')}`, ...formatAccommodationDetails(flat)],
+      residents, details: formatAccommodationDetails(flat),
       searchQuery: flat.address ? [flat.address, data.event.city, data.event.country].join(', ') : undefined,
       notice: flat.coordinates?.precision === 'street' ? 'Approximate street location, not a confirmed entrance.'
-        : flat.coordinates?.precision === 'approximate' ? data.accommodation.coordinatePrecisionNote
+        : flat.coordinates?.precision === 'approximate' ? 'Approximate area location. Use the street address for directions.'
         : flat.coordinates ? undefined
         : flat.address ? 'The address is confirmed, but a map pin is not available. Open Maps to search for this address.'
         : 'The apartment address is not provided in the guide.',

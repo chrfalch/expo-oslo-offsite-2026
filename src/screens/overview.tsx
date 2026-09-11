@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { AppState } from 'react-native';
 import type { Href } from 'expo-router';
 import { formatOffsiteDate, formatTravelLeg, getSchedule, offsiteData } from '@/data/offsite';
-import { attendees, formatHousemates } from '@/data/attendees';
+import { attendees, getAccommodationResidents } from '@/data/attendees';
 import { findAccommodationForAttendee } from '@/data/accommodation';
 import { getOffsiteMoment, getUpcomingTravel } from '@/data/offsite-time';
 import { getGuideImage } from '@/media/guide-images';
@@ -40,8 +40,11 @@ export default function OverviewScreen() {
     arrival={{ id: 'overview-travel', icon: '✈️', title: travelDirection ? `Your ${travelDirection}` : 'Your trip',
       detail: travelDirection ? formatTravelLeg(attendee?.[travelDirection] ?? null) : 'Arrival, departure and where to stay', onPress: () => router.push('/travel') }}
     stay={apartment && attendee ? { id: 'overview-apartment', eyebrow: 'YOUR APARTMENT', title: apartment.name,
-      description: apartment.address ?? apartment.area, details: [formatHousemates(apartment, attendee.id)] } : undefined}
+      description: apartment.address ?? apartment.area,
+      housemates: getAccommodationResidents(apartment).filter((person) => person.id !== attendee.id).map((person) => person.name) } : undefined}
     onStay={apartment ? () => location(`stay:${apartment.id}`) : undefined}
+    allApartments={{ id: 'overview-all-apartments', icon: '🏘️', title: 'All apartments', detail: 'See who’s staying where',
+      onPress: () => router.push({ pathname: '/bases', params: { section: 'stay' } }) }}
     upcoming={next ? { id: next.id, eyebrow: `${formatOffsiteDate(next.date, { weekday: 'short', day: 'numeric', month: 'short' })} · ${next.startTime}`,
       title: next.title, description: next.location, image: getGuideImage(next.image, next.location),
       onPress: () => activity(next.id) } : undefined}

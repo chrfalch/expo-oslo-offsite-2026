@@ -199,7 +199,6 @@ export interface OffsiteData {
     verifiedOn: string;
     totalMaxGuests: number;
     totalBedrooms: number;
-    coordinatePrecisionNote: string;
     options: AccommodationOption[];
   };
   workspace: {

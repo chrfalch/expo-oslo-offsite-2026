@@ -63,10 +63,10 @@ test('every apartment exposes its saved address, photos, listing and coordinates
     assert.deepEqual(location.coordinates, flat.coordinates);
     assert.deepEqual(location.photos, flat.photos);
     assert.equal(location.websiteUrl, flat.url);
-    assert.equal(location.details?.[0], `Staying here · ${flat.residentAttendeeIds.map((id) => {
+    assert.deepEqual(location.residents, flat.residentAttendeeIds.map((id) => {
       const name = offsiteData.travel.find((person) => attendeeId(person.name) === id)?.name;
       return name;
-    }).filter(Boolean).join(', ')}`);
+    }).filter(Boolean));
   });
 });
 
@@ -93,26 +93,33 @@ test('confirmed apartment pins take precedence over address search without an ar
   assert.match(mapsUrls(location, 'web')[0], /query=59\.933992%2C10\.764322/);
 });
 
-test('apartment directions prefer confirmed addresses over approximate Airbnb pins', () => {
-  for (const flat of offsiteData.accommodation.options) {
-    const location = getLocation(`stay:${flat.id}`)!;
-    assert.equal(location.address, flat.address);
-    assert.equal(location.coordinates?.matchedAddress, null);
-    assert.equal(location.coordinates?.precision, 'approximate');
-    assert.equal(isApproximateLocation(location), true);
-    assert.equal(location.areaKey, undefined);
-    assert.match(location.notice!, /directions search for the street address/);
-    assert.match(formatLocationAccuracy(location)!, /Approximate area location · Source: Airbnb listing/);
-    assert.doesNotMatch(formatLocationAccuracy(location)!, /Address-level|Kartverket/);
-    const query = encodeURIComponent(`${flat.address}, Oslo, Norway`);
-    assert.equal(mapsUrls(location, 'ios')[0], `maps://?q=${query}`);
-    assert.equal(mapsUrls(location, 'android')[0], `geo:0,0?q=${query}`);
-    assert.equal(mapsUrls(location, 'web')[0], `https://www.google.com/maps/search/?api=1&query=${query}`);
-    assert.ok(!mapsUrls(location, 'web')[0].includes(`${location.coordinates?.lat}`));
+test('every apartment uses its matched Kartverket address point for maps and directions', () => {
+  const expected = {
+    'top-apartment-torshov': ['Trøndergata 2', 59.9356762, 10.763946],
+    'large-loft-torshov': ['Rosenlundgata 6A', 59.9334329, 10.7624488],
+    'bright-and-nice-torshov': ['Vogts gate 50B', 59.935027, 10.7644037],
+  } as const;
+  for (const [id, [address, lat, lng]] of Object.entries(expected)) {
+    const location = getLocation(`stay:${id}`)!;
+    assert.deepEqual(location.coordinates, { lat, lng, precision: 'address', source: 'geonorge', matchedAddress: address });
+    assert.equal(isApproximateLocation(location), false);
+    assert.equal(location.notice, undefined);
+    assert.match(formatLocationAccuracy(location)!, /Address-level location · Source: Kartverket/);
+    assert.ok(mapsUrls(location, 'ios')[0].startsWith(`maps://?ll=${lat},${lng}`));
+    assert.ok(mapsUrls(location, 'android')[0].startsWith(`geo:${lat},${lng}`));
+    assert.equal(mapsUrls(location, 'web')[0], `https://www.google.com/maps/search/?api=1&query=${lat}%2C${lng}`);
   }
-  assert.equal(isApproximateLocation(getLocation('workspace:rebel')!), false);
-  assert.match(formatLocationAccuracy(getLocation('workspace:rebel')!)!, /Address-level location · Source: Kartverket/);
-  assert.equal(formatLocationAccuracy(stayLocation({})), undefined);
+});
+
+test('approximate apartment pins still fall back to a supplied street address', () => {
+  const location = stayLocation({ address: 'Vogts gate 50B', coordinates: {
+    lat: 59.935, lng: 10.7644, precision: 'approximate', source: 'airbnb-listing', matchedAddress: null,
+  } });
+  assert.equal(isApproximateLocation(location), true);
+  const query = encodeURIComponent('Vogts gate 50B, Oslo, Norway');
+  assert.equal(mapsUrls(location, 'ios')[0], `maps://?q=${query}`);
+  assert.equal(mapsUrls(location, 'android')[0], `geo:0,0?q=${query}`);
+  assert.equal(mapsUrls(location, 'web')[0], `https://www.google.com/maps/search/?api=1&query=${query}`);
 });
 
 test('apartment IDs remain stable when the listing order changes; numeric links still work', () => {

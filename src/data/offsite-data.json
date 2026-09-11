@@ -5,7 +5,7 @@
     "name": "Oslo Offsite — September 2026 (Notion)",
     "url": "https://app.notion.com/p/383e5b57352481b18dc0ef30c9da41e8",
     "pageLastEditedAt": "2026-09-08T18:35:12Z",
-    "note": "Guide content comes from the Notion invitation. Accommodation listing details, photos and approximate coordinates come from the local guide update dated 9 September 2026. Other coordinates come from Kartverket’s official Norwegian address register (ws.geonorge.no). Walking times are estimates, not measured routes. Entity images come from the local schema 1.4 update; each image records its original source and available credit and licence information."
+    "note": "Guide content comes from the Notion invitation. Accommodation listing details and photos come from the local guide update dated 9 September 2026. Apartment coordinates were matched to exact addresses and postcodes in Kartverket’s official Norwegian address register (ws.geonorge.no) on 11 September 2026. Other address coordinates also come from Kartverket. Walking times are estimates, not measured routes. Entity images come from the local schema 1.4 update; each image records its original source and available credit and licence information."
   },
   "event": {
     "name": "Oslo Offsite — September 2026",
@@ -2264,7 +2264,6 @@
     "totalMaxGuests": 15,
     "totalBedrooms": 9,
     "note": "All three apartments are booked. Private bedrooms for everyone, with shared bathrooms in each apartment.",
-    "coordinatePrecisionNote": "Apartment addresses are confirmed. Map previews still use approximate Airbnb listing pins, so directions search for the street address.",
     "options": [
       {
         "id": "bright-and-nice-torshov",
@@ -2277,11 +2276,11 @@
         "area": "Torshov / Sagene",
         "address": "Vogts gate 50B, 0477 Oslo",
         "coordinates": {
-          "lat": 59.935,
-          "lng": 10.7644,
-          "precision": "approximate",
-          "source": "airbnb-listing",
-          "matchedAddress": null
+          "lat": 59.935027,
+          "lng": 10.7644037,
+          "precision": "address",
+          "source": "geonorge",
+          "matchedAddress": "Vogts gate 50B"
         },
         "hostName": "Håvard",
         "hostNote": "Two years hosting. Rated 5.0 for communication, responds within an hour.",
@@ -2355,11 +2354,11 @@
         "area": "Torshov",
         "address": "Trøndergata 2, 0477 Oslo",
         "coordinates": {
-          "lat": 59.9357,
-          "lng": 10.764,
-          "precision": "approximate",
-          "source": "airbnb-listing",
-          "matchedAddress": null
+          "lat": 59.9356762,
+          "lng": 10.763946,
+          "precision": "address",
+          "source": "geonorge",
+          "matchedAddress": "Trøndergata 2"
         },
         "hostName": "Maria",
         "hostNote": null,
@@ -2437,11 +2436,11 @@
         "area": "Torshov",
         "address": "Rosenlundgata 6 A, 0474 Oslo",
         "coordinates": {
-          "lat": 59.93444,
-          "lng": 10.7631,
-          "precision": "approximate",
-          "source": "airbnb-listing",
-          "matchedAddress": null
+          "lat": 59.9334329,
+          "lng": 10.7624488,
+          "precision": "address",
+          "source": "geonorge",
+          "matchedAddress": "Rosenlundgata 6A"
         },
         "hostName": "Kjersti Anne",
         "hostNote": null,
