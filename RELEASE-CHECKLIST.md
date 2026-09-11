@@ -2,6 +2,33 @@
 
 Prepare and validate everything before uploading. Use EAS Build, EAS-managed signing credentials, EAS Update, EAS Observe, and EAS Submit. Audience confirmed: only offsite attendees. Destinations: a private TestFlight beta and Google Play internal testing. Ask setup questions one at a time.
 
+## Phone number copy update — 2026-09-10
+
+- [x] Enable native long-press selection/copy for guide-card and location details, including the phone number on Support and both home screens. Preserve iOS Dynamic Type; constrain Android text width so longer details wrap.
+- [x] TypeScript, lint, all 56 tests, and Android/iOS/web production exports pass. Verify the iPhone Copy menu and exact clipboard value `+47 911 85 912`. Verify selection, Select all, Copy, and the clipboard preview on Android; verify the corrected text wrapping after the release app downloads the OTA.
+- [x] Publish at the default 100% availability to both `production` and `preview`, using their respective EAS environments. Cover iOS `1.0.0`, Android `1.0.0-android-maps-v1`, and older Android `1.0.0` installers. All six live channel/platform/runtime requests return the expected update IDs. The production and preview JavaScript bundles match byte for byte.
+- [x] Preserve compatibility for older Android installers: publish the tested Android bundle from an isolated source/config snapshot that explicitly omits the native Maps key and sets `androidMapsConfigured: false`. Keep their original `1.0.0` runtime and external Maps fallback. The main checkout's Maps configuration is unchanged. Android preview build 4 successfully downloads and runs this update; preview build 9 downloads the Maps-enabled variant.
+- Source: `8a0ffd4c8b0ac0c14f28f18cb6b4cc3df31a2606` plus the two existing attendee-travel changes, new `selectable-text` platform components, and changes to `guide-card.tsx` and `location-view.tsx`. Published from an uncommitted working tree; Git metadata alone does not identify the complete update source.
+
+| Channel | Platform / runtime | Final EAS update group |
+| --- | --- | --- |
+| production | iOS / `1.0.0` | [e72801cc-93f1-4267-bcf4-a06ed70a2132](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/updates/e72801cc-93f1-4267-bcf4-a06ed70a2132) |
+| production | Android / `1.0.0-android-maps-v1` | [1e0a038c-ec24-4684-b3d0-bea6b66c8f60](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/updates/1e0a038c-ec24-4684-b3d0-bea6b66c8f60) |
+| production | Android / `1.0.0` | [8f210eec-1163-44ec-9969-b7dbaa2659d2](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/updates/8f210eec-1163-44ec-9969-b7dbaa2659d2) |
+| preview | iOS / `1.0.0` | [d446e831-6266-4a75-a554-a00880c26423](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/updates/d446e831-6266-4a75-a554-a00880c26423) |
+| preview | Android / `1.0.0-android-maps-v1` | [a8fb33a6-84b9-40a0-91fd-d446abed086e](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/updates/a8fb33a6-84b9-40a0-91fd-d446abed086e) |
+| preview | Android / `1.0.0` | [2379f6d5-3189-423a-8abb-063cb4ad9a98](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/updates/2379f6d5-3189-423a-8abb-063cb4ad9a98) |
+
+Allow up to two cold launches: one to download the update and another to apply it. An initial preview exposed an Android wrapping issue and was superseded before production publication; the table lists the final updates.
+
+## iOS attendee travel update — 2026-09-10
+
+- [x] Include arrival and departure dates/times beneath every selectable attendee, with Oslo local-time guidance and explicit missing details. The EAS source archive includes the two current, uncommitted attendee-screen changes on top of `8a0ffd4c8b0ac0c14f28f18cb6b4cc3df31a2606`; the build's Git metadata alone does not describe these additions.
+- [x] Validate TypeScript, lint, all 56 tests, the iOS production export, and iPhone simulator layout, scrolling, and attendee selection.
+- [x] Build iOS 1.0.0 (7): [EAS build `9ad088eb-10e6-45be-9f61-9c44dee6f5c1`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/builds/9ad088eb-10e6-45be-9f61-9c44dee6f5c1), finished at 07:55:58 UTC. Verify the strict code signature, App Store provisioning, bundle/team/version, production Updates channel, runtime `1.0.0`, and the new attendee travel text in the signed app's embedded bundle. The 192-file source/config/asset snapshot remained unchanged during the build; digest `1f02b26a0b99fb9b9864ccbde9b5c9893a054e6d43e3b8ec5f47436433fa64dd`.
+- [x] Upload the exact verified build to App Store Connect: [submission `a7edd19b-693a-4961-b998-ce5ceb6e2bbb`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/submissions/a7edd19b-693a-4961-b998-ce5ceb6e2bbb), completed at 08:01:44 UTC. Apple processing is `VALID`; internal state is `IN_BETA_TESTING`, external state is `READY_FOR_BETA_SUBMISSION`. View it in [TestFlight](https://appstoreconnect.apple.com/apps/6810129391/testflight/ios).
+- The optional EAS `--what-to-test` field was rejected before scheduling because it requires Enterprise. The successful submission omitted that field. No new tester groups, invitations, external beta review submission, public App Store release, or production OTA were requested or performed.
+
 ## Android attendee APK — 2026-09-10
 
 - [x] Build the directly installable Android preview on EAS: 1.0.0 (9), [build `a0586211-0b10-4768-b52d-0ea95503c153`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/builds/a0586211-0b10-4768-b52d-0ea95503c153), finished at 07:30 UTC from source commit `e9db0cc003ad82a970eac874d7eb899a862901f7`.
@@ -153,3 +180,23 @@ Prepare and validate everything before uploading. Use EAS Build, EAS-managed sig
 - Source data files changed during the audit in concurrent workspace work. Preserve those edits and rerun final validation against the exact release snapshot.
 
 Do not mark cloud builds, credential verification, telemetry delivery, or store uploads complete based only on local configuration.
+
+
+## Hassan and travel text updates — 2026-09-11
+
+Published the current working tree, including Hassan Khan and both flights, chooser travel details, and selectable travel/location text. EAS records mark commit `56be7aa802c7e41a2dee0c238254463bac5e756f` as dirty.
+
+- Android preview, environment `preview`, runtime `1.0.0-android-maps-v1`: [group `4bf751a1-0dd9-4e10-b964-bde5fd8ce278`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/updates/4bf751a1-0dd9-4e10-b964-bde5fd8ce278), update `01a08eaa-0809-76d7-b558-667fa542167a`.
+- iOS production, environment `production`, runtime `1.0.0`: [group `b81daf0f-b726-4fea-b5e8-2a0a97a410a5`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/updates/b81daf0f-b726-4fea-b5e8-2a0a97a410a5), update `01a08eaa-7acb-7f54-9cba-afda26cd026d`.
+- Both publishes and EAS update record reads succeeded. Existing 56 tests, TypeScript, lint, and platform exports passed; Hassan was visible in the iOS development simulator. Direct manifest verification returned HTTP 403; receipt on installed release apps was not tested.
+- These groups do not include the subsequently requested startup update alert. Legacy Android runtime `1.0.0` was not republished.
+
+
+## Startup update alert — 2026-09-11
+
+Published the startup check, background download, and one-time Restart now / Later alert. Native release builds only; offline checks fail silently, and prompts wait for the app to be active. No native configuration or dependency changes.
+
+- Android preview, environment `preview`, runtime `1.0.0-android-maps-v1`: [group `0c152a50-91dc-47bd-99bd-74a7e2ae5aa9`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/updates/0c152a50-91dc-47bd-99bd-74a7e2ae5aa9), update `01a08eae-a6c7-78b2-9326-26d9b834be91`.
+- iOS production, environment `production`, runtime `1.0.0`: [group `504a964a-0554-4820-8b33-bca46d14c03b`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/updates/504a964a-0554-4820-8b33-bca46d14c03b), update `01a08eaf-2fe6-7176-9624-f2fa00db6592`.
+- Both platform exports and publishes succeeded. Validation: 59 tests, TypeScript, lint. The alert was not exercised on a native release installation. These updates include Hassan and the earlier travel-text changes; they supersede the two groups above on the matching destinations.
+- Published from the working tree before the requested commit. Existing installations must receive this update using their prior startup flow before the new alert is available. Legacy Android runtime `1.0.0` was not republished.

@@ -9,9 +9,9 @@ function memoryStorage(initial: string | null = null) {
   return { read: () => raw, getItem: async () => raw, setItem: async (_key: string, value: string) => { raw = value; } };
 }
 
-test('onboarding contains seven unique attendees and excludes Christian without editing the guide', () => {
-  assert.equal(attendees.length, 7);
-  assert.equal(new Set(attendees.map((p) => p.id)).size, 7);
+test('onboarding contains eight unique attendees and excludes Christian without editing the guide', () => {
+  assert.equal(attendees.length, 8);
+  assert.equal(new Set(attendees.map((p) => p.id)).size, 8);
   assert(!attendees.some((p) => p.name === 'Christian Falch'));
   assert(offsiteData.travel.some((p) => p.name === 'Christian Falch'));
 });

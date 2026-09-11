@@ -11,5 +11,5 @@
     "types": ["node"],
     "rootDir": "."
   },
-  "include": ["src/data/**/*.ts", "tests/**/*.test.ts"]
+  "include": ["src/data/**/*.ts", "src/updates/startup-update.ts", "tests/**/*.test.ts"]
 }

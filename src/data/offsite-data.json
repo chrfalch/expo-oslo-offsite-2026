@@ -2383,6 +2383,24 @@
   ],
   "travel": [
     {
+      "name": "Hassan Khan",
+      "role": "attendee",
+      "arrival": {
+        "date": "2026-09-12",
+        "time": "23:15",
+        "flight": "RK1394",
+        "departureDate": "2026-09-12",
+        "departureTime": "20:10",
+        "note": null
+      },
+      "departure": {
+        "date": "2026-09-19",
+        "time": "14:55",
+        "flight": "RK1393",
+        "note": "Arrives at 16:05 on 19 September 2026, local destination time."
+      }
+    },
+    {
       "name": "Christian Falch",
       "role": "organizer",
       "arrival": null,

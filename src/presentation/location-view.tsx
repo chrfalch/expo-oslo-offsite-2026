@@ -1,5 +1,6 @@
 import { Column } from '@expo/ui';
 import { Text } from '@/components/text';
+import { SelectableText as SelectableDetail } from '@/components/selectable-text';
 import { Button } from '@/components/button';
 import { DetailsDisclosure } from '@/components/details-disclosure';
 import { Component, useState, type ReactNode } from 'react';
@@ -70,7 +71,7 @@ export function LocationView({ title, address, notice, accuracy, map, image, pho
       {photos ? <PhotoGallery key={title} photos={photos} width={width - 40} /> : null}
       {description || details?.length ? <NativeContent><Column spacing={12}>
         {description ? <Text textStyle={{ color: colors.text, fontSize: 16, lineHeight: 24 }}>{description}</Text> : null}
-        {details?.map((detail, index) => <Text key={index} textStyle={{ color: colors.secondaryText, fontSize: 15, lineHeight: 23 }}>{detail}</Text>)}
+        {details?.map((detail, index) => <SelectableDetail key={index} width={width - 40} textStyle={{ color: colors.secondaryText, fontSize: 15, lineHeight: 23 }}>{detail}</SelectableDetail>)}
       </Column></NativeContent> : null}
     </View>
   </ScrollView>;

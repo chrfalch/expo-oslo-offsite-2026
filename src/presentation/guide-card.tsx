@@ -1,6 +1,6 @@
 import { RNHostView } from '@expo/ui';
 import { useWindowDimensions } from 'react-native';
-import { Text } from '@/components/text';
+import { SelectableText } from '@/components/selectable-text';
 import { Button } from '@/components/button';
 import { DetailsDisclosure } from '@/components/details-disclosure';
 
@@ -32,9 +32,9 @@ export function GuideCard({ card }: { card: GuideCardModel }) {
     <InfoCard title={card.title} eyebrow={card.eyebrow} description={card.description}
       leading={icon && fontScale <= 1.3 ? <RNHostView matchContents><GuideImage image={card.image!} width={56} /></RNHostView> : undefined}>
       {card.details?.map((detail, index) => (
-        <Text key={`${index}:${detail}`} textStyle={{ fontSize: 15, lineHeight: 23, color: colors.secondaryText }}>
+        <SelectableText key={`${index}:${detail}`} width={width} textStyle={{ fontSize: 15, lineHeight: 23, color: colors.secondaryText }}>
           {detail}
-        </Text>
+        </SelectableText>
       ))}
       {card.actions?.map((action) => <Button key={action.label} label={action.label} onPress={action.onPress} testID={action.testID} selected={action.selected} variant={action.primary ? 'filled' : 'outlined'} />)}
       {card.image && !icon ? <RNHostView matchContents><GuideImage key={card.image.id} image={card.image} width={width} /></RNHostView> : null}

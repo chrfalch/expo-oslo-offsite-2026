@@ -8,7 +8,7 @@ import { useContentWidth, useOffsiteTheme } from '@/theme';
 
 export function OnboardingView({ people, selected, onSelect, onContinue, changing, eyebrow }: {
   eyebrow: string;
-  people: readonly { id: string; name: string }[];
+  people: readonly { id: string; name: string; travelDetail: string }[];
   selected: string | null;
   onSelect: (id: string) => void;
   onContinue: () => void;
@@ -24,7 +24,8 @@ export function OnboardingView({ people, selected, onSelect, onContinue, changin
     </Text>
     <Text textStyle={{ color: colors.secondaryText, fontSize: 16, lineHeight: 24 }}>Choose your name. We’ll remember you on this phone.</Text>
     <Column spacing={4} style={{ width }}>
-      {people.map((person) => <ActionRowControl key={person.id} title={person.name} selected={selected === person.id}
+      <Text role="footnote" textStyle={{ color: colors.secondaryText }}>Arrival and departure times are local to Oslo.</Text>
+      {people.map((person) => <ActionRowControl key={person.id} title={person.name} detail={person.travelDetail} selected={selected === person.id}
         onPress={() => onSelect(person.id)} testID={`attendee-${person.id}`} />)}
     </Column>
     <Button label={selectedPerson ? `Continue as ${selectedPerson.name.split(' ')[0]}` : 'Choose a name to continue'}

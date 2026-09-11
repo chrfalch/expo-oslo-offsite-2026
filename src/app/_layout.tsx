@@ -12,6 +12,7 @@ import * as Updates from 'expo-updates';
 import { NativeContent } from '@/presentation/native-content';
 import { PreferencesProvider, usePreferences } from '@/state/preferences';
 import { useOffsiteTheme } from '@/theme';
+import { useStartupUpdate } from '@/updates/use-startup-update';
 
 Observe.configure({
   environment: Updates.channel ?? (__DEV__ ? 'development' : 'production'),
@@ -23,6 +24,7 @@ Observe.configure({
 function RootLayout() {
   const { colors, scheme } = useOffsiteTheme();
   const baseTheme = scheme === 'dark' ? DarkTheme : DefaultTheme;
+  useStartupUpdate();
 
   useEffect(() => {
     if (__DEV__ && process.env.EXPO_OS !== 'web') {

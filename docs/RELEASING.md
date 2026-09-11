@@ -71,7 +71,9 @@ Store build numbers are managed remotely and increment automatically. `expo.vers
 
 ## Current uploaded release
 
-On 2026-09-09, iOS 1.0.0 (4) was uploaded through EAS Submit and processed successfully in TestFlight. EAS build: `ce7ace99-7e9d-486c-b676-03b3f72b8def`; submission: `5b251776-4099-4974-9024-b37af52befcd`. The build is in the private `Offsite attendees` group and waiting for external beta review. Automatic tester notifications and public links are disabled; no invitations have been sent.
+On 2026-09-10, iOS 1.0.0 (7), including arrival and departure dates/times beneath each attendee, was uploaded through EAS Submit and processed successfully by Apple (`VALID`). [EAS build `9ad088eb-10e6-45be-9f61-9c44dee6f5c1`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/builds/9ad088eb-10e6-45be-9f61-9c44dee6f5c1) finished at 07:55:58 UTC; [submission `a7edd19b-693a-4961-b998-ce5ceb6e2bbb`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/submissions/a7edd19b-693a-4961-b998-ce5ceb6e2bbb) completed at 08:01:44 UTC. Strict artifact signing and embedded travel text were verified. The upload includes the two uncommitted attendee-screen changes on top of `8a0ffd4`; see the checklist for the full source digest. [App Store Connect](https://appstoreconnect.apple.com/apps/6810129391/testflight/ios) reports internal state `IN_BETA_TESTING` and external state `READY_FOR_BETA_SUBMISSION`. No external beta review submission, new tester groups, invitations, or public release was performed for build 7.
+
+The previous iOS 1.0.0 (4) remains in the private `Offsite attendees` group waiting for external beta review. EAS build: `ce7ace99-7e9d-486c-b676-03b3f72b8def`; submission: `5b251776-4099-4974-9024-b37af52befcd`. Automatic tester notifications and public links were disabled for that group.
 
 Android 1.0.0 (9), [EAS build `13c49daf-65d5-4e9f-8902-ba390b0a471d`](https://expo.dev/accounts/chrfalch/projects/oslo-offsite-2026/builds/13c49daf-65d5-4e9f-8902-ba390b0a471d), finished at 16:58 UTC on 2026-09-09 from commit `d8dfd823a65ac943b4d7e66ccf314e890c6138a6`. The signed AAB is verified: Maps key, package/version, production update channel/project, runtime `1.0.0-android-maps-v1`, and EAS upload certificate all match. This replaces the earlier Android candidates for embedded Maps. It has not been submitted to Google Play. Google identity approval still blocks contact-phone verification and creation of the Play listing; add the Play app-signing SHA-1 to the Maps key and verify a Play-installed build once available.
 
@@ -94,7 +96,11 @@ Replace the uppercase placeholders with the verified IDs. Do not select `--lates
 
 ## Publish compatible updates
 
+The phone-number copy update was published on 2026-09-10 with full availability on both production and preview. Production serves TestFlight/production builds; preview serves the directly shared Android APK. iOS runtime `1.0.0` and both Android runtimes (`1.0.0-android-maps-v1` and legacy `1.0.0`) are covered. See the [release checklist](../RELEASE-CHECKLIST.md#phone-number-copy-update--2026-09-10) for exact update groups and validation. The production and preview bundles are identical.
+
 EAS configured `runtimeVersion: { "policy": "appVersion" }`. Android builds with a Maps key override this with `<app version>-android-maps-v1`, isolating them from older binaries without a key; iOS retains the app-version policy. Builds and updates must use an EAS environment with the same Maps configuration. **Bump `expo.version` and create new native builds whenever native packages, permissions, or other native behavior changes.** Adding the first Android Maps key already changes the Android runtime; later key changes require a version bump and rebuild. Auto-incrementing build numbers does not change this compatibility boundary.
+
+When also updating older Android installers, prepare a separate source/config snapshot with no native Maps key and `extra.androidMapsConfigured: false`, retaining the original `1.0.0` runtime. Publish the tested Android bundle with that snapshot to both channels. Never assign the Maps-enabled configuration to the older runtime. The copy release used this approach and verified both legacy preview build 4 and Maps-enabled preview build 9.
 
 Validate JavaScript and bundled content updates on preview first:
 
@@ -108,7 +114,7 @@ After testing and confirming the production destination:
 npx eas-cli@23.2.0 update --channel production --environment production --platform all --message "Describe the verified guide change"
 ```
 
-These commands publish immediately; they are not preparation commands. A normal release launch downloads a compatible update in the background and applies it on the next cold launch. Allow up to two cold launches when testing. Native changes require a new build. If an update fails, use `npx eas-cli@23.2.0 update:rollback` and choose the affected channel and a known-good update or embedded bundle. Check the current command help before performing a rollback.
+These commands publish immediately; they are not preparation commands. The app checks for updates at startup without blocking the guide. Once a compatible update is downloaded, a native alert offers **Restart now** or **Later**, at most once per app session. Choosing Later leaves the update ready for a subsequent cold launch; failed checks stay silent. The prompt runs only in native release builds with Updates enabled, and waits until the app is active. Existing installations must first receive this behavior through the previous update flow, which can take two cold launches. Native changes require a new build. If an update fails, use `npx eas-cli@23.2.0 update:rollback` and choose the affected channel and a known-good update or embedded bundle. Check the current command help before performing a rollback.
 
 ## Observe
 
@@ -128,7 +134,7 @@ Verify that data ingestion is enabled and that the expected version, platform, a
 
 The preview releases have sent telemetry from both iOS and Android test installations, including events from the applied preview OTA on both platforms. The current Free account can query version/event counts, but detailed metric queries return a subscription-required error. Upgrade decisions remain with the account owner.
 
-The preview channel contains the current UI validation snapshot, published on 2026-09-09 as group `ee29ca85-8fc9-43ed-b2f7-1cf09907ad07`. Its application is verified on both platforms by visible UI and Observe events. iOS update: `01a085b1-84fd-79a8-9e03-769a01f0742e`; Android update: `01a085b1-84fd-76c2-a1bb-5e8b5f609a7d`. No production OTA has been published. Always replace or isolate an older compatible preview update before testing a new embedded candidate across restarts.
+The initial preview UI validation snapshot was published on 2026-09-09 as group `ee29ca85-8fc9-43ed-b2f7-1cf09907ad07`. Its application was verified on both platforms by visible UI and Observe events. The phone-number copy release described above supersedes it and is also published to production. Always replace or isolate an older compatible preview update before testing a new embedded candidate across restarts.
 
 ## References
 
