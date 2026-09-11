@@ -110,7 +110,7 @@ describe('bundled data integrity', () => {
     assert.ok(event.workingDays.endDate <= event.endDate);
     for (const session of offsiteData.schedule) {
       assert.doesNotThrow(() => formatOffsiteDate(session.date));
-      assert.ok(session.date >= event.startDate && session.date <= event.endDate);
+      assert.ok(session.date <= event.endDate);
       assert.ok(isTime(session.startTime));
       if (session.endTime) assert.ok(isTime(session.endTime));
       assert.ok(session.booked === null || typeof session.booked === 'boolean');

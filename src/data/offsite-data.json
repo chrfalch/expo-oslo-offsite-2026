@@ -74,6 +74,20 @@
   },
   "schedule": [
     {
+      "id": "early-bird-dinner",
+      "title": "Early-bird dinner",
+      "type": "social",
+      "date": "2026-09-12",
+      "startTime": "18:00",
+      "endTime": null,
+      "location": "Collets parkservering or Oslo Street Food (TBA)",
+      "address": null,
+      "booked": null,
+      "notes": "Dinner for those already in Oslo. Venue to be announced: either Collets parkservering or Oslo Street Food.",
+      "coordinates": null,
+      "image": null
+    },
+    {
       "id": "sauna",
       "title": "Fjord sauna, team only",
       "type": "social",

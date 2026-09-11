@@ -8,8 +8,9 @@ export default function ScheduleScreen() {
   const [day, setDay] = useState(() => getDefaultScheduleDay(new Date(), offsiteData.event));
   const { location, activity, router } = useOffsiteNavigation();
   const { event } = offsiteData;
-  const dates = [];
-  for (let date = new Date(`${event.startDate}T12:00:00Z`); date.toISOString().slice(0, 10) <= event.endDate; date.setUTCDate(date.getUTCDate() + 1)) dates.push(date.toISOString().slice(0, 10));
+  const scheduleDates = [];
+  for (let date = new Date(`${event.startDate}T12:00:00Z`); date.toISOString().slice(0, 10) <= event.endDate; date.setUTCDate(date.getUTCDate() + 1)) scheduleDates.push(date.toISOString().slice(0, 10));
+  const dates = [...new Set([...scheduleDates, ...getSchedule().map((item) => item.date)])].sort();
   return <ContentPageView intro={`${formatDateRange(event.startDate, event.endDate)} · Times in Oslo`}
     choices={[{ id: 'schedule-day', label: 'Day', value: day, onChange: setDay, options: [{ value: 'all', label: 'All days' },
       ...dates.map((value) => ({ value, label: formatOffsiteDate(value, { weekday: 'short', day: 'numeric', month: 'short' }) }))] }]}
