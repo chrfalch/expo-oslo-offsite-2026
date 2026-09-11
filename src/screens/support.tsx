@@ -19,8 +19,8 @@ export default function SupportScreen() {
           failureMessage: `Couldn’t open WhatsApp. Try again when connected, or add ${support.phone} in WhatsApp.` },
       ],
     }] },
-    { id: 'support-home', title: 'Support HQ', cards: [{
-      id: 'christian-home', title: support.home.name, eyebrow: 'ALSO KNOWN AS HOME',
+    { id: 'support-home', title: 'Christian’s home', cards: [{
+      id: 'christian-home', title: support.home.name, eyebrow: 'LOCAL HOST',
       description: support.home.address, details: [support.home.notes],
       image: getGuideImage(support.home.image, support.home.name),
       actions: [{ label: 'Find Christian’s home', primary: true, testID: 'support-home-map', onPress: () => location('home:christian') }],

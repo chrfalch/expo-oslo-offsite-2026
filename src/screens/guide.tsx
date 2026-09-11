@@ -1,14 +1,17 @@
 import { useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { formatAccommodationDetails, formatOffsiteDate, formatWalkTime, getFoodPlaces, getPlaces, offsiteData } from '@/data/offsite';
+import { formatAccommodationDetails, formatOffsiteDate, formatWalkTime, getFoodPlaces, getPlaces, offsiteData, orderAccommodationOptions } from '@/data/offsite';
+import { getAccommodationResidents } from '@/data/attendees';
 import { getAccommodationPhotos, getGuideImage } from '@/media/guide-images';
 import { ContentPageView, type ContentSection } from '@/presentation/content-page-view';
 import { useOffsiteNavigation } from '@/screens/navigation';
+import { usePreferences } from '@/state/preferences';
 
 export function BasesScreen() {
   const params = useLocalSearchParams<{ section?: string }>();
   const [section, setSection] = useState(params.section === 'stay' || params.section === 'home' ? params.section : 'work');
   const { location, router } = useOffsiteNavigation();
+  const { attendee } = usePreferences();
   const { workspace: w, accommodation: a, event, support } = offsiteData;
   return <ContentPageView choices={[{ id: 'base-section', label: 'Our bases', value: section, onChange: setSection,
     options: [{ value: 'work', label: 'Workspace' }, { value: 'stay', label: 'Apartments' }, { value: 'home', label: 'Home' }] }]}
@@ -17,18 +20,26 @@ export function BasesScreen() {
         actions: [{ label: 'Show on map', primary: true, onPress: () => location('workspace:rebel'), testID: 'workspace-map' }], links: [{ label: 'Workspace website', url: w.url }] }] },
       { id: 'working-hours', description: `${event.workingDays.hours}\n${formatOffsiteDate(event.workingDays.startDate)}–${formatOffsiteDate(event.workingDays.endDate)}` },
     ] : section === 'home' ? [
-      { id: 'home', cards: [{ id: 'christian-home', title: support.home.name, eyebrow: 'SUPPORT HQ',
+      { id: 'home', cards: [{ id: 'christian-home', title: support.home.name, eyebrow: 'CHRISTIAN’S HOME',
         description: support.home.address, details: [support.home.notes, `Phone & WhatsApp · ${support.phone}`],
         image: getGuideImage(support.home.image, support.home.name),
         actions: [{ label: 'Show on map', primary: true, testID: 'home-map', onPress: () => location('home:christian') },
           { label: 'Contact Christian', testID: 'home-support', onPress: () => router.push('/support') }] }] },
     ] : [
-      { id: 'accommodation', title: a.area, description: `${a.options.length} apartments · ${a.status}. Exact addresses are in the booking confirmations; map pins are approximate.`,
-        disclosure: { label: 'Booking and location notes', details: [a.note, a.coordinatePrecisionNote] },
-        rows: [{ id: 'torshov-map', title: 'Show Torshov area', detail: 'Approximate neighbourhood centre', onPress: () => location('area:torshov') }] },
-      { id: 'apartments', cards: a.options.map((flat, index) => ({ id: flat.id, title: flat.name, eyebrow: `${flat.status.toUpperCase()} · ${flat.area}`, description: flat.address ?? 'Exact address not provided', photos: getAccommodationPhotos(flat.photos),
-        details: formatAccommodationDetails(flat).slice(0, 2), disclosure: { label: 'About this apartment', details: [flat.description, ...formatAccommodationDetails(flat).slice(2)] },
-        actions: [{ label: 'Location details', primary: true, testID: `apartment-location-${index}`, onPress: () => location(`stay:${flat.id}`) }], links: [{ label: 'View Airbnb', url: flat.url }] })) },
+      { id: 'accommodation', title: 'Apartments', description: a.note,
+        disclosure: { label: 'Map preview note', details: [a.coordinatePrecisionNote] } },
+      { id: 'apartments', cards: orderAccommodationOptions(a.options).map((flat) => {
+        const details = formatAccommodationDetails(flat);
+        const visibleNotes = flat.notes.filter((note) => /floor|lift|elevator/i.test(note));
+        const residents = getAccommodationResidents(flat).map((person) => person.name);
+        return { id: flat.id, title: flat.name,
+          eyebrow: flat.residentAttendeeIds.includes(attendee?.id ?? '') ? 'YOUR APARTMENT' : flat.area.toUpperCase(),
+          description: flat.address ?? flat.area, photos: getAccommodationPhotos(flat.photos),
+          details: [`Staying here · ${residents.join(', ')}`, details[0], details[1], ...(flat.selfCheckIn ? ['Smartlock self check-in'] : []), ...visibleNotes],
+          disclosure: { label: 'About this apartment', details: [flat.description, ...details.slice(2).filter((detail) => !visibleNotes.includes(detail) && detail !== 'Self check-in available')] },
+          actions: [{ label: 'Directions', primary: true, testID: `apartment-location-${flat.number}`, onPress: () => location(`stay:${flat.id}`) }],
+          links: [{ label: 'View Airbnb', url: flat.url }] };
+      }) },
     ]} />;
 }
 

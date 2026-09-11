@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { formatLocationAccuracy, getLocation, isApproximateLocation, mapsUrls } from '../src/data/locations';
 import { offsiteData } from '../src/data/offsite';
+import { attendeeId } from '../src/data/attendees';
 import type { AccommodationOption } from '../src/data/offsite';
 
 const stayLocation = (overrides: Partial<AccommodationOption>) => getLocation('stay:0', {
@@ -62,6 +63,10 @@ test('every apartment exposes its saved address, photos, listing and coordinates
     assert.deepEqual(location.coordinates, flat.coordinates);
     assert.deepEqual(location.photos, flat.photos);
     assert.equal(location.websiteUrl, flat.url);
+    assert.equal(location.details?.[0], `Staying here · ${flat.residentAttendeeIds.map((id) => {
+      const name = offsiteData.travel.find((person) => attendeeId(person.name) === id)?.name;
+      return name;
+    }).filter(Boolean).join(', ')}`);
   });
 });
 
@@ -88,20 +93,22 @@ test('confirmed apartment pins take precedence over address search without an ar
   assert.match(mapsUrls(location, 'web')[0], /query=59\.933992%2C10\.764322/);
 });
 
-test('Airbnb pins are approximate and never presented as confirmed addresses or Kartverket data', () => {
+test('apartment directions prefer confirmed addresses over approximate Airbnb pins', () => {
   for (const flat of offsiteData.accommodation.options) {
     const location = getLocation(`stay:${flat.id}`)!;
-    assert.equal(location.address, null);
+    assert.equal(location.address, flat.address);
     assert.equal(location.coordinates?.matchedAddress, null);
     assert.equal(location.coordinates?.precision, 'approximate');
     assert.equal(isApproximateLocation(location), true);
     assert.equal(location.areaKey, undefined);
-    assert.match(location.notice!, /100-200 m/);
-    assert.match(location.notice!, /not an apartment entrance/);
+    assert.match(location.notice!, /directions search for the street address/);
     assert.match(formatLocationAccuracy(location)!, /Approximate area location · Source: Airbnb listing/);
     assert.doesNotMatch(formatLocationAccuracy(location)!, /Address-level|Kartverket/);
-    assert.match(mapsUrls(location, 'ios')[0], /approximate/);
-    assert.match(mapsUrls(location, 'android')[0], /approximate/);
+    const query = encodeURIComponent(`${flat.address}, Oslo, Norway`);
+    assert.equal(mapsUrls(location, 'ios')[0], `maps://?q=${query}`);
+    assert.equal(mapsUrls(location, 'android')[0], `geo:0,0?q=${query}`);
+    assert.equal(mapsUrls(location, 'web')[0], `https://www.google.com/maps/search/?api=1&query=${query}`);
+    assert.ok(!mapsUrls(location, 'web')[0].includes(`${location.coordinates?.lat}`));
   }
   assert.equal(isApproximateLocation(getLocation('workspace:rebel')!), false);
   assert.match(formatLocationAccuracy(getLocation('workspace:rebel')!)!, /Address-level location · Source: Kartverket/);
@@ -125,6 +132,14 @@ test('street-level apartment coordinates remain explicitly approximate', () => {
   assert.equal(location.address, null);
   assert.equal(location.areaKey, undefined);
   assert.equal(mapsUrls(location, 'web').length, 1);
+});
+
+test('approximate area references keep coordinate-based Maps handoffs', () => {
+  const area = getLocation('area:torshov')!;
+  assert.equal(area.searchQuery, undefined);
+  assert.ok(mapsUrls(area, 'ios')[0].startsWith('maps://?ll='));
+  assert.ok(mapsUrls(area, 'android')[0].startsWith('geo:'));
+  assert.match(mapsUrls(area, 'web')[0], /query=59\./);
 });
 
 test('map handoffs use coordinates when present and encode names in native and web fallbacks', () => {

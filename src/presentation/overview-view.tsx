@@ -1,12 +1,14 @@
 import { Column, Row } from '@expo/ui';
 import { Text } from '@/components/text';
 import { Button } from '@/components/button';
+import { CardButton } from '@/components/card-button';
 import { SystemSymbol } from '@/components/symbol';
 import { SupportHeading } from '@/components/support-heading';
 import { rowContentModifiers } from '@/components/control-modifiers';
 import { Image, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ActionRow, type ActionRowModel } from '@/presentation/content-page-view';
+import { GuideCard, type GuideCardModel } from '@/presentation/guide-card';
 import { UpcomingActivityCard, type UpcomingActivityModel } from '@/presentation/upcoming-activity-card';
 import { NativeContent } from '@/presentation/native-content';
 import { WeatherSummary, type WeatherModel } from '@/presentation/weather-view';
@@ -15,7 +17,7 @@ import { layout, useOffsiteTheme } from '@/theme';
 export type OverviewViewProps = {
   title: string; year: string; dates: string;
   weather: WeatherModel; onWeather: () => void;
-  onProfile: () => void; onSupport: () => void; arrival: ActionRowModel; upcoming?: UpcomingActivityModel; rows: readonly ActionRowModel[];
+  onProfile: () => void; onSupport: () => void; arrival: ActionRowModel; stay?: GuideCardModel; onStay?: () => void; upcoming?: UpcomingActivityModel; rows: readonly ActionRowModel[];
 };
 
 export function OverviewView(props: OverviewViewProps) {
@@ -47,6 +49,7 @@ export function OverviewView(props: OverviewViewProps) {
       </View>
       <NativeContent><Column spacing={18}>
         <ActionRow row={props.arrival} />
+        {props.stay && props.onStay ? <CardButton onPress={props.onStay} testID="overview-apartment"><GuideCard card={props.stay} /></CardButton> : null}
         <Text textStyle={{ fontSize: 18, fontWeight: '600', color: colors.text }}>{props.upcoming ? 'Coming up' : 'Your offsite guide'}</Text>
         {props.upcoming ? <UpcomingActivityCard activity={props.upcoming} /> : <Text textStyle={{ color: colors.secondaryText }}>No more shared activities are listed. Your schedule and city guide are still here.</Text>}
         {props.rows.map((row) => <ActionRow key={row.id} row={row} />)}

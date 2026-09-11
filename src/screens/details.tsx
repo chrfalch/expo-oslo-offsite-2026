@@ -16,8 +16,8 @@ export function PlaceScreen() {
     { id: 'place', cards: [{ id: place.id, title: place.name, description: place.description, image: getGuideImage(place.image, place.name),
       headerActions: [{ label: saved ? `Remove ${place.name} from saved places` : `Save ${place.name}`, icon: saved ? 'star.fill' : 'star', testID: 'save-place', selected: saved,
           onPress: () => { void store.togglePlace(place.id); } }] }] },
-    { id: 'getting-there', title: 'Getting there', description: 'Walking times are estimates from the guide’s reference points, not your current position or a measured route.',
-      actions: [{ label: place.address ? 'Show on map' : 'Location details', testID: 'place-map', primary: true, compact: true, onPress: () => location(`place:${place.id}`) }], rows: [
+    { id: 'getting-there', rows: [{ id: 'place-map', title: 'Getting there', detail: place.address ?? 'Location details', onPress: () => location(`place:${place.id}`) }] },
+    { id: 'walking-times', description: 'Walking times are estimates from the guide’s reference points, not your current position or a measured route.', rows: [
       { id: 'walk-rebel', title: 'From Rebel', detail: formatWalkTime(place.walkMinutesFrom.rebel), onPress: () => location('workspace:rebel') },
       { id: 'walk-torshov', title: 'From Torshov area', detail: formatWalkTime(place.walkMinutesFrom.torshov), onPress: () => location('area:torshov') },
     ] },
@@ -36,8 +36,7 @@ export function ActivityScreen() {
   if (!event) return <ContentPageView sections={[{ id: 'missing-event', title: 'Activity not found', rows: [{ id: 'schedule', title: 'See the schedule', onPress: () => router.replace('/schedule') }] }]} />;
   return <><Stack.Screen options={{ title: event.title }} /><ContentPageView intro="Team activity · Oslo local time" sections={[
     { id: 'activity', cards: [{ id, title: event.title, image: getGuideImage(event.image, event.location), eyebrow: formatBookingStatus(event.booked).toUpperCase(),
-      description: `${formatOffsiteDate(event.date, { weekday: 'long', day: 'numeric', month: 'long' })}\n${formatEventTime(event)}`,
-      actions: [{ label: 'Show on map', primary: true, testID: 'activity-primary-map', onPress: () => location(`activity:${id}`) }] }] },
+      description: `${formatOffsiteDate(event.date, { weekday: 'long', day: 'numeric', month: 'long' })}\n${formatEventTime(event)}` }] },
     { id: 'venue', title: 'Where', rows: [{ id: 'activity-map', title: event.location, detail: event.address ?? 'Address not provided', onPress: () => location(`activity:${id}`) }] },
     { id: 'event-notes', title: 'Good to know', description: event.notes,
       rows: id === 'sauna' ? [{ id: 'sauna-packing', title: 'Open packing checklist', onPress: () => router.push('/packing') }] : [] },

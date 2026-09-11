@@ -85,7 +85,16 @@
       "booked": null,
       "notes": "Dinner for those already in Oslo. Venue to be announced: either Collets parkservering or Oslo Street Food.",
       "coordinates": null,
-      "image": null
+      "image": {
+        "file": "assets/schedule/early-bird-dinner.webp",
+        "type": "photo",
+        "sourceUrl": "http://static1.squarespace.com/static/6038204a6bf989551704f5c2/t/67470dfdd06e27543b0a171a/1777539176709/DSC_2385.jpg?format=1500w",
+        "sourcePage": "https://www.oslo-streetfood.no/en",
+        "sourceDomain": "oslo-streetfood.no",
+        "credit": null,
+        "caption": null,
+        "licence": null
+      }
     },
     {
       "id": "sauna",
@@ -2254,18 +2263,19 @@
     "verifiedOn": "2026-09-08",
     "totalMaxGuests": 15,
     "totalBedrooms": 9,
-    "note": "All three Torshov Airbnbs are booked and verified. Christian booked them. Private bedrooms for everyone, shared bathrooms. Listing details, photos and coordinates were read from the Airbnb listings on 9 Sept 2026.",
-    "coordinatePrecisionNote": "Airbnb publishes an approximate point, not the street address, so each flat's coordinates are area-accurate to roughly 100-200 m. Exact addresses arrive with the booking confirmations.",
+    "note": "All three apartments are booked. Private bedrooms for everyone, with shared bathrooms in each apartment.",
+    "coordinatePrecisionNote": "Apartment addresses are confirmed. Map previews still use approximate Airbnb listing pins, so directions search for the street address.",
     "options": [
       {
         "id": "bright-and-nice-torshov",
-        "name": "Bright and nice apartment in Torshov",
+        "number": 3,
+        "name": "Bright and light",
         "url": "https://www.airbnb.com/rooms/1164546549560682899",
         "listingId": "1164546549560682899",
         "status": "booked",
         "verified": true,
         "area": "Torshov / Sagene",
-        "address": null,
+        "address": "Vogts gate 50B, 0477 Oslo",
         "coordinates": {
           "lat": 59.935,
           "lng": 10.7644,
@@ -2281,7 +2291,7 @@
         "bedrooms": 2,
         "beds": 3,
         "extraBeds": 1,
-        "bathrooms": 1.0,
+        "bathrooms": 1,
         "floor": 3,
         "elevator": false,
         "selfCheckIn": true,
@@ -2305,6 +2315,10 @@
         "notes": [
           "Third floor, no elevator.",
           "Some storage in the flat is not for guest use."
+        ],
+        "residentAttendeeIds": [
+          "jakub-tkacz",
+          "hassan-khan"
         ],
         "photos": [
           {
@@ -2332,13 +2346,14 @@
       },
       {
         "id": "top-apartment-torshov",
-        "name": "Top apartment in Torshov",
+        "number": 1,
+        "name": "HQ",
         "url": "https://www.airbnb.com/rooms/41404820",
         "listingId": "41404820",
         "status": "booked",
         "verified": true,
         "area": "Torshov",
-        "address": null,
+        "address": "Trøndergata 2, 0477 Oslo",
         "coordinates": {
           "lat": 59.9357,
           "lng": 10.764,
@@ -2376,10 +2391,11 @@
         "amenitiesMissing": [
           "Carbon monoxide alarm not reported"
         ],
-        "notes": [
-          "Rent includes internet and electricity.",
-          "Listing states it is not suitable for children aged 2 to 12.",
-          "Host prefers whole-month rentals in July and August, with some flexibility."
+        "notes": [],
+        "residentAttendeeIds": [
+          "tomasz-sapeta",
+          "hirbod",
+          "gabriel"
         ],
         "photos": [
           {
@@ -2412,13 +2428,14 @@
       },
       {
         "id": "large-loft-torshov",
-        "name": "Large loft apartment in Torshov",
+        "number": 2,
+        "name": "The loft",
         "url": "https://www.airbnb.com/rooms/1401228997904837114",
         "listingId": "1401228997904837114",
         "status": "booked",
         "verified": true,
         "area": "Torshov",
-        "address": null,
+        "address": "Rosenlundgata 6 A, 0474 Oslo",
         "coordinates": {
           "lat": 59.93444,
           "lng": 10.7631,
@@ -2428,13 +2445,13 @@
         },
         "hostName": "Kjersti Anne",
         "hostNote": null,
-        "rating": 5.0,
+        "rating": 5,
         "reviewCount": 8,
         "maxGuests": 5,
         "bedrooms": 4,
         "beds": 5,
         "extraBeds": 0,
-        "bathrooms": 1.0,
+        "bathrooms": 1,
         "floor": 5,
         "elevator": false,
         "selfCheckIn": null,
@@ -2457,6 +2474,11 @@
         "notes": [
           "Fifth and sixth floor, no lift.",
           "Four bedrooms but a five-guest maximum, so one room is a single."
+        ],
+        "residentAttendeeIds": [
+          "jakub-grzywacz",
+          "wojciech-drozdz",
+          "wiktor-smaga"
         ],
         "photos": [
           {

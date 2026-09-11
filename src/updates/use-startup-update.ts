@@ -43,15 +43,31 @@ export function useStartupUpdate() {
     mounted.current = true;
     if (!enabled) return () => { mounted.current = false; };
 
+    const checkForUpdate = () => {
+      if (pending.current) {
+        promptForRestart();
+        return;
+      }
+      void coordinator.checkAndDownload(Updates).then((downloaded) => {
+        if (!downloaded || !mounted.current) return;
+        pending.current = true;
+        promptForRestart();
+      });
+    };
+
+    let wasBackgrounded = AppState.currentState === 'background';
     const subscription = AppState.addEventListener('change', (state) => {
-      if (state === 'active' && pending.current) promptForRestart();
+      if (state === 'background') wasBackgrounded = true;
+      if (state !== 'active') return;
+      if (wasBackgrounded) {
+        wasBackgrounded = false;
+        checkForUpdate();
+      } else if (pending.current) {
+        promptForRestart();
+      }
     });
 
-    void coordinator.checkAndDownload(Updates).then((downloaded) => {
-      if (!downloaded || !mounted.current) return;
-      pending.current = true;
-      promptForRestart();
-    });
+    checkForUpdate();
 
     return () => {
       mounted.current = false;

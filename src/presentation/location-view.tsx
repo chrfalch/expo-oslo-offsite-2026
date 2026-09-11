@@ -18,20 +18,12 @@ class MapBoundary extends Component<{ children: ReactNode; fallback: ReactNode }
   render() { return this.state.failed ? this.props.fallback : this.props.children; }
 }
 
-export function LocationSheet({ children, onClose }: { children: ReactNode; onClose: () => void }) {
+export function LocationSheet({ children }: { children: ReactNode }) {
   const { colors } = useOffsiteTheme();
   if (Platform.OS !== 'android') return children;
-  // Android form sheets do not render the native stack header.
+  // Android needs a visible drag handle above the sheet content.
   return <View style={{ flex: 1, backgroundColor: colors.background }}>
-    <View style={{ alignSelf: 'center', width: 32, height: 4, borderRadius: 2, backgroundColor: colors.border, marginTop: 10 }} />
-    <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 8 }}>
-      <View style={{ flex: 1 }}><NativeContent>
-        <Text textStyle={{ color: colors.accent, fontSize: 18, fontWeight: '600' }}>Location</Text>
-      </NativeContent></View>
-      <View style={{ width: 80 }}><NativeContent>
-        <Button label="Done" variant="text" testID="close-location" onPress={onClose} />
-      </NativeContent></View>
-    </View>
+    <View style={{ alignSelf: 'center', width: 32, height: 4, borderRadius: 2, backgroundColor: colors.border, marginVertical: 10 }} />
     {children}
   </View>;
 }

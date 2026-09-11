@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { AppState } from 'react-native';
 import type { Href } from 'expo-router';
 import { formatOffsiteDate, formatTravelLeg, getSchedule, offsiteData } from '@/data/offsite';
-import { attendees } from '@/data/attendees';
+import { attendees, formatHousemates } from '@/data/attendees';
+import { findAccommodationForAttendee } from '@/data/accommodation';
 import { getOffsiteMoment, getUpcomingTravel } from '@/data/offsite-time';
 import { getGuideImage } from '@/media/guide-images';
 import { OverviewView } from '@/presentation/overview-view';
@@ -26,6 +27,7 @@ export default function OverviewScreen() {
   const moment = getOffsiteMoment(now, event.timezone);
   const { date: localDate, time: localTime } = moment;
   const travelDirection = getUpcomingTravel(attendee, moment);
+  const apartment = findAccommodationForAttendee(offsiteData.accommodation.options, attendee?.id);
   const next = getSchedule().find((item) => `${item.date} ${item.endTime ?? item.startTime}` >= `${localDate} ${localTime}`);
   return <OverviewView
     weather={weather}
@@ -37,15 +39,15 @@ export default function OverviewScreen() {
     onSupport={() => router.push('/support')}
     arrival={{ id: 'overview-travel', icon: '✈️', title: travelDirection ? `Your ${travelDirection}` : 'Your trip',
       detail: travelDirection ? formatTravelLeg(attendee?.[travelDirection] ?? null) : 'Arrival, departure and where to stay', onPress: () => router.push('/travel') }}
+    stay={apartment && attendee ? { id: 'overview-apartment', eyebrow: 'YOUR APARTMENT', title: apartment.name,
+      description: apartment.address ?? apartment.area, details: [formatHousemates(apartment, attendee.id)] } : undefined}
+    onStay={apartment ? () => location(`stay:${apartment.id}`) : undefined}
     upcoming={next ? { id: next.id, eyebrow: `${formatOffsiteDate(next.date, { weekday: 'short', day: 'numeric', month: 'short' })} · ${next.startTime}`,
       title: next.title, description: next.location, image: getGuideImage(next.image, next.location),
       onPress: () => activity(next.id) } : undefined}
     rows={[
       { id: 'overview-work', icon: '💻', title: 'Rebel workspace', detail: offsiteData.workspace.address, onPress: () => location('workspace:rebel') },
-      { id: 'overview-stay', icon: '🛏️', title: 'Where we’re staying', detail: offsiteData.accommodation.area, onPress: () => router.push({ pathname: '/bases', params: { section: 'stay' } }) },
       { id: 'overview-team', icon: '👋', title: 'My Team', detail: `${attendees.length} arrivals in Oslo`, onPress: () => router.push('/team' as Href) },
-      { id: 'overview-plan', icon: '🗓️', title: 'Schedule', detail: 'Work, shared activities and team travel', onPress: () => router.navigate('/schedule') },
-      { id: 'overview-city', icon: '🧭', title: 'Oslo', detail: `${offsiteData.places.length} places, food and practical details`, onPress: () => router.navigate('/oslo') },
       { id: 'overview-packing', icon: '🎒', title: 'Packing checklist', detail: `${personal.packedItems.length} of ${offsiteData.packing.length} packed`, onPress: () => router.push('/packing') },
       { id: 'overview-products', icon: '🚀', title: 'Expo products to try', detail: `${offsiteData.expoCustomerApps.length} apps to explore`, onPress: () => router.push('/products') },
     ]}

@@ -1,5 +1,6 @@
 import { offsiteData, type AccommodationPhoto, type Coordinates, type DeepReadonly, type GuideImage, type OffsiteData } from './offsite';
 import { formatAccommodationDetails } from './accommodation';
+import { attendeeId } from './attendees';
 
 export type GuideLocation = {
   key: string;
@@ -52,15 +53,19 @@ export function getLocation(key: string, data: DeepReadonly<OffsiteData> = offsi
   if (kind === 'stay') {
     const flat = data.accommodation.options.find((flat) => flat.id === id)
       ?? (/^\d+$/.test(id) ? data.accommodation.options[Number(id)] : undefined);
-    if (flat) return { key, title: flat.name, address: flat.address, coordinates: flat.coordinates,
-      photos: flat.photos, websiteUrl: flat.url, websiteLabel: 'View Airbnb', description: flat.description, details: formatAccommodationDetails(flat),
+    if (flat) {
+      const residents = flat.residentAttendeeIds.map((residentId) => data.travel.find((person) => attendeeId(person.name) === residentId)?.name).filter(Boolean);
+      return { key, title: flat.name, address: flat.address, coordinates: flat.coordinates,
+      photos: flat.photos, websiteUrl: flat.url, websiteLabel: 'View Airbnb', description: flat.description,
+      details: [`Staying here · ${residents.join(', ')}`, ...formatAccommodationDetails(flat)],
       searchQuery: flat.address ? [flat.address, data.event.city, data.event.country].join(', ') : undefined,
       notice: flat.coordinates?.precision === 'street' ? 'Approximate street location, not a confirmed entrance.'
-        : flat.coordinates?.precision === 'approximate' ? `${data.accommodation.coordinatePrecisionNote} This pin is not an apartment entrance.`
+        : flat.coordinates?.precision === 'approximate' ? data.accommodation.coordinatePrecisionNote
         : flat.coordinates ? undefined
         : flat.address ? 'The address is confirmed, but a map pin is not available. Open Maps to search for this address.'
         : 'The apartment address is not provided in the guide.',
       areaKey: !flat.coordinates && !flat.address ? 'area:torshov' : undefined };
+    }
   }
   if (kind === 'travel') {
     const namedLocation = data.travel.flatMap((person) => [person.arrival?.departsFrom, person.departure?.departsFrom]).find((name) => name === id);
@@ -84,7 +89,9 @@ export function formatLocationAccuracy(location: GuideLocation): string | undefi
 }
 
 export function mapsUrls(location: GuideLocation, platform: 'ios' | 'android' | 'web') {
-  const coordinate = location.coordinates ? `${location.coordinates.lat},${location.coordinates.lng}` : undefined;
+  const apartmentAddressSearch = location.key.startsWith('stay:') && location.address && location.searchQuery;
+  const coordinate = location.coordinates && !(apartmentAddressSearch && isApproximateLocation(location))
+    ? `${location.coordinates.lat},${location.coordinates.lng}` : undefined;
   const query = coordinate ?? location.searchQuery;
   const title = isApproximateLocation(location) ? `${location.title} (approximate)` : location.title;
   if (!query) return [];

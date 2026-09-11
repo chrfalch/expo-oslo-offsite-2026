@@ -3,6 +3,7 @@ import type { AccommodationPhoto, DeepReadonly, GuideImage } from '../data/offsi
 
 // Literal requires let Metro include every image in native and web bundles.
 const sources: Record<string, ImageSourcePropType> = {
+  'assets/schedule/early-bird-dinner.webp': require('../../assets/schedule/early-bird-dinner.webp'),
   'assets/accommodation/bright-and-nice-torshov-1.jpg': require('../../assets/accommodation/bright-and-nice-torshov-1.jpg'),
   'assets/accommodation/bright-and-nice-torshov-2.jpg': require('../../assets/accommodation/bright-and-nice-torshov-2.jpg'),
   'assets/accommodation/bright-and-nice-torshov-3.jpg': require('../../assets/accommodation/bright-and-nice-torshov-3.jpg'),

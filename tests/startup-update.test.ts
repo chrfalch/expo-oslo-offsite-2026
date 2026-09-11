@@ -52,3 +52,39 @@ test('allows only one restart prompt', () => {
   assert.equal(coordinator.claimPrompt(), true);
   assert.equal(coordinator.claimPrompt(), false);
 });
+
+
+test('checks again after no update or an offline failure on a later foreground', async () => {
+  const coordinator = createStartupUpdateCoordinator();
+  let checks = 0;
+  let downloads = 0;
+  const api = {
+    checkForUpdateAsync: async () => {
+      checks += 1;
+      if (checks === 2) throw new Error('offline');
+      return { isAvailable: checks >= 3 };
+    },
+    fetchUpdateAsync: async () => { downloads += 1; return { isNew: true }; },
+  };
+  assert.equal(await coordinator.checkAndDownload(api), false);
+  assert.equal(await coordinator.checkAndDownload(api), false);
+  assert.equal(await coordinator.checkAndDownload(api), true);
+  assert.equal(await coordinator.checkAndDownload(api), true);
+  assert.equal(checks, 3);
+  assert.equal(downloads, 1);
+});
+
+test('retries a failed download on a later foreground', async () => {
+  const coordinator = createStartupUpdateCoordinator();
+  let downloads = 0;
+  const api = {
+    checkForUpdateAsync: async () => ({ isAvailable: true }),
+    fetchUpdateAsync: async () => {
+      if (++downloads === 1) throw new Error('offline');
+      return { isNew: true };
+    },
+  };
+  assert.equal(await coordinator.checkAndDownload(api), false);
+  assert.equal(await coordinator.checkAndDownload(api), true);
+  assert.equal(downloads, 2);
+});

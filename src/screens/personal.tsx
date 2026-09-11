@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { getAttendee } from '@/data/attendees';
 import { Linking } from 'react-native';
 import { formatOffsiteDate, offsiteData } from '@/data/offsite';
+import { findAccommodationForAttendee } from '@/data/accommodation';
 import { ContentPageView, type ContentSection } from '@/presentation/content-page-view';
 import { useOffsiteNavigation } from '@/screens/navigation';
 import { usePreferences } from '@/state/preferences';
@@ -54,8 +55,9 @@ export function TravelScreen() {
   const params = useLocalSearchParams<{ mode?: string; attendee?: string }>();
   const [mode, setMode] = useState(params.mode === 'all' ? 'all' : 'mine');
   const { attendee } = usePreferences();
-  const { location, router } = useOffsiteNavigation();
+  const { location } = useOffsiteNavigation();
   const selectedAttendee = params.attendee ? getAttendee(params.attendee) : undefined;
+  const apartment = findAccommodationForAttendee(offsiteData.accommodation.options, (selectedAttendee ?? attendee)?.id);
   const travelers = selectedAttendee ? [selectedAttendee] : mode === 'mine' ? (attendee ? [attendee] : []) : offsiteData.travel;
   const sections: ContentSection[] = travelers.map((person) => ({
     id: person.name, title: person.name,
@@ -71,7 +73,7 @@ export function TravelScreen() {
   return <ContentPageView intro="Oslo arrivals and departures use local Oslo time. Earlier inbound departure times are shown separately."
     choices={selectedAttendee ? undefined : [{ id: 'travel-mode', label: 'Itinerary', value: mode, options: [{ value: 'mine', label: 'My trip' }, { value: 'all', label: 'Everyone' }], onChange: setMode }]}
     sections={[...sections, { id: 'travel-bases', rows: [
-      { id: 'travel-stay', title: 'Where we’re staying', detail: `${offsiteData.accommodation.area} · ${offsiteData.accommodation.options.length} apartments`, onPress: () => router.push({ pathname: '/bases', params: { section: 'stay' } }) },
+      ...(apartment ? [{ id: 'travel-stay', title: apartment.name, detail: apartment.address ?? apartment.area, onPress: () => location(`stay:${apartment.id}`) }] : []),
       { id: 'travel-workspace', title: 'Rebel', detail: offsiteData.workspace.address, onPress: () => location('workspace:rebel') },
     ] }]} />;
 }

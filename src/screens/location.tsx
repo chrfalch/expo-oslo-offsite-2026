@@ -16,8 +16,7 @@ export default function LocationScreen() {
   const place = getLocation(key);
   const { router } = useOffsiteNavigation();
   const [error, setError] = useState<string>();
-  const close = () => router.canGoBack() ? router.back() : router.replace('/oslo');
-  if (!place) return <LocationSheet onClose={close}><ContentPageView sections={[{ id: 'location-missing', title: 'Location not found', rows: [{ id: 'guide', title: 'Open Oslo guide', onPress: () => router.replace('/oslo') }] }]} /></LocationSheet>;
+  if (!place) return <LocationSheet><ContentPageView sections={[{ id: 'location-missing', title: 'Location not found', rows: [{ id: 'guide', title: 'Open Oslo guide', onPress: () => router.replace('/oslo') }] }]} /></LocationSheet>;
   const urls = mapsUrls(place, Platform.OS === 'ios' ? 'ios' : Platform.OS === 'android' ? 'android' : 'web');
   async function open() {
     setError(undefined);
@@ -29,8 +28,8 @@ export default function LocationScreen() {
   const c = place.coordinates;
   const approximate = isApproximateLocation(place);
   const apartmentApproximation = key.startsWith('stay:') && c?.precision === 'approximate';
-  return <LocationSheet onClose={close}><LocationView key={key} title={place.title} address={place.address ?? 'Exact address not provided'}
-    notice={apartmentApproximation ? 'Approximate area, not the entrance. Use your booking confirmation for the exact address.' : place.notice}
+  return <LocationSheet><LocationView key={key} title={place.title} address={place.address ?? 'Exact address not provided'}
+    notice={place.notice}
     image={getGuideImage(place.image, place.title)} photos={place.photos ? getAccommodationPhotos(place.photos) : undefined}
     websiteUrl={place.websiteUrl} websiteLabel={place.websiteLabel} description={place.description} details={place.details}
     accuracy={[formatLocationAccuracy(place), apartmentApproximation ? place.notice : undefined].filter(Boolean).join('\n\n') || undefined}

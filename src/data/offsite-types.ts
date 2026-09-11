@@ -117,6 +117,7 @@ export interface AccommodationPhoto {
 
 export interface AccommodationOption {
   id: string;
+  number: number;
   name: string;
   url: string;
   listingId: string;
@@ -146,6 +147,7 @@ export interface AccommodationOption {
   amenities: string[];
   amenitiesMissing: string[];
   notes: string[];
+  residentAttendeeIds: string[];
   distanceMetersFrom: Partial<Record<ReferencePointId, number | null>>;
   walkMinutesFrom: Partial<Record<ReferencePointId, number | null>>;
 }

@@ -1,8 +1,7 @@
-import { DarkTheme, DefaultTheme, ThemeProvider, router } from 'expo-router';
+import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { ActivityIndicator, Platform, View } from 'react-native';
-import { Host } from '@expo/ui';
 import { Text } from '@/components/text';
 import { Button } from '@/components/button';
 import { Stack } from 'expo-router/stack';
@@ -56,7 +55,7 @@ export default ObserveRoot.wrap(RootLayout);
 
 function Navigation() {
   const { ready, attendee, error, store } = usePreferences();
-  const { colors, scheme } = useOffsiteTheme();
+  const { colors } = useOffsiteTheme();
   if (!ready) return <View style={{ flex: 1, padding: 24, justifyContent: 'center', backgroundColor: colors.background }}>
     {error ? <NativeContent><Text textStyle={{ color: colors.text }}>{error}</Text><Button label="Try again" onPress={() => { void store.hydrate(); }} /></NativeContent>
       : <ActivityIndicator color={colors.accent} accessibilityLabel="Loading your saved guide" />}
@@ -79,17 +78,12 @@ function Navigation() {
         <Stack.Screen name="place/[id]" options={{ title: 'Place' }} />
         <Stack.Screen name="activity/[id]" options={{ title: 'Activity' }} />
         <Stack.Screen name="location/[key]" options={{
-          title: 'Location',
+          headerShown: false,
           presentation: 'formSheet',
           sheetAllowedDetents: [0.8, 1],
           sheetGrabberVisible: true,
           sheetCornerRadius: Platform.OS === 'android' ? 24 : undefined,
           gestureEnabled: true,
-          headerBackVisible: false,
-          headerRight: () => <Host matchContents ignoreSafeArea="all" colorScheme={scheme} seedColor={colors.accent} style={{ width: 80, height: 44 }}>
-            <Button label="Done" variant="text" testID="close-location"
-              onPress={() => router.canGoBack() ? router.back() : router.replace('/oslo')} />
-          </Host>,
         }} />
         <Stack.Screen name="bases" options={{ title: 'Our bases' }} />
         <Stack.Screen name="food" options={{ title: 'Food to try' }} />
