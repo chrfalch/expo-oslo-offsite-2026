@@ -59,7 +59,7 @@ test('all entity images resolve locally with the right media type and accessible
     ...offsiteData.expoCustomerApps, offsiteData.workspace, offsiteData.support.home,
   ];
   const referenced = new Set(offsiteData.accommodation.options.flatMap((flat) => flat.photos.map((photo) => join(root, photo.file))));
-  assert.equal(entities.length, 65);
+  assert.equal(entities.length, 68);
   for (const entity of entities) {
     const image = entity.image!;
     const model = exports.getGuideImage(image, entity.name)!;
@@ -90,7 +90,7 @@ test('image metadata retains supported types, local folders and original provena
     apps: offsiteData.expoCustomerApps,
     workspace: [offsiteData.workspace],
   };
-  assert.equal(offsiteData.schemaVersion, '1.4');
+  assert.equal(offsiteData.schemaVersion, '1.5');
   assert.ok(offsiteData.assets.rightsNote.length > 0);
   for (const [folder, entities] of Object.entries(groups)) {
     const assetFolder = offsiteData.assets.folders[folder as keyof typeof groups];

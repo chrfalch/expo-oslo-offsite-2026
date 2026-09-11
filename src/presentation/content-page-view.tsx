@@ -1,6 +1,7 @@
 import { Column, RNHostView } from '@expo/ui';
 import { Image, Text as IconText, View } from 'react-native';
 import { Text } from '@/components/text';
+import { Button } from '@/components/button';
 import { ActionRowControl } from '@/components/action-row';
 import { ChoiceControl } from '@/components/choice-control';
 import { DetailsDisclosure } from '@/components/details-disclosure';
@@ -19,6 +20,7 @@ export type ContentSection = {
   disclosure?: { label: string; details: readonly string[] };
   image?: GuideImageModel;
   cards?: readonly GuideCardModel[];
+  actions?: GuideCardModel['actions'];
   rows?: readonly ActionRowModel[];
   checks?: readonly { id: string; label: string; detail: string; checked: boolean; onToggle: () => void }[];
 };
@@ -46,6 +48,7 @@ export function ContentPageView({ intro, choices, sections }: { intro?: string; 
       {section.description ? <Text textStyle={{ fontSize: 15, lineHeight: 23, color: colors.secondaryText }}>{section.description}</Text> : null}
       {section.image ? <RNHostView matchContents><GuideImage key={section.image.id} image={section.image} width={width} /></RNHostView> : null}
       {section.cards?.map((card) => <GuideCard key={card.id} card={card} />)}
+      {section.actions?.map((action) => <Button key={action.testID ?? action.label} label={action.label} compact={action.compact} onPress={action.onPress} testID={action.testID} selected={action.selected} variant={action.primary ? 'filled' : 'outlined'} />)}
       {section.rows?.map((row) => <ActionRow key={row.id} row={row} />)}
       {section.disclosure ? <DetailsDisclosure {...section.disclosure} width={width} /> : null}
       {section.checks?.map((check) => <Column key={check.id} style={{ width, paddingHorizontal: 16, borderRadius: 16, backgroundColor: colors.surface }}>

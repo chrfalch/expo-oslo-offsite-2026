@@ -144,6 +144,24 @@ describe('place discovery', () => {
     assert.deepEqual(result.map((place) => place.id), ['stykke-pizza']);
   });
 
+  test('treats food halls as dining places while preserving exact food hall filtering', () => {
+    const diningIds = offsiteData.places
+      .filter((place) => place.category === 'restaurant' || place.category === 'foodhall')
+      .map((place) => place.id).sort();
+    const foodHallIds = offsiteData.places
+      .filter((place) => place.category === 'foodhall')
+      .map((place) => place.id).sort();
+    assert.ok(offsiteData.places.some((place) => place.category === 'restaurant'));
+    assert.ok(foodHallIds.length > 0);
+    assert.deepEqual(getPlaces({ category: 'restaurant' }).map((place) => place.id).sort(), diningIds);
+    assert.deepEqual(getPlaces({ category: 'foodhall' }).map((place) => place.id).sort(), foodHallIds);
+  });
+
+  test('searches former place names', () => {
+    assert.deepEqual(getPlaces({ query: 'collets kafe og bar' }).map((place) => place.id),
+      ['collets-parkservering']);
+  });
+
   test('matches Norwegian names without accents and ignores casing and whitespace', () => {
     assert.deepEqual(getPlaces({ query: '  APENT  BAKERI ' }).map((place) => place.id),
       ['apent-bakeri-torshov']);

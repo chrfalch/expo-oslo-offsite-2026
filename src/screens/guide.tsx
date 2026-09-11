@@ -1,6 +1,6 @@
 import { useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
-import { formatAccommodationDetails, formatOffsiteDate, getFoodPlaces, offsiteData } from '@/data/offsite';
+import { formatAccommodationDetails, formatOffsiteDate, formatWalkTime, getFoodPlaces, getPlaces, offsiteData } from '@/data/offsite';
 import { getAccommodationPhotos, getGuideImage } from '@/media/guide-images';
 import { ContentPageView, type ContentSection } from '@/presentation/content-page-view';
 import { useOffsiteNavigation } from '@/screens/navigation';
@@ -36,7 +36,15 @@ export function FoodScreen() {
   const [section, setSection] = useState('out');
   const { place, router } = useOffsiteNavigation();
   const { foodToTry } = offsiteData;
-  const sections: ContentSection[] = section === 'out' ? foodToTry.outAndAbout.map((food) => ({
+  const restaurants = getPlaces({ category: 'restaurant', near: 'rebel' });
+  const sections: ContentSection[] = section === 'restaurants' ? [{
+    id: 'restaurants', description: `${restaurants.length} restaurants and food halls · Walking times from Rebel`,
+    rows: restaurants.map((venue) => ({
+      id: `food-restaurant-${venue.id}`, title: venue.name,
+      detail: [venue.cuisine, venue.area, formatWalkTime(venue.walkMinutesFrom.rebel)].filter(Boolean).join(' · '),
+      image: getGuideImage(venue.image, venue.name), onPress: () => place(venue.id),
+    })),
+  }] : section === 'out' ? foodToTry.outAndAbout.map((food) => ({
     id: food.id, title: food.name, description: food.description, image: getGuideImage(food.image, food.name),
     rows: getFoodPlaces(food).map((venue) => ({ id: venue.id, title: venue.name, detail: venue.address ?? venue.area ?? '', onPress: () => place(venue.id) })),
   })) : [
@@ -45,7 +53,7 @@ export function FoodScreen() {
     { id: 'supermarkets', rows: [{ id: 'find-supermarket', title: 'Find a supermarket', onPress: () => router.push({ pathname: '/places', params: { category: 'supermarket' } }) }] },
   ];
   return <ContentPageView intro="A taste of Norway" choices={[{ id: 'food-section', label: 'Food to try', value: section, onChange: setSection,
-    options: [{ value: 'out', label: 'Out & about' }, { value: 'shop', label: 'Supermarket' }] }]} sections={sections} />;
+    options: [{ value: 'out', label: 'Out & about' }, { value: 'shop', label: 'Supermarket' }, { value: 'restaurants', label: 'Restaurants' }] }]} sections={sections} />;
 }
 
 export function PracticalScreen() {

@@ -14,9 +14,10 @@ export function PlaceScreen() {
   const saved = personal.savedPlaceIds.includes(place.id);
   return <><Stack.Screen options={{ title: place.name }} /><ContentPageView intro={[placeCategoryLabels[place.category], place.cuisine, place.area].filter(Boolean).join(' · ')} sections={[
     { id: 'place', cards: [{ id: place.id, title: place.name, description: place.description, image: getGuideImage(place.image, place.name),
-      actions: [{ label: place.address ? 'Show on map' : 'Location details', testID: 'place-map', primary: true, onPress: () => location(`place:${place.id}`) },
-        { label: saved ? 'Saved' : 'Save place', testID: 'save-place', selected: saved, onPress: () => { void store.togglePlace(place.id); } }] }] },
-    { id: 'getting-there', title: 'Getting there', description: 'Walking times are estimates from the guide’s reference points, not your current position or a measured route.', rows: [
+      headerActions: [{ label: saved ? `Remove ${place.name} from saved places` : `Save ${place.name}`, icon: saved ? 'star.fill' : 'star', testID: 'save-place', selected: saved,
+          onPress: () => { void store.togglePlace(place.id); } }] }] },
+    { id: 'getting-there', title: 'Getting there', description: 'Walking times are estimates from the guide’s reference points, not your current position or a measured route.',
+      actions: [{ label: place.address ? 'Show on map' : 'Location details', testID: 'place-map', primary: true, compact: true, onPress: () => location(`place:${place.id}`) }], rows: [
       { id: 'walk-rebel', title: 'From Rebel', detail: formatWalkTime(place.walkMinutesFrom.rebel), onPress: () => location('workspace:rebel') },
       { id: 'walk-torshov', title: 'From Torshov area', detail: formatWalkTime(place.walkMinutesFrom.torshov), onPress: () => location('area:torshov') },
     ] },

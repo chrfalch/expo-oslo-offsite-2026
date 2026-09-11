@@ -12,7 +12,7 @@
       ]
     }
   },
-  "exclude": ["node_modules", "ios", "android", "dist", "tests"],
+  "exclude": ["node_modules", "ios", "android", "dist", "dist-weather", "tests"],
   "include": [
     "**/*.ts",
     "**/*.tsx",

@@ -42,13 +42,16 @@ export function createOffsiteGuide(data: DeepReadonly<OffsiteData>) {
     }
     const terms = searchText(filters.query ?? '').trim().split(/\s+/).filter(Boolean);
     return data.places.filter((place) => {
-      if (category && place.category !== category) return false;
+      if (category && (category === 'restaurant'
+        ? place.category !== 'restaurant' && place.category !== 'foodhall'
+        : place.category !== category)) return false;
       if (near && maxWalkMinutes !== undefined) {
         const minutes = place.walkMinutesFrom[near];
         if (minutes == null || minutes > maxWalkMinutes) return false;
       }
       const text = searchText([
-        place.name, place.cuisine, place.area, place.address, place.description, place.signatureDish,
+        place.name, ...(place.formerNames ?? []), place.cuisine, place.area, place.address,
+        place.description, place.signatureDish,
       ].filter(Boolean).join(' '));
       return terms.every((term) => text.includes(term));
     }).sort((a, b) => {

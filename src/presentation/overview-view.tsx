@@ -9,10 +9,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ActionRow, type ActionRowModel } from '@/presentation/content-page-view';
 import { UpcomingActivityCard, type UpcomingActivityModel } from '@/presentation/upcoming-activity-card';
 import { NativeContent } from '@/presentation/native-content';
+import { WeatherSummary, type WeatherModel } from '@/presentation/weather-view';
 import { layout, useOffsiteTheme } from '@/theme';
 
 export type OverviewViewProps = {
   title: string; year: string; dates: string;
+  weather: WeatherModel; onWeather: () => void;
   onProfile: () => void; onSupport: () => void; arrival: ActionRowModel; upcoming?: UpcomingActivityModel; rows: readonly ActionRowModel[];
 };
 
@@ -32,13 +34,17 @@ export function OverviewView(props: OverviewViewProps) {
           <Row style={{ width: 44 }} modifiers={rowContentModifiers(44)}><SystemSymbol name="person.crop.circle" color={colors.accent} /></Row>
         </Button></NativeContent></View>
       </View>
-      {fontScale <= 1.3 ? <View style={[styles.hero, { backgroundColor: colors.hero }]} testID="offsite-hero">
+      <View style={[styles.hero, { backgroundColor: colors.hero }]} testID="offsite-hero">
+        <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }}>
         <View style={{ flex: 1 }}><NativeContent><Column spacing={4}>
           <Text role="title2" textStyle={{ fontWeight: '700', color: colors.heroText }}>Oslo Offsite</Text>
           <Text role="subheadline" textStyle={{ color: colors.heroText }}>{`${props.dates} ${props.year} · Better together.`}</Text>
         </Column></NativeContent></View>
-        <View style={styles.logoTile}><Image source={require('../../assets/images/expo-logo.png')} accessibilityLabel="Expo" style={styles.logo} /></View>
-      </View> : null}
+        {fontScale <= 1.3 ? <View style={styles.logoTile}><Image source={require('../../assets/images/expo-logo.png')} accessibilityLabel="Expo" style={styles.logo} /></View> : null}
+        </View>
+        <View style={{ height: StyleSheet.hairlineWidth, backgroundColor: colors.heroText, opacity: 0.2 }} />
+        <WeatherSummary weather={props.weather} onMore={props.onWeather} />
+      </View>
       <NativeContent><Column spacing={18}>
         <ActionRow row={props.arrival} />
         <Text textStyle={{ fontSize: 18, fontWeight: '600', color: colors.text }}>{props.upcoming ? 'Coming up' : 'Your offsite guide'}</Text>
@@ -67,7 +73,7 @@ const styles = StyleSheet.create({
   heading: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 10 },
   footer: { marginTop: 8, paddingTop: 28, borderTopWidth: StyleSheet.hairlineWidth, alignItems: 'center', gap: 14 },
   supportBadge: { width: 58, height: 58, borderRadius: 20, justifyContent: 'center', transform: [{ rotate: '-10deg' }] },
-  hero: { padding: 18, borderRadius: layout.heroRadius, gap: 12, flexDirection: 'row', alignItems: 'center' },
+  hero: { padding: 18, borderRadius: layout.heroRadius, gap: 14 },
   logoTile: { width: 38, height: 38, backgroundColor: '#FFFFFF', borderRadius: 11, alignItems: 'center', justifyContent: 'center' },
   logo: { width: 23, height: 23, tintColor: '#111113', resizeMode: 'contain' },
 });

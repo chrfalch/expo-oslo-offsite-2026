@@ -96,6 +96,7 @@ function Navigation() {
         <Stack.Screen name="practical" options={{ title: 'Practical info' }} />
         <Stack.Screen name="products" options={{ title: 'Expo products to try' }} />
         <Stack.Screen name="support" options={{ title: 'Support' }} />
+        <Stack.Screen name="weather" options={{ title: 'Oslo weather' }} />
       </Stack.Protected>
     </Stack>
   </View>;

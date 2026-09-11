@@ -51,3 +51,4 @@ example
 # Public store support site output
 /dist-store/
 /deploy.tar.gz
+/dist-weather/

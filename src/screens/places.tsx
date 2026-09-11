@@ -10,7 +10,11 @@ import { useOffsiteNavigation } from '@/screens/navigation';
 import { useScreenObserve } from '@/screens/use-screen-observe';
 import { usePreferences } from '@/state/preferences';
 
-const categories = [{ value: 'all', label: 'All categories' }, ...Object.entries(placeCategoryLabels).map(([value, label]) => ({ value, label }))];
+const placeFilterLabels: Record<PlaceCategory, string> = {
+  ...placeCategoryLabels,
+  restaurant: 'Restaurants & food halls',
+};
+const categories = [{ value: 'all', label: 'All categories' }, ...Object.entries(placeFilterLabels).map(([value, label]) => ({ value, label }))];
 const bases = [{ value: 'rebel', label: 'Rebel' }, { value: 'torshov', label: 'Torshov area' }];
 
 export default function PlacesScreen() {
@@ -33,7 +37,7 @@ export default function PlacesScreen() {
     <PlacesView savedOnly={savedOnly} savedCount={personal.savedPlaceIds.length} onSavedOnlyChange={setSavedOnly}
       category={category} categories={categories} onCategoryChange={onCategoryChange} near={near} bases={bases} onBaseChange={onBaseChange}
       query={query} onQueryChange={setQuery} searching={searching} headerHeight={headerHeight}
-      filterSummary={`${category === 'all' ? 'Estimated walk' : placeCategoryLabels[category]} from ${near === 'rebel' ? 'Rebel' : 'Torshov area'}`}
+      filterSummary={`${category === 'all' ? 'Estimated walk' : placeFilterLabels[category]} from ${near === 'rebel' ? 'Rebel' : 'Torshov area'}`}
       places={places.map((place) => ({ id: place.id, title: place.name,
         subtitle: [place.cuisine ?? placeCategoryLabels[place.category], place.area].filter(Boolean).join(' · '),
         walk: place.walkMinutesFrom[near] === 0 ? `Near ${near === 'rebel' ? 'Rebel' : 'Torshov reference point'}` : formatWalkTime(place.walkMinutesFrom[near]),

@@ -20,6 +20,10 @@ Diagnostics are sent to Expo, our app infrastructure provider. Events recorded o
 
 Expo may process information outside your country, including in the United States. Its privacy policy describes its international-transfer arrangements and the ways to contact it about information it handles.
 
+## Weather
+
+The app requests a shared Oslo forecast from our weather endpoint on Expo hosting. Expo receives the network information needed to serve that request, including your IP address. Our endpoint fetches and caches public forecast data from MET Norway using fixed Oslo coordinates. It does not forward your IP address, selected attendee, or device location to MET Norway. A copy of the forecast is stored on your device for offline use.
+
 ## Maps and external websites
 
 iOS displays maps using Apple Maps. The current Android configuration opens destinations in an external Maps app or website. Opening a destination or website shares the requested destination or page with that service, which handles requests under its own privacy policy. The app does not request your device's current location or access your photo library.

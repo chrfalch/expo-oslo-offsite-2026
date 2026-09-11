@@ -143,6 +143,16 @@ The source is deeply frozen and exposed as readonly TypeScript data. Helpers ret
 
 Coordinates include source and precision. Walking estimates use straight-line distance with a detour allowance, and Torshov is an approximate neighbourhood reference, not an apartment entrance. Prices and opening hours remain editorial text rather than structured live data.
 
+## Oslo weather
+
+The overview's Oslo Offsite banner includes today's forecast and a “see more” link to the next seven Oslo calendar days. The Weather screen's purple section shows today's remaining forecast times in an always-expanded horizontal strip; the six following day rows expand independently into time-of-day strips. Weather uses MET Norway Locationforecast 2.0 with fixed central Oslo coordinates, Celsius and metres per second. Future ranges use the available forecast samples. Daily precipitation is shown only when complete forecast intervals cover the displayed period. Missing values stay unavailable. Forecast timestamps, stale/offline labels and source/license links are shown in the weather screen.
+
+The app shares a validated AsyncStorage forecast cache across screens, honours the service's expiry, revalidates with Last-Modified, and only refreshes while a weather screen is focused and the app is active. Bundled guide content does not depend on the weather request.
+
+The default endpoint is `https://oslo-offsite-2026--weather.expo.app/api/weather`. Set `EXPO_PUBLIC_WEATHER_URL` to override it during local testing. `hosting/weather-proxy.ts` only serves the fixed Oslo forecast, identifies this app to MET Norway, caches responses and backs off on upstream failures. The dedicated public router root in `hosting/app/` has no imports from the attendee guide or app state.
+
+To export the isolated service, run `npm run weather:export`, then deploy `dist-weather` to the **weather alias**, using `eas deploy --alias weather --export-dir dist-weather --environment production`. Use a current EAS CLI compatible with `uploadSourceMaps` in this project's configuration. Keep this deployment separate from the production support website. Do not deploy a normal guide export publicly. The default mobile/web app export continues using `src/app/` and static web output.
+
 ## Refresh the guide
 
 Replace `src/data/offsite-data.json` with the updated source JSON, copy the referenced images into their matching `assets/` folders and update the literal imports in `src/media/guide-images.ts`, then run `npm test` and `npm run typecheck`. For example, from the project root:

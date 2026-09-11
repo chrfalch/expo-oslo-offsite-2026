@@ -7,8 +7,7 @@ export default function OsloScreen() {
   const { router, location } = useOffsiteNavigation();
   const { personal } = usePreferences();
   return <ContentPageView intro="Your offsite field guide" sections={[
-    { id: 'explore', cards: [{ id: 'explore', title: 'A city to explore.', eyebrow: 'COFFEE, FOOD & GOOD COMPANY', description: `${offsiteData.places.length} places from the offsite guide.`,
-      actions: [{ label: 'Find a place', testID: 'find-places', primary: true, onPress: () => router.push('/places') }] }],
+    { id: 'explore', cards: [{ id: 'explore', title: 'A city to explore.', eyebrow: 'COFFEE, FOOD & GOOD COMPANY', description: `${offsiteData.places.length} places from the offsite guide.` }],
       rows: [{ id: 'oslo-saved', title: 'Saved places', detail: `${personal.savedPlaceIds.length} saved on this phone`, onPress: () => router.push({ pathname: '/places', params: { saved: 'true' } }) }] },
     { id: 'bases', title: 'Our bases', rows: [
       { id: 'workspace', title: offsiteData.workspace.name, detail: offsiteData.workspace.address, onPress: () => router.push('/bases') },

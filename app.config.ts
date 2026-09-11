@@ -1,10 +1,15 @@
 import type { ConfigContext, ExpoConfig } from 'expo/config';
 
 export default ({ config }: ConfigContext): ExpoConfig => {
+  const weatherServer = process.env.OFFSITE_WEATHER_SERVER === '1';
   const mapsKey = process.env.GOOGLE_MAPS_API_KEY?.trim()
     || config.android?.config?.googleMaps?.apiKey?.trim();
   return {
     ...config,
+    ...(weatherServer ? {
+      web: { ...config.web, output: 'server' as const },
+      plugins: (config.plugins ?? []).map((plugin) => plugin === 'expo-router' ? ['expo-router', { root: './hosting/app' }] : plugin),
+    } : {}),
     name: config.name ?? 'Oslo Offsite',
     slug: config.slug ?? 'oslo-offsite-2026',
     android: {

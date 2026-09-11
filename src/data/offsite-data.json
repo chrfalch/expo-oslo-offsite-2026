@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.4",
+  "schemaVersion": "1.5",
   "generatedAt": "2026-09-09",
   "source": {
     "name": "Oslo Offsite — September 2026 (Notion)",
@@ -1763,6 +1763,129 @@
         "sourceDomain": "brandfetch.com",
         "credit": null,
         "licence": null
+      }
+    },
+    {
+      "id": "collets-parkservering",
+      "name": "Collett's Parkservering",
+      "formerNames": [
+        "Collets Kafé og Bar",
+        "Heim"
+      ],
+      "category": "restaurant",
+      "cuisine": "Norwegian and international",
+      "description": "Restaurant and bar by St. Hanshaugen park. Opera on Tuesdays, music bingo on Thursdays, and the big sports events on screen. Run by Sajid Sultan, who also runs Pilestredet Parkservering.",
+      "address": "Colletts gate 33",
+      "area": "St. Hanshaugen",
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": null,
+      "url": "https://collettsparkservering.com/",
+      "coordinates": {
+        "lat": 59.92707,
+        "lng": 10.73827,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Colletts gate 33"
+      },
+      "image": {
+        "file": "assets/places/collets-parkservering.jpg",
+        "type": "photo",
+        "sourceUrl": "https://image.vartoslo.no/1143007.jpg",
+        "sourcePage": "https://www.vartoslo.no/bydel-st-hanshaugen-colletts-parkservering-heim/utestedet-heim-har-stengt-dorene-sine-pa-st-hanshaugen-disse-tar-over/1141907",
+        "sourceDomain": "vartoslo.no",
+        "credit": "Vårt Oslo",
+        "caption": "Press photo from Vårt Oslo's article on the handover. The venue's own site has no photos.",
+        "licence": null
+      },
+      "distanceMetersFrom": {
+        "torshov": 1678,
+        "rebel": 1069
+      },
+      "walkMinutesFrom": {
+        "torshov": 29,
+        "rebel": 19
+      }
+    },
+    {
+      "id": "oslo-street-food",
+      "name": "Oslo Street Food",
+      "formerNames": null,
+      "category": "foodhall",
+      "cuisine": "Street food hall",
+      "description": "Street food hall in the old Torggata Bad swimming baths. Their own tagline says 16 food stalls and 4 bars, another page on the site says 13 stalls. Pho, tacos, empanadas, smash burgers. Club nights with DJs in Bassenget at weekends.",
+      "address": "Torggata 16",
+      "area": "Sentrum",
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": "Mon–Thu 11:00–23:00, Fri–Sat 11:00–03:00, Sun 12:00–22:00. Food stalls close at 22:00 on weekdays and 21:00 at weekends.",
+      "url": "https://www.oslo-streetfood.no/en",
+      "coordinates": {
+        "lat": 59.915849,
+        "lng": 10.750834,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Torggata 16A"
+      },
+      "image": {
+        "file": "assets/places/oslo-street-food.webp",
+        "type": "photo",
+        "sourceUrl": "http://static1.squarespace.com/static/6038204a6bf989551704f5c2/t/67470dfdd06e27543b0a171a/1777539176709/DSC_2385.jpg?format=1500w",
+        "sourcePage": "https://www.oslo-streetfood.no/en",
+        "sourceDomain": "oslo-streetfood.no",
+        "credit": null,
+        "caption": null,
+        "licence": null
+      },
+      "distanceMetersFrom": {
+        "torshov": 2254,
+        "rebel": 628
+      },
+      "walkMinutesFrom": {
+        "torshov": 39,
+        "rebel": 11
+      }
+    },
+    {
+      "id": "mathallen-oslo",
+      "name": "Mathallen Oslo",
+      "formerNames": null,
+      "category": "foodhall",
+      "cuisine": "Food hall",
+      "description": "Indoor food hall at Vulkan: specialist shops, delis and small eateries for meat, fish, fruit and vegetables, cheese, bakery, coffee and tea, desserts, plus bars and places to sit down and eat.",
+      "address": "Vulkan 5",
+      "area": "Vulkan",
+      "vinkScore": null,
+      "signatureDish": null,
+      "priceNote": null,
+      "hours": "Tue–Sat 10:00–20:00, Sun 11:00–18:00. Closed Monday.",
+      "url": "https://mathallenoslo.no/",
+      "coordinates": {
+        "lat": 59.922253,
+        "lng": 10.751749,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Vulkan 5"
+      },
+      "image": {
+        "file": "assets/places/mathallen-oslo.jpg",
+        "type": "photo",
+        "sourceUrl": "https://mathallenoslo.no/wp-content/uploads/2015/09/130611FSF135.jpg-1024x681.jpg",
+        "sourcePage": "https://mathallenoslo.no/",
+        "sourceDomain": "mathallenoslo.no",
+        "credit": null,
+        "caption": null,
+        "licence": null
+      },
+      "distanceMetersFrom": {
+        "torshov": 1574,
+        "rebel": 839
+      },
+      "walkMinutesFrom": {
+        "torshov": 27,
+        "rebel": 15
       }
     }
   ],

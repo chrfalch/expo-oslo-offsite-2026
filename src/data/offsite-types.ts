@@ -1,5 +1,6 @@
 export const placeCategoryLabels = {
   restaurant: 'Restaurants',
+  foodhall: 'Food halls',
   lunch: 'Lunch',
   coffee: 'Coffee',
   activity: 'Activities',
@@ -49,6 +50,7 @@ export interface GuideImage {
 export interface Place {
   id: string;
   name: string;
+  formerNames?: string[] | null;
   category: PlaceCategory;
   cuisine: string | null;
   description: string;
@@ -230,7 +232,7 @@ export interface OffsiteData {
 
 export interface PlaceFilters {
   category?: PlaceCategory;
-  /** Searches names, cuisine, neighbourhood, address, descriptions and dishes. */
+  /** Searches names (including former names), cuisine, neighbourhood, address, descriptions and dishes. */
   query?: string;
   /** Sort by estimated walking time from this base; unknown times sort last. */
   near?: ReferencePointId;

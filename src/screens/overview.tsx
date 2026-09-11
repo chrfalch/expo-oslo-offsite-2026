@@ -9,9 +9,11 @@ import { OverviewView } from '@/presentation/overview-view';
 import { useOffsiteNavigation } from '@/screens/navigation';
 import { usePreferences } from '@/state/preferences';
 import { useScreenObserve } from '@/screens/use-screen-observe';
+import { useWeather } from '@/screens/use-weather';
 
 export default function OverviewScreen() {
   useScreenObserve();
+  const { weather } = useWeather();
   const { router, activity, location } = useOffsiteNavigation();
   const { attendee, personal } = usePreferences();
   const { event } = offsiteData;
@@ -26,6 +28,8 @@ export default function OverviewScreen() {
   const travelDirection = getUpcomingTravel(attendee, moment);
   const next = getSchedule().find((item) => `${item.date} ${item.endTime ?? item.startTime}` >= `${localDate} ${localTime}`);
   return <OverviewView
+    weather={weather}
+    onWeather={() => router.push('/weather')}
     title={`Hey, ${attendee?.name.split(' ')[0] ?? 'there'}.`}
     year={`’${event.startDate.slice(2, 4)}`}
     dates={`${formatOffsiteDate(event.startDate, { day: 'numeric' })}–${formatOffsiteDate(event.endDate, { day: 'numeric', month: 'short' })}`}
