@@ -1887,6 +1887,36 @@
         "torshov": 27,
         "rebel": 15
       }
+    },
+    {
+      "id": "talormade",
+      "name": "Talormade",
+      "category": "snack",
+      "cuisine": "Doughnuts & specialty coffee",
+      "description": "Oslo bakery and specialty coffee roastery making doughnuts from scratch daily in Bjørvika. Stop by the Bispevika shop for a doughnut and coffee.",
+      "address": "Operagata 67B",
+      "area": "Bispevika · Bjørvika",
+      "walkMinutesFrom": {
+        "rebel": null,
+        "torshov": null
+      },
+      "distanceMetersFrom": {
+        "rebel": null,
+        "torshov": null
+      },
+      "vinkScore": null,
+      "signatureDish": "Freshly made doughnuts",
+      "priceNote": null,
+      "hours": "Mon–Thu 09:00–18:00; Fri–Sat 09:00–19:00; Sun 10:00–19:00. Checked on talormade.no on 11 September 2026.",
+      "url": "https://talormade.no",
+      "coordinates": {
+        "lat": 59.90664906264424,
+        "lng": 10.75741493893452,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Operagata 67B"
+      },
+      "image": null
     }
   ],
   "foodToTry": {
@@ -2047,6 +2077,15 @@
           "credit": null,
           "licence": null
         }
+      },
+      {
+        "id": "talormade-doughnuts",
+        "name": "Doughnuts at Talormade",
+        "description": "Freshly made doughnuts and specialty coffee from an Oslo bakery in Bispevika. A sweet stop while exploring Bjørvika.",
+        "placeIds": [
+          "talormade"
+        ],
+        "image": null
       },
       {
         "name": "Pølse med lompe",
