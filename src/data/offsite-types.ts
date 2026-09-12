@@ -129,6 +129,7 @@ export interface AccommodationOption {
   verified: boolean;
   hostName: string;
   hostNote: string | null;
+  keyPickup?: { instructions: string; url: string };
   rating: number | null;
   reviewCount: number;
   maxGuests: number;

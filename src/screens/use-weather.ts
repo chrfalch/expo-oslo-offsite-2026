@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { AppState } from 'react-native';
 import { useFocusEffect } from 'expo-router';
 import { createWeatherClient, type WeatherClientResult } from '@/data/weather-client';
@@ -48,35 +48,41 @@ export function useWeather() {
   const [now, setNow] = useState(() => new Date());
   const [loading, setLoading] = useState(true);
   const [failed, setFailed] = useState(false);
-  const [retry, setRetry] = useState(0);
+  const activeRefresh = useRef<() => Promise<void>>(async () => {});
 
   useFocusEffect(useCallback(() => {
     let alive = true;
-    let busy = false;
-    async function refresh() {
-      if (!alive || busy || AppState.currentState === 'background' || AppState.currentState === 'inactive') return;
-      busy = true;
-      setNow(new Date());
-      setLoading(true);
-      try {
-        const cached = await weatherClient.getCachedForecast();
-        if (alive && cached) setResult(cached);
-        const next = await weatherClient.getForecast();
-        if (alive) { setResult(next); setFailed(next.source === 'offline-cache'); }
-      } catch {
-        if (alive) setFailed(true);
-      } finally {
-        busy = false;
-        if (alive) { setLoading(false); setNow(new Date()); }
-      }
+    let request: Promise<void> | undefined;
+    function refresh() {
+      if (!alive || AppState.currentState === 'background' || AppState.currentState === 'inactive') return Promise.resolve();
+      request ??= (async () => {
+        setNow(new Date());
+        setLoading(true);
+        try {
+          const cached = await weatherClient.getCachedForecast();
+          if (alive && cached) setResult(cached);
+          const next = await weatherClient.getForecast();
+          if (alive) { setResult(next); setFailed(next.source === 'offline-cache'); }
+        } catch {
+          if (alive) setFailed(true);
+        } finally {
+          if (alive) { setLoading(false); setNow(new Date()); }
+        }
+      })().finally(() => { request = undefined; });
+      return request;
     }
+    activeRefresh.current = refresh;
     void refresh();
     const subscription = AppState.addEventListener('change', (state) => { if (state === 'active') void refresh(); });
     const timer = setInterval(() => { void refresh(); }, 60_000);
-    return () => { alive = false; subscription.remove(); clearInterval(timer); };
-    // retry deliberately re-enters the focused lifecycle, using the same shared cache.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [retry]));
+    return () => {
+      alive = false;
+      if (activeRefresh.current === refresh) activeRefresh.current = async () => {};
+      subscription.remove();
+      clearInterval(timer);
+    };
+  }, []));
 
-  return { weather: toModel(result, now, loading, failed), refresh: () => setRetry((value) => value + 1) };
+  const refresh = useCallback(() => activeRefresh.current(), []);
+  return { weather: toModel(result, now, loading, failed), refresh };
 }

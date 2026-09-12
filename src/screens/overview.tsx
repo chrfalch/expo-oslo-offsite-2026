@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { AppState } from 'react-native';
 import type { Href } from 'expo-router';
 import { formatOffsiteDate, formatTravelLeg, getSchedule, offsiteData } from '@/data/offsite';
@@ -11,19 +11,39 @@ import { useOffsiteNavigation } from '@/screens/navigation';
 import { usePreferences } from '@/state/preferences';
 import { useScreenObserve } from '@/screens/use-screen-observe';
 import { useWeather } from '@/screens/use-weather';
+import { refreshStartupUpdate } from '@/updates/use-startup-update';
 
 export default function OverviewScreen() {
   useScreenObserve();
-  const { weather } = useWeather();
+  const { weather, refresh: refreshWeather } = useWeather();
   const { router, activity, location } = useOffsiteNavigation();
   const { attendee, personal } = usePreferences();
   const { event } = offsiteData;
   const [now, setNow] = useState(() => new Date());
+  const [refreshing, setRefreshing] = useState(false);
+  const refreshRequest = useRef<Promise<void> | undefined>(undefined);
   useEffect(() => {
     const subscription = AppState.addEventListener('change', (state) => { if (state === 'active') setNow(new Date()); });
     const interval = setInterval(() => setNow(new Date()), 60_000);
     return () => { subscription.remove(); clearInterval(interval); };
   }, []);
+  const refresh = useCallback(() => {
+    refreshRequest.current ??= (async () => {
+      setRefreshing(true);
+      setNow(new Date());
+      try {
+        // Cached results may resolve within one frame; give the native spinner time to be seen.
+        await Promise.allSettled([
+          refreshWeather(),
+          refreshStartupUpdate(),
+          new Promise<void>((resolve) => setTimeout(resolve, 800)),
+        ]);
+      } finally {
+        setNow(new Date());
+        setRefreshing(false);
+      }
+    })().finally(() => { refreshRequest.current = undefined; });
+  }, [refreshWeather]);
   const moment = getOffsiteMoment(now, event.timezone);
   const { date: localDate, time: localTime } = moment;
   const travelDirection = getUpcomingTravel(attendee, moment);
@@ -31,6 +51,8 @@ export default function OverviewScreen() {
   const next = getSchedule().find((item) => `${item.date} ${item.endTime ?? item.startTime}` >= `${localDate} ${localTime}`);
   return <OverviewView
     weather={weather}
+    refreshing={refreshing}
+    onRefresh={refresh}
     onWeather={() => router.push('/weather')}
     title={`Hey, ${attendee?.name.split(' ')[0] ?? 'there'}.`}
     year={`’${event.startDate.slice(2, 4)}`}

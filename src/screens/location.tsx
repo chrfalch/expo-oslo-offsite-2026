@@ -31,6 +31,7 @@ export default function LocationScreen() {
   return <LocationSheet><LocationView key={key} title={place.title} address={place.address ?? 'Exact address not provided'}
     notice={place.notice}
     image={getGuideImage(place.image, place.title)} photos={place.photos ? getAccommodationPhotos(place.photos) : undefined}
+    keyPickup={place.keyPickup}
     websiteUrl={place.websiteUrl} websiteLabel={place.websiteLabel} description={place.description} details={place.details} residents={place.residents}
     accuracy={[formatLocationAccuracy(place), apartmentApproximation ? place.notice : undefined].filter(Boolean).join('\n\n') || undefined}
     map={c ? <NativeMap latitude={c.lat} longitude={c.lng} title={approximate ? `${place.title} (approximate)` : place.title} approximate={approximate} androidConfigured={Constants.expoConfig?.extra?.androidMapsConfigured === true} /> : undefined}

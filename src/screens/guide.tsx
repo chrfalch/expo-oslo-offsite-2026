@@ -38,7 +38,7 @@ export function BasesScreen() {
           details: [details[0], details[1], ...(flat.selfCheckIn ? ['Smartlock self check-in'] : []), ...visibleNotes],
           disclosure: { label: 'About this apartment', details: [flat.description, ...details.slice(2).filter((detail) => !visibleNotes.includes(detail) && detail !== 'Self check-in available')] },
           actions: [{ label: 'Directions', primary: true, testID: `apartment-location-${flat.number}`, onPress: () => location(`stay:${flat.id}`) }],
-          links: [{ label: 'View Airbnb', url: flat.url }] };
+          links: [...(flat.keyPickup ? [{ label: 'Collect keys · EasyPick', url: flat.keyPickup.url }] : []), { label: 'View Airbnb', url: flat.url }] };
       }) },
     ]} />;
 }

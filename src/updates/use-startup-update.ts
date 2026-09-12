@@ -6,11 +6,27 @@ import { createStartupUpdateCoordinator } from './startup-update';
 
 const coordinator = createStartupUpdateCoordinator();
 
+function updatesEnabled() {
+  return !__DEV__ && Platform.OS !== 'web' && Updates.isEnabled;
+}
+
+export async function refreshStartupUpdate() {
+  if (!updatesEnabled()) return;
+
+  const result = await coordinator.checkDownloadAndApply(Updates);
+  if (result === 'reload-failed') {
+    Alert.alert(
+      'Could not restart',
+      'Please close and reopen the app to use the latest version.',
+    );
+  }
+}
+
 export function useStartupUpdate() {
   const { isUpdatePending } = Updates.useUpdates();
   const mounted = useRef(false);
   const pending = useRef(isUpdatePending);
-  const enabled = !__DEV__ && Platform.OS !== 'web' && Updates.isEnabled;
+  const enabled = updatesEnabled();
 
   const promptForRestart = useCallback(() => {
     if (!mounted.current || AppState.currentState !== 'active' || !coordinator.claimPrompt()) {
@@ -78,6 +94,7 @@ export function useStartupUpdate() {
   useEffect(() => {
     if (!enabled || !isUpdatePending) return;
     pending.current = true;
+    coordinator.markDownloaded();
     promptForRestart();
   }, [enabled, isUpdatePending, promptForRestart]);
 }

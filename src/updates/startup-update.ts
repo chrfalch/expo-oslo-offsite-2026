@@ -3,9 +3,17 @@ export type StartupUpdateApi = {
   fetchUpdateAsync: () => Promise<{ isNew: boolean }>;
 };
 
+export type InteractiveUpdateApi = StartupUpdateApi & {
+  reloadAsync: () => Promise<void>;
+};
+
+export type InteractiveUpdateResult = 'no-update' | 'reloading' | 'reload-failed';
+
 export function createStartupUpdateCoordinator() {
   let download: Promise<boolean> | undefined;
+  let interactiveUpdate: Promise<InteractiveUpdateResult> | undefined;
   let promptClaimed = false;
+  let restartHandled = false;
   let updateDownloaded = false;
 
   return {
@@ -28,8 +36,30 @@ export function createStartupUpdateCoordinator() {
       return download;
     },
 
+    checkDownloadAndApply(api: InteractiveUpdateApi) {
+      interactiveUpdate ??= (async (): Promise<InteractiveUpdateResult> => {
+        const downloaded = await this.checkAndDownload(api);
+        if (!downloaded) return 'no-update';
+
+        restartHandled = true;
+        try {
+          await api.reloadAsync();
+          return 'reloading';
+        } catch {
+          restartHandled = false;
+          return 'reload-failed';
+        }
+      })().finally(() => { interactiveUpdate = undefined; });
+
+      return interactiveUpdate;
+    },
+
+    markDownloaded() {
+      updateDownloaded = true;
+    },
+
     claimPrompt() {
-      if (promptClaimed) return false;
+      if (interactiveUpdate || restartHandled || promptClaimed) return false;
       promptClaimed = true;
       return true;
     },

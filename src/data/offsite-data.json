@@ -77,7 +77,7 @@
       "id": "early-bird-dinner",
       "title": "Early-bird dinner",
       "type": "social",
-      "date": "2026-09-12",
+      "date": "2026-09-13",
       "startTime": "18:00",
       "endTime": null,
       "location": "Collets parkservering or Oslo Street Food (TBA)",
@@ -2390,7 +2390,13 @@
         "amenitiesMissing": [
           "Carbon monoxide alarm not reported"
         ],
-        "notes": [],
+        "keyPickup": {
+          "instructions": "Collect the keys at Deli de Luca, just down the street from the apartment. Use the EasyPick link for pickup details.",
+          "url": "https://www.easypick.no/p/88/644591"
+        },
+        "notes": [
+          "Contact Maria through Airbnb if you need anything during your stay."
+        ],
         "residentAttendeeIds": [
           "tomasz-sapeta",
           "hirbod",

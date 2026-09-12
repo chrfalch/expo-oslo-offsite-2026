@@ -88,3 +88,63 @@ test('retries a failed download on a later foreground', async () => {
   assert.equal(await coordinator.checkAndDownload(api), true);
   assert.equal(downloads, 2);
 });
+
+test('an interactive refresh downloads and applies an update once', async () => {
+  const coordinator = createStartupUpdateCoordinator();
+  let checks = 0;
+  let downloads = 0;
+  let reloads = 0;
+  const api = {
+    checkForUpdateAsync: async () => { checks += 1; return { isAvailable: true }; },
+    fetchUpdateAsync: async () => { downloads += 1; return { isNew: true }; },
+    reloadAsync: async () => { reloads += 1; },
+  };
+
+  const results = await Promise.all([
+    coordinator.checkDownloadAndApply(api),
+    coordinator.checkDownloadAndApply(api),
+  ]);
+
+  assert.deepEqual(results, ['reloading', 'reloading']);
+  assert.equal(checks, 1);
+  assert.equal(downloads, 1);
+  assert.equal(reloads, 1);
+  assert.equal(coordinator.claimPrompt(), false);
+});
+
+test('an interactive refresh joins a startup download and suppresses its prompt', async () => {
+  const coordinator = createStartupUpdateCoordinator();
+  let finishCheck: ((result: { isAvailable: boolean }) => void) | undefined;
+  let reloads = 0;
+  const api = {
+    checkForUpdateAsync: () => new Promise<{ isAvailable: boolean }>((resolve) => { finishCheck = resolve; }),
+    fetchUpdateAsync: async () => ({ isNew: true }),
+    reloadAsync: async () => { reloads += 1; },
+  };
+
+  const startup = coordinator.checkAndDownload(api);
+  const interactive = coordinator.checkDownloadAndApply(api);
+  assert.equal(coordinator.claimPrompt(), false);
+  finishCheck?.({ isAvailable: true });
+
+  assert.equal(await startup, true);
+  assert.equal(await interactive, 'reloading');
+  assert.equal(reloads, 1);
+});
+
+test('an interactive refresh settles when no update exists or reload fails', async () => {
+  const unavailable = createStartupUpdateCoordinator();
+  assert.equal(await unavailable.checkDownloadAndApply({
+    checkForUpdateAsync: async () => ({ isAvailable: false }),
+    fetchUpdateAsync: async () => ({ isNew: true }),
+    reloadAsync: async () => {},
+  }), 'no-update');
+
+  const failedReload = createStartupUpdateCoordinator();
+  assert.equal(await failedReload.checkDownloadAndApply({
+    checkForUpdateAsync: async () => ({ isAvailable: true }),
+    fetchUpdateAsync: async () => ({ isNew: true }),
+    reloadAsync: async () => { throw new Error('reload failed'); },
+  }), 'reload-failed');
+  assert.equal(failedReload.claimPrompt(), true);
+});

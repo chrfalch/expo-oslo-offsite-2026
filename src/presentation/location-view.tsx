@@ -28,9 +28,10 @@ export function LocationSheet({ children }: { children: ReactNode }) {
   </View>;
 }
 
-export function LocationView({ title, address, notice, accuracy, map, image, photos, websiteUrl, websiteLabel = 'Visit website', description, details, residents, openLabel, onOpenMaps, onOpenArea, error }: {
+export function LocationView({ title, address, notice, accuracy, map, image, photos, keyPickup, websiteUrl, websiteLabel = 'Visit website', description, details, residents, openLabel, onOpenMaps, onOpenArea, error }: {
   title: string; address: string; notice?: string; accuracy?: string; map?: ReactNode;
   image?: GuideImageModel; photos?: readonly PhotoModel[]; websiteUrl?: string; websiteLabel?: string;
+  keyPickup?: { readonly instructions: string; readonly url: string };
   description?: string; details?: readonly string[];
   residents?: readonly string[];
   openLabel: string; onOpenMaps?: () => void; onOpenArea?: () => void; error?: string;
@@ -61,6 +62,8 @@ export function LocationView({ title, address, notice, accuracy, map, image, pho
         {notice ? <Text testID="location-notice" textStyle={{ color: colors.text, fontSize: 15, lineHeight: 23 }}>{notice}</Text> : null}
         {onOpenMaps ? <Button label={openLabel} onPress={onOpenMaps} testID="open-native-maps" /> : null}
         {onOpenArea ? <Button label="Show Torshov area" onPress={onOpenArea} testID="show-location-area" variant="outlined" /> : null}
+        {keyPickup ? <Text textStyle={{ color: colors.text, fontSize: 15, lineHeight: 23 }}>{keyPickup.instructions}</Text> : null}
+        {keyPickup ? <WebsiteButton label="Collect keys · EasyPick" url={keyPickup.url} /> : null}
         {websiteUrl ? <WebsiteButton label={websiteLabel} url={websiteUrl} /> : null}
         {error ? <Text textStyle={{ color: colors.text }}>{error}</Text> : null}
         {accuracy ? <DetailsDisclosure label="About this location" details={[accuracy]} width={width - 40} /> : null}

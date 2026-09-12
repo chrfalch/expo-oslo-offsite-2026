@@ -19,6 +19,7 @@ export function formatAccommodationDetails(flat: DeepReadonly<AccommodationOptio
     `Check-in ${checkIn} · Check-out ${flat.checkOutBy ? `by ${flat.checkOutBy}` : 'not provided'}`,
     ...(flat.selfCheckIn === true ? ['Self check-in available'] : []),
     `Hosted by ${flat.hostName}`,
+    ...(flat.keyPickup ? [flat.keyPickup.instructions] : []),
     ...(flat.walkMinutesFrom.rebel != null ? [`About ${flat.walkMinutesFrom.rebel} min walk to Rebel · Estimate`] : []),
     flat.neighbourhoodNote,
     ...flat.notes,

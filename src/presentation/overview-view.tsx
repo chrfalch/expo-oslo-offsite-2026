@@ -4,7 +4,7 @@ import { Button } from '@/components/button';
 import { SystemSymbol } from '@/components/symbol';
 import { SupportHeading } from '@/components/support-heading';
 import { rowContentModifiers } from '@/components/control-modifiers';
-import { Image, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
+import { Image, RefreshControl, ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ActionRow, type ActionRowModel } from '@/presentation/content-page-view';
 import { StayCard, type GuideCardModel } from '@/presentation/guide-card';
@@ -16,6 +16,7 @@ import { layout, useOffsiteTheme } from '@/theme';
 export type OverviewViewProps = {
   title: string; year: string; dates: string;
   weather: WeatherModel; onWeather: () => void;
+  refreshing: boolean; onRefresh: () => void;
   allApartments: ActionRowModel;
   onProfile: () => void; onSupport: () => void; arrival: ActionRowModel; stay?: GuideCardModel; onStay?: () => void; upcoming?: UpcomingActivityModel; rows: readonly ActionRowModel[];
 };
@@ -25,6 +26,8 @@ export function OverviewView(props: OverviewViewProps) {
   const insets = useSafeAreaInsets();
   const { fontScale } = useWindowDimensions();
   return <ScrollView style={{ flex: 1, backgroundColor: colors.background }} contentInsetAdjustmentBehavior="never"
+    bounces alwaysBounceVertical
+    refreshControl={<RefreshControl refreshing={props.refreshing} onRefresh={props.onRefresh} progressViewOffset={insets.top} tintColor={colors.accent} colors={[colors.accent]} />}
     contentContainerStyle={{ padding: 20, paddingTop: insets.top + 20, paddingBottom: insets.bottom + 100 }}>
     <View style={styles.content}>
       <View style={styles.heading}>
