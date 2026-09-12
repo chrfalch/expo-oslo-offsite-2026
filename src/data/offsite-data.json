@@ -80,18 +80,24 @@
       "date": "2026-09-13",
       "startTime": "18:00",
       "endTime": null,
-      "location": "Collets parkservering or Oslo Street Food (TBA)",
-      "address": null,
+      "location": "Collett's Parkservering",
+      "address": "Colletts gate 33",
       "booked": null,
-      "notes": "Dinner for those already in Oslo. Venue to be announced: either Collets parkservering or Oslo Street Food.",
-      "coordinates": null,
+      "notes": "Dinner for those already in Oslo.",
+      "coordinates": {
+        "lat": 59.92707,
+        "lng": 10.73827,
+        "precision": "address",
+        "source": "geonorge",
+        "matchedAddress": "Colletts gate 33"
+      },
       "image": {
-        "file": "assets/schedule/early-bird-dinner.webp",
+        "file": "assets/schedule/early-bird-dinner.jpg",
         "type": "photo",
-        "sourceUrl": "http://static1.squarespace.com/static/6038204a6bf989551704f5c2/t/67470dfdd06e27543b0a171a/1777539176709/DSC_2385.jpg?format=1500w",
-        "sourcePage": "https://www.oslo-streetfood.no/en",
-        "sourceDomain": "oslo-streetfood.no",
-        "credit": null,
+        "sourceUrl": "https://image.vartoslo.no/1143007.jpg",
+        "sourcePage": "https://www.vartoslo.no/bydel-st-hanshaugen-colletts-parkservering-heim/utestedet-heim-har-stengt-dorene-sine-pa-st-hanshaugen-disse-tar-over/1141907",
+        "sourceDomain": "vartoslo.no",
+        "credit": "Vårt Oslo",
         "caption": null,
         "licence": null
       }
